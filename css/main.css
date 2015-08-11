@@ -31,6 +31,10 @@ boundary {
     font-size: 12px;
 }
 
+.bin:hover {
+    fill: #fdbf11;
+}
+
 .axis line,
 .axis path {
     fill: none;

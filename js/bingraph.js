@@ -3,6 +3,7 @@ var COLORS = ["#CFE8F3", "#73BFE2", "#1696D2", "#12719E", "#062635"];
 var MOBILE_THRESHOLD = 600;
 var BREAKS = [3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000];
 var FORMATTER = d3.format("$,");
+var BINVAL = 'fundingfte'
 
 //globals
 var data;
@@ -12,7 +13,6 @@ var bingraph_aspect_width = 1,
 var $bingraph = $('#bingraph');
 
 var isMobile = false;
-var formatter = d3.format("%");
 var binnedData = [];
 
 /*
@@ -28,8 +28,8 @@ var formatData = function () {
 
     // put states in bins
     _.each(data, function (d) {
-        if (d['fundingfte'] != null) {
-            var amt = +d['fundingfte'];
+        if (d[BINVAL] != null) {
+            var amt = +d[BINVAL];
             var abbrev = d['abbrev'];
 
             for (var i = 0; i < numBins; i++) {
@@ -45,6 +45,7 @@ var formatData = function () {
 
 
 function bingraph() {
+
     var blockGap = 1;
 
     var margin = {
@@ -74,8 +75,6 @@ function bingraph() {
         isMobile = false;
     }
 
-    var formatAxis = d3.format('.0f');
-
     var x = d3.scale.ordinal()
         .domain(BREAKS.slice(0, -1))
         .rangeRoundBands([0, width], .1);
@@ -101,10 +100,25 @@ function bingraph() {
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x axis")
         .call(xAxis);
+    
+        //have to manually attach last value
+    gx.append("text")
+        .attr('text-anchor', 'middle')
+        .attr('x', 0)
+        .attr('y', 6)
+        .attr("class","tick")
+        .text(function () {
+            return FORMATTER(BREAKS[BREAKS.length -1]);
+        })
+        .attr('transform', function (d, i) {
+            return "translate(" + x.rangeBand()*(BREAKS.length + 1.5) + "," + 8 + ")";
+        });
 
-    svg.selectAll("text")
+    gx.selectAll("text")
         .attr("dx", -x.rangeBand() / 2 - x.rangeBand() * 0.05)
         .attr("y", 6);
+
+    console.log(BREAKS.length);
 
     /*
      * Render bins to chart.
@@ -127,6 +141,7 @@ function bingraph() {
         .attr('y', function (d, i) {
             return height - ((blockHeight + blockGap) * (i + 1));
         })
+        .attr("class", "bin")
         .attr('height', blockHeight)
         .attr('fill', "#a2d4ec");
 
@@ -157,7 +172,9 @@ function bingraph() {
 $(window).load(function () {
     if (Modernizr.svg) { // if svg is supported, draw dynamic chart
         d3.csv(bingraph_data_url, function (error, rates) {
-            data = rates;
+            data = rates.filter(function (d) {
+                return d.abbrev != "US";
+            });
 
             formatData();
 
