@@ -26,11 +26,14 @@ boundary {
     color: #333;
 }
 
-.axis path {
-    display: none;
+.value {
+    text-align: center;
+    font-size: 12px;
 }
 
-.axis line {
+.axis line,
+.axis path {
+    fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
