@@ -1,24 +1,21 @@
-//configure
-var COLORS = ["#CFE8F3", "#73BFE2", "#1696D2", "#12719E", "#062635"];
 var MOBILE_THRESHOLD = 600;
-var BREAKS = [3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000];
-var FORMATTER = d3.format("$,");
-var BINVAL = 'fundingfte'
+//configure in each graph call
+var BREAKS,
+    FORMATTER,
+    BINVAL,
+    $BINDIV;
 
 //globals
 var data;
 var bingraph_data_url = "data/statedata.csv";
 var bingraph_aspect_width = 1,
     bingraph_aspect_height = 0.5;
-var $bingraph = $('#bingraph');
 
 var isMobile = false;
-var binnedData = [];
+var binnedData;
 
-/*
- * Format graphic data for processing by D3.
- */
-var formatData = function () {
+//make array of the states in each bin
+function formatData() {
     var numBins = BREAKS.length - 1;
 
     // init the bins
@@ -40,11 +37,10 @@ var formatData = function () {
             }
         }
     });
-    console.log(binnedData, numBins);
+    console.log(binnedData);
 }
 
-
-function bingraph() {
+function bingraph(div, id) {
 
     var blockGap = 1;
 
@@ -60,13 +56,13 @@ function bingraph() {
         return bin.length;
     }).length;
 
-    var width = $bingraph.width() - margin.left - margin.right,
+    var width = $BINDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * bingraph_aspect_height) / bingraph_aspect_width) - margin.top - margin.bottom,
         padding = 30;
 
     var blockHeight = height / largestBin;
 
-    $bingraph.empty();
+    $BINDIV.empty();
 
 
     if (width <= MOBILE_THRESHOLD) {
@@ -90,7 +86,7 @@ function bingraph() {
         .tickFormat(FORMATTER);
 
 
-    var svg = d3.select("#bingraph").append("svg")
+    var svg = d3.select(div).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -100,29 +96,25 @@ function bingraph() {
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x axis")
         .call(xAxis);
-    
-        //have to manually attach last value
+
+    //have to manually attach last value
     gx.append("text")
         .attr('text-anchor', 'middle')
         .attr('x', 0)
         .attr('y', 6)
-        .attr("class","tick")
+        .attr("class", "tick")
         .text(function () {
-            return FORMATTER(BREAKS[BREAKS.length -1]);
+            return FORMATTER(BREAKS[BREAKS.length - 1]);
         })
         .attr('transform', function (d, i) {
-            return "translate(" + x.rangeBand()*(BREAKS.length + 1.5) + "," + 8 + ")";
+            return "translate(" + (x.rangeBand() * (BREAKS.length)) + "," + 8 + ")";
         });
 
     gx.selectAll("text")
-        .attr("dx", -x.rangeBand() / 2 - x.rangeBand() * 0.05)
+        .attr("dx", -0.55*x.rangeBand())
         .attr("y", 6);
 
-    console.log(BREAKS.length);
 
-    /*
-     * Render bins to chart.
-     */
     var bins = svg.selectAll('.bin')
         .data(binnedData)
         .enter().append('g')
@@ -130,7 +122,7 @@ function bingraph() {
             return "translate(" + x(BREAKS[i]) + ",0 )";
         });
 
-
+    //draw bins
     bins.selectAll('rect')
         .data(function (d) {
             return d3.entries(d);
@@ -142,13 +134,13 @@ function bingraph() {
             return height - ((blockHeight + blockGap) * (i + 1));
         })
         .attr("class", "bin")
+        .attr("id", function (d) {
+            return d['value'];
+        })
         .attr('height', blockHeight)
         .attr('fill', "#a2d4ec");
 
-
-    /*
-     * Render bin values.
-     */
+    //label bins with state abbreviation
     bins.append('g')
         .attr('class', 'value')
         .selectAll('text')
@@ -164,23 +156,4 @@ function bingraph() {
         .text(function (d) {
             return d['value'];
         });
-
-
-
 }
-
-$(window).load(function () {
-    if (Modernizr.svg) { // if svg is supported, draw dynamic chart
-        d3.csv(bingraph_data_url, function (error, rates) {
-            data = rates.filter(function (d) {
-                return d.abbrev != "US";
-            });
-
-            formatData();
-
-            bingraph();
-
-            window.onresize = bingraph;
-        });
-    }
-});

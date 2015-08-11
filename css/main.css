@@ -10,9 +10,8 @@ boundary {
     stroke: #fff;
 }
 
-.bar.selected,
-.boundary.selected {
-    fill: #ec008b;
+.bin.selected {
+    fill: #fdbf11;
 }
 
 .chartline {
@@ -31,9 +30,6 @@ boundary {
     font-size: 12px;
 }
 
-.bin:hover {
-    fill: #fdbf11;
-}
 
 .axis line,
 .axis path {
