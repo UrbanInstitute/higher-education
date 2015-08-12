@@ -9,7 +9,7 @@ var BREAKS,
 var data;
 var bingraph_data_url = "data/statedata.csv";
 var bingraph_aspect_width = 1,
-    bingraph_aspect_height = 0.5;
+    bingraph_aspect_height = 0.4;
 
 var isMobile = false;
 var binnedData;
@@ -30,7 +30,7 @@ function formatData() {
             var abbrev = d['abbrev'];
 
             for (var i = 0; i < numBins; i++) {
-                if (amt >= BREAKS[i] && amt < BREAKS[i + 1]) {
+                if (amt >= BREAKS[i] && amt <= BREAKS[i + 1]) {
                     binnedData[i].unshift(abbrev);
                     break;
                 }
@@ -44,17 +44,28 @@ function bingraph(div, id) {
 
     var blockGap = 1;
 
+    if ($BINDIV.width() < MOBILE_THRESHOLD) {
+        isMobile = true;
+    } else {
+        isMobile = false;
+    }
+    console.log($BINDIV.width, MOBILE_THRESHOLD, isMobile);
+
     var margin = {
-        top: 20,
-        right: 15,
+        top: 30,
+        right: 10,
         bottom: 25,
-        left: 15
+        left: 10
     };
 
     // Determine largest bin
     var largestBin = _.max(binnedData, function (bin) {
         return bin.length;
     }).length;
+    
+    if (isMobile) {
+        bingraph_aspect_height = 0.8;
+    }
 
     var width = $BINDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * bingraph_aspect_height) / bingraph_aspect_width) - margin.top - margin.bottom,
@@ -63,13 +74,6 @@ function bingraph(div, id) {
     var blockHeight = height / largestBin;
 
     $BINDIV.empty();
-
-
-    if (width <= MOBILE_THRESHOLD) {
-        isMobile = true;
-    } else {
-        isMobile = false;
-    }
 
     var x = d3.scale.ordinal()
         .domain(BREAKS.slice(0, -1))
@@ -96,7 +100,7 @@ function bingraph(div, id) {
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x axis")
         .call(xAxis);
-
+    
     //have to manually attach last value
     gx.append("text")
         .attr('text-anchor', 'middle')
@@ -107,11 +111,11 @@ function bingraph(div, id) {
             return FORMATTER(BREAKS[BREAKS.length - 1]);
         })
         .attr('transform', function (d, i) {
-            return "translate(" + (x.rangeBand() * (BREAKS.length)) + "," + 8 + ")";
+            return "translate(" + (((BREAKS.length -1)* 1.1 * x.rangeBand()) + (x.rangeBand()*0.55))+ "," + 9 + ")";
         });
 
     gx.selectAll("text")
-        .attr("dx", -0.55*x.rangeBand())
+        .attr("dx", -0.55 * x.rangeBand())
         .attr("y", 6);
 
 

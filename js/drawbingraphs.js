@@ -25,9 +25,23 @@ function twoyearbins() {
 
 }
 
+function grantbins() {
+    $BINDIV = $("#grants"),
+    BREAKS = [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1];
+    FORMATTER = d3.format("%");
+    BINVAL = "grants_needbased";
+
+    binnedData = [];
+    
+    formatData();
+    bingraph("#grants");
+
+}
+
 function bincharts() {
     ftebins();
     twoyearbins();
+    grantbins();
     
     var allbars = d3.selectAll(".bin");
         allbars.on("mouseover", function () {

@@ -10,7 +10,7 @@ al <- read.csv("data/annualdata_long.csv", stringsAsFactors = F)
 sdt <- read.csv("data/statedata.csv", stringsAsFactors = F)
 
 #Line chart
-enrollchart <- ggplot(al, aes(x=year, y=enroll_change, group=abbrev)) +
+enrollchart <- ggplot(al, aes(x=fiscalyear, y=enroll_change, group=abbrev)) +
   geom_line() +
   ggtitle("Enrollment by State - Change from 2001") +
   theme(panel.grid.minor=element_blank(), 
@@ -24,7 +24,7 @@ png(filename = "img/enrollment_change.png", width=1800, height=1000, res=200)
 enrollchart
 dev.off()
 
-apchart <- ggplot(al, aes(x=year, y=approp_change, group=abbrev)) +
+apchart <- ggplot(al, aes(x=fiscalyear, y=approp_change, group=abbrev)) +
   geom_line() +
   ggtitle("Appropriations by State - Change from 2001") +
   theme(panel.grid.minor=element_blank(), 
