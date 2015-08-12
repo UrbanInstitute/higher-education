@@ -4,6 +4,8 @@
 
 require(openxlsx)
 require(dplyr)
+require(tidyr)
+require(reshape2)
 
 #Read in state matching data - fips, name, abbreviation, region
 states<-read.csv("data/states.csv",stringsAsFactors = F)
@@ -111,3 +113,29 @@ dt <- left_join(dt,fig9,by="state")
 dt <- left_join(dt,tab6,by="state")
 dt <- dt %>% filter (statefip != 11)
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
+
+#Make annual enrollment and appropriations data long
+enrollment<-enrollment %>% mutate(enroll_base = enroll_01)
+enroll<-enrollment%>%gather(year,"enrollment",2:16)
+
+enroll<-enroll %>% mutate(year=as.character(year), enroll_change = (enrollment - enroll_base)/enroll_base)
+enroll<-enroll %>% mutate(year=sapply(strsplit(enroll$year, split='_', fixed=TRUE),function(x) (x[2]))) %>% 
+  mutate(year=as.numeric(year)) %>% 
+  mutate(year = year + 2000) %>% 
+  select(-enroll_base)
+
+appropriations<-appropriations %>% mutate(approp_base = appropr_01)
+approp<-appropriations%>%gather(year,"appropriations",2:16)
+
+approp<-approp %>% mutate(year=as.character(year), approp_change = (appropriations - approp_base)/approp_base)
+approp<-approp %>% mutate(year=sapply(strsplit(approp$year, split='_', fixed=TRUE),function(x) (x[2]))) %>%
+  mutate(year=as.numeric(year)) %>% 
+  mutate(year = year + 2000) %>% 
+  select(-approp_base)
+
+apen_long <- left_join(enroll,approp,by=c("state","year"))
+apen_long <- apen_long %>% arrange(state, year)
+apen_long <- left_join(apen_long,states, by="state")
+apen_long <- apen_long %>% select(-region) %>% select (statefip,abbrev,everything()) %>% rename (fiscalyear=year)
+
+write.csv(apen_long,"data/annualdata_long.csv",row.names=F, na="")
