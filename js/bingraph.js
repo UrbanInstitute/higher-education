@@ -49,7 +49,6 @@ function bingraph(div, id) {
     } else {
         isMobile = false;
     }
-    console.log($BINDIV.width, MOBILE_THRESHOLD, isMobile);
 
     var margin = {
         top: 30,
@@ -88,7 +87,6 @@ function bingraph(div, id) {
         .orient("bottom")
         .tickSize(0)
         .tickFormat(FORMATTER);
-
 
     var svg = d3.select(div).append("svg")
         .attr("width", width + margin.left + margin.right)

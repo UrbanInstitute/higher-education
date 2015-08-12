@@ -3,33 +3,22 @@ body {
     color: #333;
 }
 
+/***bin charts***/
 #bingraph {
     width: 100%;
 }
-boundary {
-    stroke: #fff;
-}
 
-.bin.selected {
-    fill: #fdbf11;
-}
-
-.chartline {
-    fill: none;
-    stroke: #000;
-    stroke-width: 2px;
-}
-
-.axis {
-    font-size: 12px;
-    color: #333;
-}
-
+/*label for bin chart state abbreviation*/
 .value {
     text-align: center;
     font-size: 12px;
 }
 
+/*bin graph axis*/
+.axis {
+    font-size: 12px;
+    color: #333;
+}
 
 .axis line,
 .axis path {
@@ -43,40 +32,42 @@ boundary {
     stroke-dasharray: 2, 2;
 }
 
-.baraxis {
-    font-weight: 700;
+.bin.selected {
+    fill: #fdbf11;
+}
+.chartline.selected {
+    stroke: #fdbf11;
+    stroke-width:5;
+}
+
+/***line charts***/
+/*line chart value line*/
+.chartline {
+    fill: none;
+    stroke-width: 1px;
+}
+
+/*line chart axis*/
+.axislc {
+    font-size: 12px;
+    color: #333;
+}
+
+.axislc path {
+    display: none;
+}
+
+.axislc line {
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axislc .minor line {
+    stroke: #bbb;
+    stroke-dasharray: 2, 2;
 }
 
 .legend {
     font-size: 12px;
     color: #333;
-}
-
-.tooltip-num {
-    font-size: 26px;
-    font-weight: 700;
-    opacity: 0;
-    text-align: left;
-}
-
-.tooltip-label {
-    font-size: 18px;
-    font-weight: 700;
-    opacity: 0;
-    text-align: left;
-}
-
-.tooltip-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: #666666;
-    opacity: 0;
-    text-align: left;
-}
-
-.tooltip-num.selected,
-.tooltip-label.selected,
-.tooltip-name.selected {
-    opacity: 1;
-    z-index: 1000;
 }
