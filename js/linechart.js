@@ -3,6 +3,7 @@
 var FORMATTER,
     $LINEDIV,
     LINEVAL,
+    YEARVAL,
     NUMTICKS;
 
 //globals
@@ -33,7 +34,7 @@ function linechart(div, id) {
     }
 
     if (isMobile) {
-        NUMTICKS = 7;
+        //NUMTICKS = 7;
         linechart_aspect_height = 1;
     }
 
@@ -46,12 +47,10 @@ function linechart(div, id) {
     var formatAxis = d3.format(',0f');
 
     var x = d3.scale.linear()
-        .range([padding, width])
-        .domain([2001, 2015]);
+        .range([0,width]);
 
     var y = d3.scale.linear()
-        .range([height, 0])
-        .domain([0, 0.75]);
+        .range([height, 0]);
 
     var color = d3.scale.ordinal()
         .range(["#ccc"]);
@@ -62,20 +61,38 @@ function linechart(div, id) {
         .tickFormat(formatYear)
         .ticks(NUMTICKS);
 
-    var line = d3.svg.line()
-        //.interpolate("basis")
-        .x(function (d) {
-            return x(d.fiscalyear);
-        })
-        .y(function (d) {
-            return y(d.enroll_change);
-        });
-
     var svg = d3.select(div).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    color.domain(d3.keys(data_long[0]).filter(function (key) {
+        return key == "state";
+    }));
+
+    data = data_long.map(function (d) {
+        return {
+            abbrev: d.abbrev,
+            year: +d[YEARVAL],
+            val: +d[LINEVAL]
+        };
+    });
+    
+    console.log(data);
+
+    x.domain(d3.extent(data, function (d) {
+        return d.year;
+    }));
+
+    y.domain(d3.extent(data, function (d) {
+        return d.val;
+    }));
+
+    var gx = svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "x axis")
+        .call(xAxis);
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -96,29 +113,21 @@ function linechart(div, id) {
         .attr("x", -4)
         .attr("dy", 2);
 
-    var gx = svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .attr("class", "x axis")
-        .call(xAxis);
-
-    color.domain(d3.keys(data_long[0]).filter(function (key) {
-        return key == "state";
-    }));
-
-    data = data_long.map(function (d) {
-        return {
-            abbrev: d.abbrev,
-            fiscalyear: +d.fiscalyear,
-            enroll_change: +d.enroll_change
-        };
-    });
-
-    data = d3.nest().key(function (d) {
+    data_nest = d3.nest().key(function (d) {
         return d.abbrev;
     }).entries(data);
 
+    var line = d3.svg.line()
+        //.interpolate("basis")
+        .x(function (d) {
+            return x(d.year);
+        })
+        .y(function (d) {
+            return y(d.val);
+        });
+
     var states = svg.selectAll(".state")
-        .data(data, function (d) {
+        .data(data_nest, function (d) {
             return d.key;
         })
         .enter().append("g")
@@ -133,7 +142,7 @@ function linechart(div, id) {
             return d.key;
         })
         .attr("stroke", function (d) {
-            if (d.key =="US") {
+            if (d.key == "US") {
                 return "#1696d2";
             } else {
                 return "#ccc";

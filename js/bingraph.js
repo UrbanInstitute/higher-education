@@ -64,12 +64,11 @@ function bingraph(div, id) {
     }).length;
     
     if (isMobile) {
-        bingraph_aspect_height = 0.8;
+        bingraph_aspect_height = 1;
     }
     if (isMobile==false) {
         bingraph_aspect_height = 0.4;
     }
-    console.log(isMobile, bingraph_aspect_height);
 
     var width = $BINDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * bingraph_aspect_height) / bingraph_aspect_width) - margin.top - margin.bottom,
