@@ -6,6 +6,7 @@ var BREAKS,
     $BINDIV;
 
 //globals
+var data_bins;
 var data;
 var bingraph_data_url = "data/statedata.csv";
 var bingraph_aspect_width = 1,
@@ -16,6 +17,7 @@ var binnedData;
 
 //make array of the states in each bin
 function formatData() {
+        data = data_bins;
     var numBins = BREAKS.length - 1;
 
     // init the bins
@@ -37,11 +39,10 @@ function formatData() {
             }
         }
     });
-    console.log(binnedData);
 }
 
 function bingraph(div, id) {
-
+    
     var blockGap = 1;
 
     if ($BINDIV.width() < MOBILE_THRESHOLD) {
@@ -65,6 +66,10 @@ function bingraph(div, id) {
     if (isMobile) {
         bingraph_aspect_height = 0.8;
     }
+    if (isMobile==false) {
+        bingraph_aspect_height = 0.4;
+    }
+    console.log(isMobile, bingraph_aspect_height);
 
     var width = $BINDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * bingraph_aspect_height) / bingraph_aspect_width) - margin.top - margin.bottom,

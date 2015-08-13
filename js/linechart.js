@@ -1,4 +1,4 @@
-var MOBILE_THRESHOLD = 600;
+//var MOBILE_THRESHOLD = 600;
 //configure in each graph call
 var FORMATTER,
     $LINEDIV,
@@ -9,7 +9,7 @@ var FORMATTER,
 var linechart_data_url = "data/annualdata_long.csv";
 var linechart_aspect_width = 1;
 var linechart_aspect_height = 0.6;
-var isMobile = false;
+//var isMobile = false;
 var data_long;
 
 var yearf = d3.format("02d");
@@ -132,7 +132,7 @@ function linechart(div, id) {
         .attr("id", function (d) {
             return d.key;
         })
-        .style("stroke", function (d) {
+        .attr("stroke", function (d) {
             if (d.key =="US") {
                 return "#1696d2";
             } else {
