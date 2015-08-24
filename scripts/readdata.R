@@ -1,17 +1,23 @@
 #Hannah Recht, 08-10-15
 #Lumina higher ed dashboard
-#Read in data from massive spreadsheet
+#Read in data from massive spreadsheet, format, export two CSVs
+#   1. statedata - variables that we aren't annual, by state
+#   2. annualdata - variables by both state and fiscal year: enrollment, appropriations, tuition
 
-require(openxlsx)
-require(dplyr)
-require(tidyr)
-require(reshape2)
+library(openxlsx)
+library(dplyr)
+library(tidyr)
+library(reshape2)
+
+########################################################################################################
+# Read in data from big spreadsheet and format
+########################################################################################################
 
 #Read in state matching data - fips, name, abbreviation, region
 states<-read.csv("data/states.csv",stringsAsFactors = F)
 
 #File path of spreadsheet
-xlp = "data/Tables and Figs Linked Data_8.5.2015.xlsx"
+xlp = "data/Data for Brief_8.21.2015_updated_FYinflation_with clean tables.xlsx"
 
 #read in figure and table data
 fig1<-readWorkbook(xlp, sheet="Fig. 1", colNames=T, rowNames=F, rows=2:53, cols=1:2)
@@ -24,28 +30,15 @@ fig7<-readWorkbook(xlp, sheet="Fig. 7", colNames=T, rowNames=F, rows=2:53, cols=
 fig8<-readWorkbook(xlp, sheet="Fig. 8", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 fig9<-readWorkbook(xlp, sheet="Fig. 9", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 
-#Table 1 and 2 = selected states and years of appropriations - use full Appropriations tab instead
-#tab1<-readWorkbook(xlp, sheet="Table 1", colNames=T, rowNames=F, rows=2:17, cols=1:6)
+tab6<-readWorkbook(xlp, sheet="Table 6", colNames=T, rowNames=F, rows=2:52, cols=1:3)
+enrollment<-readWorkbook(xlp, sheet="Enrollments", colNames=T, rowNames=F, rows=1:52)
 appropriations<-readWorkbook(xlp, sheet="Appropriations", colNames=T, rowNames=F, rows = c(1, 3:53))
 
+
+#Table 1 and 2 = selected states and years of appropriations - use full Appropriations tab instead
 #Table 3 = change in enrollment for selected years: use full Enrollment tab instead
-#tab3<-readWorkbook(xlp, sheet="Table 3", colNames=T, rowNames=F, rows=2:53, cols=1:5)
-enrollment<-readWorkbook(xlp, sheet="Enrollments", colNames=T, rowNames=F, rows=1:52)
-
 #Table 4 - calculations based on figure 7 data of difference in prices between college types
-#<-readWorkbook(xlp, sheet="Table 4", colNames=T, rowNames=F, rows=2:53, cols=1:2)
-#tab4b<-readWorkbook(xlp, sheet="Table 4", colNames=T, rowNames=F, rows=2:53, cols=3:4)
-
 #Table 5 = increases in tuition, 09-14: College Board tab has full data
-#tab5a<-readWorkbook(xlp, sheet="Table 5", colNames=T, rowNames=F, rows=2:53, cols=1:2)
-#tab5b<-readWorkbook(xlp, sheet="Table 5", colNames=T, rowNames=F, rows=2:53, cols=3:4)
-
-tab6<-readWorkbook(xlp, sheet="Table 6", colNames=T, rowNames=F, rows=2:52, cols=1:3)
-
-#College Board tab: tuition & fees for 3 college types by year - used for figure 7 data
-tuition_pub2<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=1:12)
-tuition_pub4<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,14:25))
-tuition_priv<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,27:38))
 
 #give meaningful col names
 colnames(fig1)<- c("state","fundingfte")
@@ -73,35 +66,31 @@ simpleCap <- function(x) {
         sep="", collapse=" ")
 }
 
-dfList <- list(fig1 = fig1, fig2=fig2, fig3=fig3, fig4=fig4, fig5=fig5, fig6=fig6, fig7=fig7, fig8=fig8, fig9=fig9, tab6 = tab6, appropriations = appropriations, enrollment = enrollment)
-dfList <- lapply(dfList, function(df) {
-  df$state = trim(df$state)
-  df$state = sapply(df$state, simpleCap)
-  df <- mutate(df, state = ifelse(state=="TOTAL"|state=="Totals"|state=="Total"|state=="US TOTAL"|state=="US","United States",
-                                    state))
-  return(df)
-})
-fig1 <- dfList$fig1
-fig2 <- dfList$fig2
-fig3 <- dfList$fig3
-fig4 <- dfList$fig4
-fig5 <- dfList$fig5
-fig6 <- dfList$fig6
-fig7 <- dfList$fig7
-fig8 <- dfList$fig8
-fig9 <- dfList$fig9
-enrollment <- dfList$enrollment
-appropriations <- dfList$appropriations
-tab6 <- dfList$tab6
+formatState <- function(dt) {
+  dt$state = trim(dt$state)
+  dt$state = sapply(dt$state, simpleCap)
+  dt <- mutate(dt, state = ifelse(state=="TOTAL"|state=="Totals"|state=="Total"|state=="US TOTAL"|state=="US","United States",
+                                  ifelse(state=="Arkansasc", "Arkansas",
+                                         ifelse(state=="Illinoisd","Illinois",
+                                                ifelse(state=="Missourie","Missouri",
+                                                       ifelse(state=="Tennesseef", "Tennessee",
+                                  state)))))) %>% 
+    arrange(state)
+}
 
-#Join data
-#Appropriations and enrollment
-apen <- left_join(appropriations,enrollment,by="state")
-apen<- left_join(states, apen, by="state")
-apen <- apen %>% filter (statefip != 11)
-write.csv(apen,"data/annualdata.csv",row.names=F, na="")
+fig1 <- formatState(fig1)
+fig2 <- formatState(fig2)
+fig3 <- formatState(fig3)
+fig4 <- formatState(fig4)
+fig5 <- formatState(fig5)
+fig6 <- formatState(fig6)
+fig7 <- formatState(fig7)
+fig8 <- formatState(fig8)
+fig9 <- formatState(fig9)
+tab6 <- formatState(tab6)
 
-dt<- left_join(states,fig1,by="state")
+#Join non-annual data
+dt <- left_join(states,fig1,by="state")
 dt <- left_join(dt,fig2,by="state")
 dt <- left_join(dt,fig3,by="state")
 dt <- left_join(dt,fig4,by="state")
@@ -111,10 +100,18 @@ dt <- left_join(dt,fig7,by="state")
 dt <- left_join(dt,fig8,by="state")
 dt <- left_join(dt,fig9,by="state")
 dt <- left_join(dt,tab6,by="state")
-dt <- dt %>% filter (statefip != 11)
+dt <- dt %>% filter (statefip != 11) %>% select(-region)
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
 
+rm(fig1,fig2,fig3,fig4,fig5,fig6,fig7,fig8,fig9,tab6)
+
+########################################################################################################
 #Make annual enrollment and appropriations data long
+########################################################################################################
+
+enrollment <- formatState(enrollment)
+appropriations <- formatState(appropriations)
+
 enrollment<-enrollment %>% mutate(enroll_base = enroll_01)
 enroll<-enrollment%>%gather(year,"enrollment",2:16)
 
@@ -137,5 +134,51 @@ apen_long <- left_join(enroll,approp,by=c("state","year"))
 apen_long <- apen_long %>% arrange(state, year)
 apen_long <- left_join(apen_long,states, by="state")
 apen_long <- apen_long %>% select(-region) %>% select (statefip,abbrev,everything()) %>% rename (fiscalyear=year)
+apen_long <- apen_long %>% mutate(approp_percap = appropriations/enrollment)
 
-write.csv(apen_long,"data/annualdata_long.csv",row.names=F, na="")
+rm(appropriations,approp,enroll,enrollment)
+
+########################################################################################################
+#College Board tab: tuition & fees for 3 college types by year - used for figure 7 data
+########################################################################################################
+
+tuition_pub2<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=1:12)
+tuition_pub4<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,14:25))
+#Not using private school data
+#tuition_priv<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,26:38))
+
+colnames(tuition_pub2) <-c ("state","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
+colnames(tuition_pub4) <-c ("state","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
+
+formatTuition <- function(dt) {
+  dt <- filter(dt,state!="Puerto Rico" & state!="District of Columbia")
+}
+tuition_pub2 <- formatTuition(tuition_pub2)
+tuition_pub4 <- formatTuition(tuition_pub4)
+
+#Coerce numbers to numeric
+cols <- c(2, 3:ncol(tuition_pub2))
+tuition_pub2[cols] <- as.numeric(as.matrix(tuition_pub2[cols]))
+
+#Make long
+formatLong <- function(dt) {
+  long <- dt %>% gather(year,tuition,2:12)
+  long$year <- as.character(long$year)
+  long <- long %>% mutate(year=sapply(strsplit(long$year, split='_', fixed=TRUE),function(x) (x[2])))
+  long$year <- as.numeric(long$year)
+  long <- long %>% mutate(year = year + 2000)
+}
+tuition_pub2 <- formatLong(tuition_pub2)
+tuition_pub2 <- rename(tuition_pub2,tuition_2year = tuition)
+tuition_pub4 <- formatLong(tuition_pub4)
+tuition_pub4 <- rename(tuition_pub4,tuition_4year = tuition)
+
+tuition_long <- left_join(tuition_pub2,tuition_pub4, by=c("state","year"))
+tuition_long <- right_join(states,tuition_long, by="state")
+tuition_long <- tuition_long %>% select(-region) %>% rename (fiscalyear=year)
+
+## Join all the long data!
+dt_long <- left_join(apen_long,tuition_long,by=c("state","statefip","abbrev","fiscalyear"))
+write.csv(dt_long,"data/annualdata.csv",row.names=F, na="")
+
+rm(tuition_pub2,tuition_pub4,apen_long,tuition_long)

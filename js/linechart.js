@@ -7,7 +7,7 @@ var FORMATTER,
     NUMTICKS;
 
 //globals
-var linechart_data_url = "data/annualdata_long.csv";
+var linechart_data_url = "data/annualdata.csv";
 var linechart_aspect_width = 1;
 var linechart_aspect_height = 0.6;
 //var isMobile = false;
