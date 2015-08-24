@@ -119,7 +119,7 @@ formatLong <- function(dt) {
   long$fiscalyear <- as.character(long$fiscalyear)
   long <- long %>% mutate(fiscalyear=sapply(strsplit(long$fiscalyear, split='_', fixed=TRUE),function(x) (x[2])))
   long$fiscalyear <- as.numeric(long$fiscalyear)
-  long <- long %>% mutate(fiscalyear = fiscalyear + 2000, change = (base-value)/base) %>% 
+  long <- long %>% mutate(fiscalyear = fiscalyear + 2000, change = (value-base)/base) %>% 
     select(-base)
 }
 enrollment <- formatLong(enrollment) %>% rename(enrollment = value, enroll_change = change)
