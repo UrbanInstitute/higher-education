@@ -114,7 +114,8 @@ colnames(appropriations) <- c("state","fy_01","fy_02","fy_03","fy_04","fy_05","f
 colnames(enrollment) <- c("state","fy_01","fy_02","fy_03","fy_04","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
 
 formatLong <- function(dt) {
-  dt <- formatState(dt) %>% mutate(base = fy_01)
+  dt <- formatState(dt) %>%
+    mutate(base = fy_01)
   long <- dt %>% gather(fiscalyear,value,2:16)
   long$fiscalyear <- as.character(long$fiscalyear)
   long <- long %>% mutate(fiscalyear=sapply(strsplit(long$fiscalyear, split='_', fixed=TRUE),function(x) (x[2])))
@@ -122,8 +123,10 @@ formatLong <- function(dt) {
   long <- long %>% mutate(fiscalyear = fiscalyear + 2000, change = (value-base)/base) %>% 
     select(-base)
 }
-enrollment <- formatLong(enrollment) %>% rename(enrollment = value, enroll_change = change)
-appropriations <- formatLong(appropriations) %>% rename(appropriations = value, approp_change = change)
+enrollment <- formatLong(enrollment) %>% 
+  rename(enrollment = value, enroll_change = change)
+appropriations <- formatLong(appropriations) %>% 
+  rename(appropriations = value, approp_change = change)
 
 apen_long <- left_join(enrollment,appropriations,by=c("state","fiscalyear")) %>% 
   arrange(state, fiscalyear)
