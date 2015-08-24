@@ -2,7 +2,7 @@
 #Lumina higher ed dashboard
 #Read in data from massive spreadsheet, format, export two CSVs
 #   1. statedata - variables that we aren't annual, by state
-#   2. annualdata - variables by both state and fiscal year: enrollment, appropriations, tuition
+#   2. annualdata - variables by both state and fiscal year: enrollment, appropriations, tuitiontabl
 
 library(openxlsx)
 library(dplyr)
@@ -152,6 +152,7 @@ colnames(tuition_pub4) <-c ("state","fy_05","fy_06","fy_07","fy_08","fy_09","fy_
 
 formatTuition <- function(dt) {
   dt <- filter(dt,state!="Puerto Rico" & state!="District of Columbia")
+  dt <- formatState(dt)
 }
 tuition_pub2 <- formatTuition(tuition_pub2)
 tuition_pub4 <- formatTuition(tuition_pub4)
