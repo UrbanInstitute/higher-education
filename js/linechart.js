@@ -79,7 +79,6 @@ function linechart(div, id) {
         };
     });
     
-    console.log(data);
 
     x.domain(d3.extent(data, function (d) {
         return d.year;

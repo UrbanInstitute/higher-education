@@ -55,6 +55,7 @@ fig8<-readWorkbook(xlp, sheet="Fig. 8", colNames=T, rowNames=F, rows=2:53, cols=
 fig9<-readWorkbook(xlp, sheet="Fig. 9", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 tab6<-readWorkbook(xlp, sheet="Table 6", colNames=T, rowNames=F, rows=2:53, cols=1:3)
 a1<-readWorkbook(xlp, sheet="B1. A1", colNames=T, rowNames=F, rows=2:53, cols=1:2)
+migration<-readWorkbook(xlp, sheet="Migration", colNames=F, rowNames=F, rows=9:59, cols=1:11)
 
 #Table 1 and 2 = selected states and years of appropriations - use full Appropriations tab instead
 #Table 3 = change in enrollment for selected years: use full Enrollment tab instead
@@ -83,6 +84,20 @@ colnames(fig7)<-c("state","tf2","add4","add_outstate")
 fig7 <- fig7 %>% mutate(tf4_instate = tf2 + add4, tf4_outstate = tf4_instate + add_outstate) %>% 
   select(-c(add4,add_outstate))
 
+#Migration data: Residence and migration of all first-time degree/certificate-seeking undergrates in degree-granting postsecondary institutions who graduated from high school in the previous 12 months, Fall 2012
+#This replaces fig4
+#res_pct_instate = percent of state resident first-time college students who stay in the state for college
+#state_enroll = total first-time enrollment in the state = res_enroll_instate + state_enroll_outstate
+#res_enroll_total = total number of state residents enrolling in college = res_enroll_instate + res_enroll_outstate
+#res_enroll_instate = state residents staying in the state for college
+#res_enroll_outstate = state residents enrolling in another state
+#state_enroll_outstate = students at state schools who are enrolling as out-of-state students (residents of other states)
+#migration_net = residents leaving vs out-of-state students coming in = state_enroll_outstate - res_enroll_outstate
+migration <- migration %>% select(-X6, -X7)
+colnames(migration) <- c("state","res_pct_instate","state_enroll","res_enroll_total","res_enroll_instate","res_enroll_outstate","state_enroll_outstate","migration_net")
+migration <- migration %>% mutate(state_pct_outstate = state_enroll_outstate / state_enroll)
+
+
 fig1 <- formatState(fig1)
 fig2 <- formatState(fig2)
 fig3 <- formatState(fig3)
@@ -94,21 +109,22 @@ fig8 <- formatState(fig8)
 fig9 <- formatState(fig9)
 tab6 <- formatState(tab6)
 a1 <- formatState(a1)
+migration <- formatState(migration)
 
 #Join non-annual data - not using flagship or race data
 dt <- left_join(states,fig1,by="state")
 dt <- left_join(dt,fig2,by="state")
 dt <- left_join(dt,fig3,by="state")
-dt <- left_join(dt,fig4,by="state")
 dt <- left_join(dt,fig7,by="state")
 dt <- left_join(dt,fig8,by="state")
 dt <- left_join(dt,fig9,by="state")
 dt <- left_join(dt,tab6,by="state")
 dt <- left_join(dt,a1,by="state")
+dt <- left_join(dt,migration,by="state")
 dt <- dt %>% filter (statefip != 11) %>% select(-region)
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
 
-rm(fig1,fig2,fig3,fig4,fig5,fig6,fig7,fig8,fig9,tab6)
+rm(fig1,fig2,fig3,fig4,fig5,fig6,fig7,fig8,fig9,tab,a1,migration)
 
 ########################################################################################################
 # Annual enrollment and appropriations data: read, format, make long, join

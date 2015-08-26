@@ -62,7 +62,6 @@ function appropchart() {
     linechart("#appropriations");
 }
 
-
 function bincharts() {
     ftebins();
     twoyearbins();
