@@ -7,13 +7,12 @@
 library(openxlsx)
 library(dplyr)
 library(tidyr)
-library(reshape2)
 
 #Read in state matching data - fips, name, abbreviation, region
 states<-read.csv("data/states.csv",stringsAsFactors = F)
 
 #File path of spreadsheet
-xlp = "data/Data for Brief_8.21.2015_updated_FYinflation_with clean tables.xlsx"
+xlp = "data/Data for Brief_8.26.2015.xlsx"
 
 ########################################################################################################
 # formatState for matching on state name column
@@ -36,7 +35,8 @@ formatState <- function(dt) {
                                          ifelse(state=="Illinoisd","Illinois",
                                                 ifelse(state=="Missourie","Missouri",
                                                        ifelse(state=="Tennesseef", "Tennessee",
-                                                              state)))))) %>% 
+                                                              ifelse(state=="South Caroilna", "South Carolina",
+                                                              state))))))) %>% 
     arrange(state)
 }
 
@@ -53,7 +53,8 @@ fig6<-readWorkbook(xlp, sheet="Fig. 6", colNames=T, rowNames=F, rows=2:53, cols=
 fig7<-readWorkbook(xlp, sheet="Fig. 7", colNames=T, rowNames=F, rows=2:53, cols=1:4)
 fig8<-readWorkbook(xlp, sheet="Fig. 8", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 fig9<-readWorkbook(xlp, sheet="Fig. 9", colNames=T, rowNames=F, rows=2:53, cols=1:2)
-tab6<-readWorkbook(xlp, sheet="Table 6", colNames=T, rowNames=F, rows=2:52, cols=1:3)
+tab6<-readWorkbook(xlp, sheet="Table 6", colNames=T, rowNames=F, rows=2:53, cols=1:3)
+a1<-readWorkbook(xlp, sheet="B1. A1", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 
 #Table 1 and 2 = selected states and years of appropriations - use full Appropriations tab instead
 #Table 3 = change in enrollment for selected years: use full Enrollment tab instead
@@ -69,7 +70,13 @@ colnames(fig5)<- c("flagship","state","flagship_instate","flagship_outstate","fl
 colnames(fig6)<- c("state","white","black","hispanic","asian","other","nonres")
 colnames(fig8)<- c("state","expendfte_pub4")
 colnames(fig9)<- c("state","statefunding_pctgrants")
-colnames(tab6)<- c("state","grant_sperfte","grants_needbased")
+colnames(tab6)<- c("state","grants_perfte","grants_pctneedbased")
+colnames(a1)<- c("state","familyinc_median")
+
+#tab 6 - add breakdown of grants by need vs non-need based in $s
+tab6$grants_pctneedbased <- as.numeric(tab6$grants_pctneedbased)
+tab6 <- tab6 %>% mutate(grants_needbased = ifelse(grants_perfte==0, 0, grants_perfte*grants_pctneedbased)) %>%
+  mutate(grants_nonneedbased = ifelse(grants_perfte==0, 0, grants_perfte*(1-grants_pctneedbased)))
 
 #figure 7 data = differentials between tution types - get full prices and delete differentials
 colnames(fig7)<-c("state","tf2","add4","add_outstate")
@@ -86,18 +93,18 @@ fig7 <- formatState(fig7)
 fig8 <- formatState(fig8)
 fig9 <- formatState(fig9)
 tab6 <- formatState(tab6)
+a1 <- formatState(a1)
 
-#Join non-annual data
+#Join non-annual data - not using flagship or race data
 dt <- left_join(states,fig1,by="state")
 dt <- left_join(dt,fig2,by="state")
 dt <- left_join(dt,fig3,by="state")
 dt <- left_join(dt,fig4,by="state")
-dt <- left_join(dt,fig5,by="state")
-dt <- left_join(dt,fig6,by="state")
 dt <- left_join(dt,fig7,by="state")
 dt <- left_join(dt,fig8,by="state")
 dt <- left_join(dt,fig9,by="state")
 dt <- left_join(dt,tab6,by="state")
+dt <- left_join(dt,a1,by="state")
 dt <- dt %>% filter (statefip != 11) %>% select(-region)
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
 

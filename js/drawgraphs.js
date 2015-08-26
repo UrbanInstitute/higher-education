@@ -34,7 +34,7 @@ function grantbins() {
     BREAKS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
     FORMATTER = d3.format("%");
     isMobile = false;
-    BINVAL = "grants_needbased";
+    BINVAL = "grants_pctneedbased";
 
     binnedData = [];
 
