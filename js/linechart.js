@@ -1,17 +1,9 @@
 //var MOBILE_THRESHOLD = 600;
 //configure in each graph call
-var FORMATTER,
-    $LINEDIV,
-    LINEVAL,
-    YEARVAL,
-    NUMTICKS;
 
 //globals
-var linechart_data_url = "data/annualdata.csv";
 var linechart_aspect_width = 1;
 var linechart_aspect_height = 0.6;
-//var isMobile = false;
-var data_long;
 
 var yearf = d3.format("02d");
 

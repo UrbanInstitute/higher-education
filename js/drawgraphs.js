@@ -1,48 +1,16 @@
+//page globals
+var MOBILE_THRESHOLD = 600;
+var main_data_url = "data/statedata.csv";
+var annual_data_url = "data/annualdata.csv";
+var isMobile = false;
+var data_long, data;
+var FORMATTER,
+    $LINEDIV,
+    LINEVAL,
+    YEARVAL,
+    NUMTICKS;
+
 //one function for each graph to make
-
-//bin charts
-function ftebins() {
-    $BINDIV = $("#fte");
-    BREAKS = [3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000];
-    FORMATTER = d3.format("$,");
-    isMobile = false;
-    BINVAL = "fundingfte";
-
-    binnedData = [];
-
-    formatData();
-    bingraph("#fte");
-
-}
-
-function twoyearbins() {
-    $BINDIV = $("#twoyear");
-    BREAKS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
-    FORMATTER = d3.format("%");
-    isMobile = false;
-    BINVAL = "ftepubin2year";
-
-    binnedData = [];
-
-    formatData();
-    bingraph("#twoyear");
-
-}
-
-function grantbins() {
-    $BINDIV = $("#grants");
-    BREAKS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
-    FORMATTER = d3.format("%");
-    isMobile = false;
-    BINVAL = "grants_pctneedbased";
-
-    binnedData = [];
-
-    formatData();
-    bingraph("#grants");
-
-}
-
 //line charts
 function enrollchart() {
     $LINEDIV = $("#enrollment");
@@ -62,10 +30,7 @@ function appropchart() {
     linechart("#appropriations");
 }
 
-function bincharts() {
-    ftebins();
-    twoyearbins();
-    grantbins();
+function drawgraphs() {
     enrollchart();
     appropchart();
 
@@ -84,16 +49,13 @@ function bincharts() {
 
 $(window).load(function () {
     if (Modernizr.svg) { // if svg is supported, draw dynamic chart
-        d3.csv(bingraph_data_url, function (error, rates) {
-            d3.csv(linechart_data_url, function (annualrates) {
+        d3.csv(main_data_url, function (error, rates) {
+            d3.csv(annual_data_url, function (annualrates) {
                 data_long = annualrates;
-                data_bins = rates.filter(function (d) {
-                    return d.abbrev != "US";
-                });
+                data_bins = rates;
 
-
-                bincharts();
-                window.onresize = bincharts;
+                drawgraphs();
+                window.onresize = drawgraphs;
             });
         });
     }

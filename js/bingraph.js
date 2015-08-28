@@ -163,3 +163,46 @@ function bingraph(div, id) {
             return d['value'];
         });
 }
+
+bin charts
+function ftebins() {
+    $BINDIV = $("#fte");
+    BREAKS = [3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000];
+    FORMATTER = d3.format("$,");
+    isMobile = false;
+    BINVAL = "fundingfte";
+
+    binnedData = [];
+
+    formatData();
+    bingraph("#fte");
+
+}
+
+function twoyearbins() {
+    $BINDIV = $("#twoyear");
+    BREAKS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
+    FORMATTER = d3.format("%");
+    isMobile = false;
+    BINVAL = "ftepubin2year";
+
+    binnedData = [];
+
+    formatData();
+    bingraph("#twoyear");
+
+}
+
+function grantbins() {
+    $BINDIV = $("#grants");
+    BREAKS = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
+    FORMATTER = d3.format("%");
+    isMobile = false;
+    BINVAL = "grants_pctneedbased";
+
+    binnedData = [];
+
+    formatData();
+    bingraph("#grants");
+
+}

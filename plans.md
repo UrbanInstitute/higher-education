@@ -35,9 +35,9 @@
  * Divided into two columns by above/below 50% need-based
  * Paired with map of above/below 50% need-based (categorical)
  * grants_needbased, grants_nonneedbased
-* Percentage change in appropriations (2015 $) since 2001
+* Line chart: Percentage change in appropriations (2015 $) since 2001
  * Paired with choropleth map of % change 2001-2015
  * approp_change
-* Appropriations per FTE student since 2001 in 2015 $
+* Line chart: Appropriations per FTE student since 2001 in 2015 $
  * Paired with choropleth map of % change per FTE student 2001-2015
  * approp_percap
