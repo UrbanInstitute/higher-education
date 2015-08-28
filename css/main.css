@@ -19,7 +19,6 @@
 
 .axis .minor line {
     stroke: #efefef;
-    /*    stroke-dasharray: 2, 2;*/
 }
 
 .legend {
@@ -40,6 +39,18 @@
 }
 
 .bar.selected {
+    fill: #fdbf11;
+}
+
+.splitbar.selected {
+    fill: #000000;
+}
+
+.needbased {
+    fill: #1696d2
+}
+
+.nonneedbased {
     fill: #fdbf11;
 }
 /***line charts***/

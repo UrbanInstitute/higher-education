@@ -13,6 +13,12 @@ var FORMATTER,
     COLORS,
     BREAKS;
 
+var palette = {
+    blue5: ["#b0d5f1", "#82c4e9", "#1696d2", "#00578b", "#00152A"],
+    yellow5: [],
+    yellowblue: []
+};
+
 //one function for each graph to make
 
 function fte2year() {
@@ -21,9 +27,25 @@ function fte2year() {
     VAL = "ftepubin2year";
     numticks = 6;
     BREAKS = [0.2, 0.3, 0.4, 0.5];
-    COLORS = ["#cfe8f3", "#73bfe2", "#1696d2", "#0a4c6a", "#062635"];
+    COLORS = palette.blue5;
     isMobile = false;
     barchart("#fte2year");
+}
+
+function grantaid1() {
+    $GRAPHDIV = $("#grantaid1");
+    FORMATTER = d3.format("%");
+    VAL = "grants_needbased";
+    isMobile = false;
+    splitchart("#grantaid1");
+}
+
+function grantaid2() {
+    $GRAPHDIV = $("#grantaid2");
+    FORMATTER = d3.format("%");
+    VAL = "grants_nonneedbased";
+    isMobile = false;
+    splitchart("#grantaid2");
 }
 
 function enrollchart() {
@@ -59,11 +81,13 @@ function approp_percapchart() {
 
 function drawgraphs() {
     fte2year();
+    grantaid1();
+    grantaid2();
     enrollchart();
     appropchart();
     approp_percapchart();
 
-    var allbars = d3.selectAll(".bar, .chartline");
+    var allbars = d3.selectAll(".bar, .chartline, .splitbar");
     allbars.on("mouseover", function () {
         var moused_id = this.id;
         allbars.classed("selected", function () {

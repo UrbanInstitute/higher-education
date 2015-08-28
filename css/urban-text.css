@@ -152,3 +152,9 @@ font-family: Georgia, serif;
 .copy {
   font-size: 0.75em;
 }
+
+.charttitle {
+    font-size: 13px;
+    text-transform: uppercase;
+    text-align: center;
+}
