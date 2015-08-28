@@ -129,7 +129,7 @@ function barchart(div, id) {
         .attr("y2", function (d) {
             return y(0.459912672);
         })
-        .attr("x1", x.rangeBand())
+        .attr("x1", 0)
         .attr("x2", width - x.rangeBand());
 
 }
