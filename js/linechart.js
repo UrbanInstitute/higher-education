@@ -1,4 +1,3 @@
-//var MOBILE_THRESHOLD = 600;
 //configure in each graph call
 
 //globals
@@ -16,7 +15,7 @@ function linechart(div, id) {
         top: 25,
         right: 15,
         bottom: 25,
-        left: 40
+        left: 55
     };
 
     if ($LINEDIV.width() <= MOBILE_THRESHOLD) {
@@ -39,7 +38,7 @@ function linechart(div, id) {
     var formatAxis = d3.format(',0f');
 
     var x = d3.scale.linear()
-        .range([0,width]);
+        .range([0, width]);
 
     var y = d3.scale.linear()
         .range([height, 0]);
@@ -70,15 +69,26 @@ function linechart(div, id) {
             val: +d[LINEVAL]
         };
     });
-    
+
 
     x.domain(d3.extent(data, function (d) {
         return d.year;
     }));
 
-    y.domain(d3.extent(data, function (d) {
+    //if positive/negative values, use full extent for y domain. if all positive, use 0 to max
+    var ymin = d3.min(data, function (d) {
         return d.val;
-    }));
+    });
+
+    if (ymin >= 0) {
+        y.domain([0, d3.max(data, function (d) {
+            return d.val;
+        })]);
+    } else {
+        y.domain(d3.extent(data, function (d) {
+            return d.val;
+        }));
+    }
 
     var gx = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -88,11 +98,11 @@ function linechart(div, id) {
     var yAxis = d3.svg.axis()
         .scale(y)
         .tickSize(-width)
-        .tickFormat(d3.format("%"))
+        .tickFormat(FORMATTER)
         .orient("left");
 
     var gy = svg.append("g")
-        .attr("class", "y axislc")
+        .attr("class", "y axis")
         .call(yAxis);
 
     gy.selectAll("g").filter(function (d) {
@@ -102,8 +112,8 @@ function linechart(div, id) {
 
     gy.selectAll("text")
         .attr("x", -4)
-        .attr("dy", 2);
-
+        .attr("dy", 4);
+    
     data_nest = d3.nest().key(function (d) {
         return d.abbrev;
     }).entries(data);
