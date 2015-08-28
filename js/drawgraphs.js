@@ -5,7 +5,7 @@ var annual_data_url = "data/annualdata.csv";
 var isMobile = false;
 var data_long, data;
 var FORMATTER,
-    $LINEDIV,
+    VAL,
     LINEVAL,
     YEARVAL,
     NUMTICKS,
@@ -18,6 +18,7 @@ var FORMATTER,
 function fte2year() {
     $GRAPHDIV = $("#fte2year");
     FORMATTER = d3.format("%");
+    VAL = "ftepubin2year";
     numticks = 6;
     BREAKS = [0.2, 0.3, 0.4, 0.5];
     COLORS = ["#cfe8f3", "#73bfe2", "#1696d2", "#0a4c6a", "#062635"];
@@ -26,7 +27,7 @@ function fte2year() {
 }
 
 function enrollchart() {
-    $LINEDIV = $("#enrollment");
+    $GRAPHDIV = $("#enrollment");
     LINEVAL = "enroll_change";
     YEARVAL = "fiscalyear";
     FORMATTER = d3.format("%");
@@ -36,7 +37,7 @@ function enrollchart() {
 }
 
 function appropchart() {
-    $LINEDIV = $("#appropriations");
+    $GRAPHDIV = $("#appropriations");
     LINEVAL = "approp_change";
     YEARVAL = "fiscalyear";
     FORMATTER = d3.format("%");
@@ -46,7 +47,7 @@ function appropchart() {
 }
 
 function approp_percapchart() {
-    $LINEDIV = $("#approp_percap");
+    $GRAPHDIV = $("#approp_percap");
     LINEVAL = "approp_percap";
     YEARVAL = "fiscalyear";
     FORMATTER = d3.format("$,");
@@ -62,7 +63,7 @@ function drawgraphs() {
     appropchart();
     approp_percapchart();
 
-    var allbars = d3.selectAll(".bin, .chartline");
+    var allbars = d3.selectAll(".bar, .chartline");
     allbars.on("mouseover", function () {
         var moused_id = this.id;
         allbars.classed("selected", function () {
@@ -80,7 +81,7 @@ $(window).load(function () {
         d3.csv(main_data_url, function (error, rates) {
             d3.csv(annual_data_url, function (annualrates) {
                 data_long = annualrates;
-                data_bins = rates;
+                data_main = rates;
 
                 drawgraphs();
                 window.onresize = drawgraphs;

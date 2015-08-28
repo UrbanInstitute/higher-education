@@ -26,6 +26,22 @@
     font-size: 12px;
     color: #333;
 }
+
+.abbrevs {
+    font-size: 11px;
+    text-align: center;
+}
+
+.labelline {
+    stroke: #000;
+    stroke-width: 1;
+    fill: none;
+    stroke-dasharray: 2, 2;
+}
+
+.bar.selected {
+    fill: #fdbf11;
+}
 /***line charts***/
 
 .chartline {

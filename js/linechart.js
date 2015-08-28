@@ -18,7 +18,7 @@ function linechart(div, id) {
         left: 55
     };
 
-    if ($LINEDIV.width() <= MOBILE_THRESHOLD) {
+    if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
         isMobile = true;
     } else {
         isMobile = false;
@@ -29,11 +29,11 @@ function linechart(div, id) {
         linechart_aspect_height = 1;
     }
 
-    var width = $LINEDIV.width() - margin.left - margin.right,
+    var width = $GRAPHDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * linechart_aspect_height) / linechart_aspect_width) - margin.top - margin.bottom,
         padding = 30;
 
-    $LINEDIV.empty();
+    $GRAPHDIV.empty();
 
     var formatAxis = d3.format(',0f');
 

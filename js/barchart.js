@@ -7,7 +7,10 @@ function barchart(div, id) {
         .domain(BREAKS)
         .range(COLORS);
 
-    data = data_bins;
+    data = data_main.filter(function (d) {
+        return d.abbrev != "US";
+    });
+
     var margin = {
         top: 5,
         right: 5,
@@ -21,9 +24,7 @@ function barchart(div, id) {
         isMobile = false;
     }
 
-    if (isMobile) {
-        barchart_aspect_height = 1;
-    }
+    if (isMobile) {}
 
     var width = $GRAPHDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * barchart_aspect_height) / barchart_aspect_width) - margin.top - margin.bottom,
@@ -38,7 +39,7 @@ function barchart(div, id) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     data.sort(function (a, b) {
-        return a.ftepubin2year - b.ftepubin2year;
+        return a[VAL] - b[VAL];
     });
 
     var x = d3.scale.ordinal()
@@ -56,16 +57,16 @@ function barchart(div, id) {
         .range([height, 0]);
 
     var ymin = d3.min(data, function (d) {
-        return d.ftepubin2year;
+        return d[VAL];
     });
 
     if (ymin >= 0) {
         y.domain([0, d3.max(data, function (d) {
-            return d.ftepubin2year;
+            return d[VAL];
         })]);
     } else {
         y.domain(d3.extent(data, function (d) {
-            return d.ftepubin2year;
+            return d[VAL];
         }));
     }
 
@@ -78,7 +79,7 @@ function barchart(div, id) {
 
     var gx = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .attr("class", "x axis")
+        .attr("class", "x axis abbrevs")
         .call(xAxis);
 
     var gy = svg.append("g")
@@ -101,10 +102,10 @@ function barchart(div, id) {
 
     pctbar.append("rect")
         .attr('id', function (d) {
-            return "v" + d.abbrev;
+            return d.abbrev;
         })
         .attr("fill", function (d) {
-            return color(d.ftepubin2year);
+            return color(d[VAL]);
         })
         .attr("class", "bar")
         .attr("x", function (d) {
@@ -112,15 +113,23 @@ function barchart(div, id) {
         })
         .attr("width", x.rangeBand())
         .attr("y", function (d) {
-            return Math.min(y(d.ftepubin2year), y(0));
+            return Math.min(y(d[VAL]), y(0));
         })
         .attr("height", function (d) {
-            return Math.abs(y(0) - (y(d.ftepubin2year)));
+            return Math.abs(y(0) - (y(d[VAL])));
         });
 
-    function type(d) {
-        d.ftepubin2year = +d.ftepubin2year;
-        return d;
-    }
+    //US value
+    svg.append("g")
+        .append("line")
+        .attr("class", "labelline")
+        .attr("y1", function (d) {
+            return y(0.459912672);
+        })
+        .attr("y2", function (d) {
+            return y(0.459912672);
+        })
+        .attr("x1", x.rangeBand())
+        .attr("x2", width - x.rangeBand());
 
 }
