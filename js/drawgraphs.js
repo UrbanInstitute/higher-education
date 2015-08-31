@@ -11,6 +11,7 @@ var FORMATTER,
     YEARVAL,
     NUMTICKS,
     $GRAPHDIV,
+    $LEGENDDIV,
     COLORS,
     BREAKS,
     stateSelect,
@@ -40,6 +41,12 @@ function fte2year() {
         map("#map_fte2year");
     }
     pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_fte2year");
+        legend("#legend_fte2year");
+    }
+    maplegend();
 }
 
 function grantaid1() {
@@ -77,6 +84,12 @@ function map_instate() {
     isMobile = false;
     MAINMAP = 1;
     map("#map_instate");
+    function maplegend() {
+        $LEGENDDIV = $("#legend_instate");
+        legend("#legend_instate");
+        FORMATTER = d3.format("%");
+    }
+    maplegend();
 }
 
 function map_outstate() {
@@ -87,6 +100,12 @@ function map_outstate() {
     isMobile = false;
     MAINMAP = 1;
     map("#map_outstate");
+    function maplegend() {
+        $LEGENDDIV = $("#legend_outstate");
+        legend("#legend_outstate");
+        FORMATTER = d3.format("%");
+    }
+    maplegend();
 }
 
 function enrollchart() {
@@ -97,16 +116,22 @@ function enrollchart() {
     isMobile = false;
     NUMTICKS = 14;
     linechart("#enrollment");
+    COLORS = palette.blue5;
+    BREAKS = [0.1, 0.2, 0.3, 0.4];
 
     function pairedmap() {
         $GRAPHDIV = $("#map_enroll");
         VAL = "enroll0115";
-        COLORS = palette.blue5;
-        BREAKS = [0.1, 0.2, 0.3, 0.4];
         MAINMAP = 0;
         map("#map_enroll");
     }
     pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_enroll");
+        legend("#legend_enroll");
+    }
+    maplegend();
 }
 
 function appropchart() {
@@ -117,16 +142,22 @@ function appropchart() {
     isMobile = false;
     NUMTICKS = 14;
     linechart("#appropriations");
+    COLORS = palette.yellowblue;
+    BREAKS = [-0.3, -0.15, 0, 0.15, 0.3];
 
     function pairedmap() {
         $GRAPHDIV = $("#map_approp");
         VAL = "approp0115";
-        COLORS = palette.yellowblue;
-        BREAKS = [-0.3, -0.15, 0, 0.15, 0.3];
         MAINMAP = 0;
         map("#map_approp");
     }
     pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_approp");
+        legend("#legend_approp");
+    }
+    maplegend();
 }
 
 function approp_percapchart() {
@@ -137,16 +168,23 @@ function approp_percapchart() {
     isMobile = false;
     NUMTICKS = 14;
     linechart("#approp_percap");
+    COLORS = palette.yellowblue;
+    BREAKS = [-0.3, -0.15, 0, 0.15, 0.3];
 
     function pairedmap() {
         $GRAPHDIV = $("#map_approppc");
         VAL = "approp_percap0115";
-        COLORS = palette.yellowblue;
-        BREAKS = [-0.3, -0.15, 0, 0.15, 0.3];
         MAINMAP = 0;
         map("#map_approppc");
     }
     pairedmap();
+    
+    function maplegend() {
+        FORMATTER = d3.format("%");
+        $LEGENDDIV = $("#legend_approppc");
+        legend("#legend_approppc");
+    }
+    maplegend();
 }
 
 function drawgraphs() {

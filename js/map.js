@@ -50,7 +50,7 @@ d3.helper.tooltip = function (accessor) {
 function map(div, id) {
 
     var margin = {
-        top: 30,
+        top: 20,
         right: 5,
         bottom: 10,
         left: 5
@@ -79,13 +79,6 @@ function map(div, id) {
     var color = d3.scale.threshold()
         .domain(BREAKS)
         .range(COLORS);
-
-    var marginl = {
-        top: 5,
-        right: 10,
-        bottom: 2,
-        left: 10
-    };
 
     var projection = d3.geo.albersUsa()
         .scale(width * 1.3)
@@ -124,9 +117,67 @@ function map(div, id) {
                 //if (d.properties[VAL] == "") {
                 //    return "#ccc";
                 //} else {
-                    return color(d.properties[VAL]);
+                return color(d.properties[VAL]);
                 //}
             });
     }
 
+}
+
+function legend(div) {
+
+    var margin = {
+        top: 3,
+        right: 1,
+        bottom: 2,
+        left: 1
+    };
+    
+    var width = $LEGENDDIV.width() - margin.left - margin.right,
+        height = 40 - margin.top - margin.bottom;
+
+    $LEGENDDIV.empty();
+
+    var svg = d3.select(div).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", 50 + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    if ($LEGENDDIV.width() < 500) {
+        var lp_w = 0,
+            ls_w = (width / COLORS.length),
+            ls_h = 15;
+    } else {
+        var lp_w = 0,
+            ls_w = 60,
+            ls_h = 15;
+    }
+    var legend = svg.selectAll("g.legend")
+        .data(COLORS)
+        .enter().append("g")
+        .attr("class", "legend");
+
+    legend.append("text")
+        .data(BREAKS)
+        .attr("x", function (d, i) {
+            return (i * ls_w) + lp_w + ls_w - 12;
+        })
+        .attr("y", 15)
+        .text(function (d, i) {
+            return FORMATTER(d);
+        });
+
+    legend.append("rect")
+        .data(COLORS)
+        .attr("x", function (d, i) {
+            return (i * ls_w) + lp_w;
+        })
+        .attr("y", 20)
+        .attr("width", ls_w - 3)
+        .attr("height", ls_h)
+        .attr("z-index", 10)
+        .style("fill", function (d, i) {
+            return COLORS[i];
+        })
 }

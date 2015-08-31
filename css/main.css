@@ -14,6 +14,13 @@
     width: 100%;
     margin-top: 30px;
 }
+
+.legendtitle {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 700;
+}
+
 /*standard axes*/
 
 .axis {
@@ -89,8 +96,15 @@
     pointer-events: none;
 }
 
-.boundary, .boundary_paired {
+.boundary,
+.boundary_paired {
     stroke: #fff;
+}
+
+.boundary:hover {
+    stroke: #000;
+    stroke-width: 3px;
+    z-index: 1000;
 }
 
 .boundary_paired.selected {
