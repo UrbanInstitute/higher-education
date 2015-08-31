@@ -64,6 +64,21 @@
     stroke: #fdbf11;
     stroke-width: 5;
 }
+/*maps*/
+
+.urban-map-tooltip {
+    padding: 10px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    opacity: 0.85;
+    border: 1px solid #aaa;
+    pointer-events: none;
+}
+
+.boundary {
+    stroke: #fff;
+}
 /*label for bin chart state abbreviation*/
 /*.value {
     text-align: center;

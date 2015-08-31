@@ -2,6 +2,7 @@
 var MOBILE_THRESHOLD = 600;
 var main_data_url = "data/statedata.csv";
 var annual_data_url = "data/annualdata.csv";
+var map_data_url = "data/states.json";
 var isMobile = false;
 var data_long, data;
 var FORMATTER,
@@ -15,7 +16,7 @@ var FORMATTER,
 
 var palette = {
     blue5: ["#b0d5f1", "#82c4e9", "#1696d2", "#00578b", "#00152A"],
-    yellow5: [],
+    yellow5: ["#fff2cf","#fdd870","#fdbf11","#e88e2d","#ca5800"],
     yellowblue: []
 };
 
@@ -46,6 +47,24 @@ function grantaid2() {
     VAL = "grants_nonneedbased";
     isMobile = false;
     splitchart("#grantaid2");
+}
+
+function map_instate() {
+    $GRAPHDIV = $("#map_instate");
+    VAL = "res_pct_instate";
+    COLORS = palette.blue5;
+    BREAKS = [0.6, 0.7, 0.8, 0.9];
+    isMobile = false;
+    map("#map_instate");
+}
+
+function map_outstate() {
+    $GRAPHDIV = $("#map_outstate");
+    VAL = "state_pct_outstate";
+    COLORS = palette.yellow5;
+    BREAKS = [0.1,0.2,0.3,0.4];
+    isMobile = false;
+    map("#map_outstate");
 }
 
 function enrollchart() {
@@ -83,6 +102,8 @@ function drawgraphs() {
     fte2year();
     grantaid1();
     grantaid2();
+    map_instate();
+    map_outstate();
     enrollchart();
     appropchart();
     approp_percapchart();
@@ -104,11 +125,14 @@ $(window).load(function () {
     if (Modernizr.svg) { // if svg is supported, draw dynamic chart
         d3.csv(main_data_url, function (error, rates) {
             d3.csv(annual_data_url, function (annualrates) {
-                data_long = annualrates;
-                data_main = rates;
+                d3.json(map_data_url, function (mapdata) {
+                    data_long = annualrates;
+                    data_main = rates;
+                    us = mapdata;
 
-                drawgraphs();
-                window.onresize = drawgraphs;
+                    drawgraphs();
+                    window.onresize = drawgraphs;
+                });
             });
         });
     }

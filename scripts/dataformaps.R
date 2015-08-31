@@ -5,4 +5,5 @@
 library(dplyr)
 
 dt <- read.csv("data/statedata.csv",stringsAsFactors = F)
-mapdt <- dt %>% select(statefip,abbrev,ftepubin2year,res_pct_instate,state_enroll_outstate,grants_pctneedbased) %>% rename(STATEFP = statefip)
+mapdt <- dt %>% select(statefip,abbrev,ftepubin2year,res_pct_instate,state_pct_outstate,grants_pctneedbased) %>% rename(STATEFP = statefip)
+write.csv(mapdt,"data/mapdata.csv",row.names=F, na="")
