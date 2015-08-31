@@ -121,7 +121,11 @@ function map(div, id) {
             })
             .attr("class", "boundary_paired")
             .attr("fill", function (d) {
-                return color(d.properties[VAL]);
+                //if (d.properties[VAL] == "") {
+                //    return "#ccc";
+                //} else {
+                    return color(d.properties[VAL]);
+                //}
             });
     }
 

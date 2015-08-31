@@ -141,8 +141,6 @@ function drawgraphs() {
         allbars.classed("selected", false);
     })
 
-    stateSelect = d3.select("#state-select").property("value");
-    console.log(stateSelect);
 }
 
 $(window).load(function () {
