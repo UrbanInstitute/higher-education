@@ -1,5 +1,10 @@
-#bingraph {
+.bingraph {
     width: 100%;
+}
+
+.pairedmap {
+    width: 100%;
+    margin-top: 30px;
 }
 /*standard axes*/
 
@@ -78,6 +83,11 @@
 
 .boundary {
     stroke: #fff;
+}
+
+.boundary.selected {
+    stroke: #000;
+    stroke-width: 2px;
 }
 /*label for bin chart state abbreviation*/
 /*.value {

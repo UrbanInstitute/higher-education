@@ -94,21 +94,35 @@ function map(div, id) {
     var path = d3.geo.path()
         .projection(projection);
 
-    svg.selectAll("path")
-        .data(topojson.feature(us, us.objects.cb_2014_us_state_20m).features)
-        .enter().append("path")
-        .attr("d", path)
-        .attr("id", function (d) {
-            return d.properties.abbrev;
-        })
-        .attr("class", "boundary")
-        .attr("fill", function (d) {
-            return color(d.properties[VAL]);
-        })
-        .call(d3.helper.tooltip(
-            function (d, i) {
-                return "<b>" + d.properties.name + "</b></br>Residents who stay in state: " + d3.format("%")(d.properties.res_pct_instate)+ "</br>State students enrolling from another state: " + d3.format("%")(d.properties.state_pct_outstate);
-            }
-        ));
+    if (MAINMAP == 1) {
+        svg.selectAll("path")
+            .data(topojson.feature(us, us.objects.cb_2014_us_state_20m).features)
+            .enter().append("path")
+            .attr("d", path)
+            .attr("id", function (d) {
+                return d.properties.abbrev;
+            })
+            .attr("class", "boundary")
+            .attr("fill", function (d) {
+                return color(d.properties[VAL]);
+            })
+            .call(d3.helper.tooltip(
+                function (d, i) {
+                    return "<b>" + d.properties.name + "</b></br>Residents who stay in state: " + d3.format("%")(d.properties.res_pct_instate) + "</br>State students enrolling from another state: " + d3.format("%")(d.properties.state_pct_outstate);
+                }
+            ));
+    } else {
+        svg.selectAll("path")
+            .data(topojson.feature(us, us.objects.cb_2014_us_state_20m).features)
+            .enter().append("path")
+            .attr("d", path)
+            .attr("id", function (d) {
+                return d.properties.abbrev;
+            })
+            .attr("class", "boundary")
+            .attr("fill", function (d) {
+                return color(d.properties[VAL]);
+            });
+    }
 
 }

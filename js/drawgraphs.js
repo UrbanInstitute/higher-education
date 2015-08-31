@@ -12,11 +12,13 @@ var FORMATTER,
     NUMTICKS,
     $GRAPHDIV,
     COLORS,
-    BREAKS;
+    BREAKS,
+    stateSelect,
+    MAINMAP = 0;
 
 var palette = {
     blue5: ["#b0d5f1", "#82c4e9", "#1696d2", "#00578b", "#00152A"],
-    yellow5: ["#fff2cf","#fdd870","#fdbf11","#e88e2d","#ca5800"],
+    yellow5: ["#fff2cf", "#fdd870", "#fdbf11", "#e88e2d", "#ca5800"],
     yellowblue: []
 };
 
@@ -31,6 +33,13 @@ function fte2year() {
     COLORS = palette.blue5;
     isMobile = false;
     barchart("#fte2year");
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_fte2year");
+        MAINMAP = 0;
+        map("#map_fte2year");
+    }
+    pairedmap();
 }
 
 function grantaid1() {
@@ -55,6 +64,7 @@ function map_instate() {
     COLORS = palette.blue5;
     BREAKS = [0.6, 0.7, 0.8, 0.9];
     isMobile = false;
+    MAINMAP = 1;
     map("#map_instate");
 }
 
@@ -62,8 +72,9 @@ function map_outstate() {
     $GRAPHDIV = $("#map_outstate");
     VAL = "state_pct_outstate";
     COLORS = palette.yellow5;
-    BREAKS = [0.1,0.2,0.3,0.4];
+    BREAKS = [0.1, 0.2, 0.3, 0.4];
     isMobile = false;
+    MAINMAP = 1;
     map("#map_outstate");
 }
 
@@ -97,8 +108,8 @@ function approp_percapchart() {
     linechart("#approp_percap");
 }
 
-
 function drawgraphs() {
+
     fte2year();
     grantaid1();
     grantaid2();
@@ -119,6 +130,9 @@ function drawgraphs() {
     allbars.on("mouseout", function () {
         allbars.classed("selected", false);
     })
+
+    stateSelect = d3.select("#state-select").property("value");
+    console.log(stateSelect);
 }
 
 $(window).load(function () {
