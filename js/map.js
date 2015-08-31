@@ -114,11 +114,12 @@ function map(div, id) {
             })
             .attr("class", "boundary_paired")
             .attr("fill", function (d) {
-                //if (d.properties[VAL] == "") {
-                //    return "#ccc";
-                //} else {
+                //NH doesn't give grant aid
+                if (VAL == "grants_pctneedbased" & d.properties.abbrev=="NH") {
+                    return "#ccc";
+                } else {
                 return color(d.properties[VAL]);
-                //}
+                }
             });
     }
 
