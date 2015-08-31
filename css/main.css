@@ -1,3 +1,11 @@
+.sidebar-nav {
+    top: 30%;
+    padding: 0;
+    max-height: none;
+    position: fixed;
+    width: inherit;
+}
+
 .bingraph {
     width: 100%;
 }
