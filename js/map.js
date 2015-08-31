@@ -1,6 +1,6 @@
 var us,
-    map_aspect_width = 1.7,
-    map_aspect_height = 1;
+    map_aspect_width = 1,
+    map_aspect_height = 0.7;
 
 d3.helper = {};
 d3.helper.tooltip = function (accessor) {
@@ -50,7 +50,7 @@ d3.helper.tooltip = function (accessor) {
 function map(div, id) {
 
     var margin = {
-        top: 10,
+        top: 30,
         right: 5,
         bottom: 10,
         left: 5
@@ -119,7 +119,7 @@ function map(div, id) {
             .attr("id", function (d) {
                 return d.properties.abbrev;
             })
-            .attr("class", "boundary")
+            .attr("class", "boundary_paired")
             .attr("fill", function (d) {
                 return color(d.properties[VAL]);
             });

@@ -58,6 +58,15 @@ function grantaid2() {
     splitchart("#grantaid2");
 }
 
+function grantmap() {
+    $GRAPHDIV = $("#map_grantaid");
+    MAINMAP = 0;
+    BREAKS = [0.5];
+    COLORS = ["#fdbf11","#1696d2"];
+    VAL = "grants_pctneedbased";
+    map("#map_grantaid");
+}
+
 function map_instate() {
     $GRAPHDIV = $("#map_instate");
     VAL = "res_pct_instate";
@@ -113,13 +122,14 @@ function drawgraphs() {
     fte2year();
     grantaid1();
     grantaid2();
+    grantmap();
     map_instate();
     map_outstate();
     enrollchart();
     appropchart();
     approp_percapchart();
 
-    var allbars = d3.selectAll(".bar, .chartline, .splitbar");
+    var allbars = d3.selectAll(".bar, .chartline, .splitbar, .boundary_paired");
     allbars.on("mouseover", function () {
         var moused_id = this.id;
         allbars.classed("selected", function () {

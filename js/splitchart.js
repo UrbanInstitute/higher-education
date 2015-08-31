@@ -1,6 +1,6 @@
 //acts as if the left (need-based) is a negative value for construction purposes
 var splitchart_aspect_width = 1;
-var splitchart_aspect_height = 1.3;
+var splitchart_aspect_height = 1.8;
 
 function splitchart(div, id) {
 
@@ -11,7 +11,7 @@ function splitchart(div, id) {
     });
 
     var margin = {
-        top: 35,
+        top: 20,
         right: 5,
         bottom: 25,
         left: 85

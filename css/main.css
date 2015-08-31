@@ -89,13 +89,13 @@
     pointer-events: none;
 }
 
-.boundary {
+.boundary, .boundary_paired {
     stroke: #fff;
 }
 
-.boundary.selected {
+.boundary_paired.selected {
     stroke: #000;
-    stroke-width: 2px;
+    stroke-width: 3px;
 }
 /*label for bin chart state abbreviation*/
 /*.value {
