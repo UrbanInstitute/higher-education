@@ -1,9 +1,11 @@
+//acts as if the left (need-based) is a negative value for construction purposes
 var splitchart_aspect_width = 1;
 var splitchart_aspect_height = 1.3;
 
 function splitchart(div, id) {
 
     //separating out the data into 2 graphs based on more/less need based
+
     data = data_main.filter(function (d) {
         return d.abbrev != "US" & (d[VAL] / d.grants_perfte >= 0.5);
     });
@@ -54,15 +56,13 @@ function splitchart(div, id) {
         .tickSize(0)
         .orient("left");
 
-    var formatter = d3.format("$,");
-
     var xAxis = d3.svg.axis()
         .scale(x)
         .tickSize(height)
         .ticks(3)
         .tickFormat(function (d) {
             if (d < 0) d = -d;
-            return formatter(d);
+            return d3.format("$,")(d);
         })
         .orient("top");
 
