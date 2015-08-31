@@ -1,6 +1,6 @@
 //acts as if the left (need-based) is a negative value for construction purposes
 var splitchart_aspect_width = 1;
-var splitchart_aspect_height = 1.8;
+var splitchart_aspect_height;
 
 function splitchart(div, id) {
 

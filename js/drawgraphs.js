@@ -19,7 +19,7 @@ var FORMATTER,
 var palette = {
     blue5: ["#b0d5f1", "#82c4e9", "#1696d2", "#00578b", "#00152A"],
     yellow5: ["#fff2cf", "#fdd870", "#fdbf11", "#e88e2d", "#ca5800"],
-    yellowblue: []
+    yellowblue: ["#ca5800", "#fcb918", "#ffedcd", "#d7e8f6", "#0096d2", "#00578b"]
 };
 
 //one function for each graph to make
@@ -46,6 +46,7 @@ function grantaid1() {
     $GRAPHDIV = $("#grantaid1");
     FORMATTER = d3.format("%");
     VAL = "grants_needbased";
+    splitchart_aspect_height = 1.9;
     isMobile = false;
     splitchart("#grantaid1");
 }
@@ -54,6 +55,7 @@ function grantaid2() {
     $GRAPHDIV = $("#grantaid2");
     FORMATTER = d3.format("%");
     VAL = "grants_nonneedbased";
+    splitchart_aspect_height = 1.9 * (16 / 34);
     isMobile = false;
     splitchart("#grantaid2");
 }
@@ -62,7 +64,7 @@ function grantmap() {
     $GRAPHDIV = $("#map_grantaid");
     MAINMAP = 0;
     BREAKS = [0.5];
-    COLORS = ["#fdbf11","#1696d2"];
+    COLORS = ["#fdbf11", "#1696d2"];
     VAL = "grants_pctneedbased";
     map("#map_grantaid");
 }
@@ -95,6 +97,16 @@ function enrollchart() {
     isMobile = false;
     NUMTICKS = 14;
     linechart("#enrollment");
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_enroll");
+        VAL = "enroll0115";
+        COLORS = palette.blue5;
+        BREAKS = [0.1, 0.2, 0.3, 0.4];
+        MAINMAP = 0;
+        map("#map_enroll");
+    }
+    pairedmap();
 }
 
 function appropchart() {
@@ -105,6 +117,16 @@ function appropchart() {
     isMobile = false;
     NUMTICKS = 14;
     linechart("#appropriations");
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_approp");
+        VAL = "approp0115";
+        COLORS = palette.yellowblue;
+        BREAKS = [-0.3, -0.15, 0, 0.15, 0.3];
+        MAINMAP = 0;
+        map("#map_approp");
+    }
+    pairedmap();
 }
 
 function approp_percapchart() {
@@ -115,6 +137,16 @@ function approp_percapchart() {
     isMobile = false;
     NUMTICKS = 14;
     linechart("#approp_percap");
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_approppc");
+        VAL = "approp_percap0115";
+        COLORS = palette.yellowblue;
+        BREAKS = [-0.3, -0.15, 0, 0.15, 0.3];
+        MAINMAP = 0;
+        map("#map_approppc");
+    }
+    pairedmap();
 }
 
 function drawgraphs() {

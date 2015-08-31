@@ -96,6 +96,7 @@
 .boundary_paired.selected {
     stroke: #000;
     stroke-width: 3px;
+    z-index: 1000;
 }
 /*label for bin chart state abbreviation*/
 /*.value {

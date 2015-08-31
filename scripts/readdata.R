@@ -12,7 +12,7 @@ library(tidyr)
 states<-read.csv("data/states.csv",stringsAsFactors = F)
 
 #File path of spreadsheet
-xlp = "data/Data for Brief_8.26.2015.xlsx"
+xlp = "data/original/Data for Brief_8.26.2015.xlsx"
 
 ########################################################################################################
 # formatState for matching on state name column
