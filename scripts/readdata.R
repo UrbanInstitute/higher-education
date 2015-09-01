@@ -47,14 +47,7 @@ formatState <- function(dt) {
 fig1<-readWorkbook(xlp, sheet="Fig. 1", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 fig2<-readWorkbook(xlp, sheet="Fig. 2", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 fig3<-readWorkbook(xlp, sheet="Fig. 3", colNames=T, rowNames=F, rows=2:53, cols=1:2)
-fig4<-readWorkbook(xlp, sheet="Fig. 4", colNames=T, rowNames=F, rows=2:53, cols=1:2)
-fig5<-readWorkbook(xlp, sheet="Fig. 5", colNames=T, rowNames=F, rows=2:52, cols=1:5)
-fig6<-readWorkbook(xlp, sheet="Fig. 6", colNames=T, rowNames=F, rows=2:53, cols=1:7)
-fig7<-readWorkbook(xlp, sheet="Fig. 7", colNames=T, rowNames=F, rows=2:53, cols=1:4)
-fig8<-readWorkbook(xlp, sheet="Fig. 8", colNames=T, rowNames=F, rows=2:53, cols=1:2)
-fig9<-readWorkbook(xlp, sheet="Fig. 9", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 tab6<-readWorkbook(xlp, sheet="Table 6", colNames=T, rowNames=F, rows=2:53, cols=1:3)
-a1<-readWorkbook(xlp, sheet="B1. A1", colNames=T, rowNames=F, rows=2:53, cols=1:2)
 migration<-readWorkbook(xlp, sheet="Migration", colNames=F, rowNames=F, rows=9:59, cols=1:11)
 
 #Table 1 and 2 = selected states and years of appropriations - use full Appropriations tab instead
@@ -66,23 +59,12 @@ migration<-readWorkbook(xlp, sheet="Migration", colNames=F, rowNames=F, rows=9:5
 colnames(fig1)<- c("state","fundingfte")
 colnames(fig2)<- c("state","fundingperthousinc")
 colnames(fig3)<- c("state","ftepubin2year")
-colnames(fig4)<- c("state","hsgradsinstate")
-colnames(fig5)<- c("flagship","state","flagship_instate","flagship_outstate","flagship_foreign")
-colnames(fig6)<- c("state","white","black","hispanic","asian","other","nonres")
-colnames(fig8)<- c("state","expendfte_pub4")
-colnames(fig9)<- c("state","statefunding_pctgrants")
 colnames(tab6)<- c("state","grants_perfte","grants_pctneedbased")
-colnames(a1)<- c("state","familyinc_median")
 
 #tab 6 - add breakdown of grants by need vs non-need based in $s
 tab6$grants_pctneedbased <- as.numeric(tab6$grants_pctneedbased)
 tab6 <- tab6 %>% mutate(grants_needbased = ifelse(grants_perfte==0, 0, grants_perfte*grants_pctneedbased)) %>%
   mutate(grants_nonneedbased = ifelse(grants_perfte==0, 0, grants_perfte*(1-grants_pctneedbased)))
-
-#figure 7 data = differentials between tution types - get full prices and delete differentials
-colnames(fig7)<-c("state","tf2","add4","add_outstate")
-fig7 <- fig7 %>% mutate(tf4_instate = tf2 + add4, tf4_outstate = tf4_instate + add_outstate) %>% 
-  select(-c(add4,add_outstate))
 
 #Migration data: Residence and migration of all first-time degree/certificate-seeking undergrates in degree-granting postsecondary institutions who graduated from high school in the previous 12 months, Fall 2012
 #This replaces fig4
@@ -97,37 +79,22 @@ migration <- migration %>% select(-X6, -X7)
 colnames(migration) <- c("state","res_pct_instate","state_enroll","res_enroll_total","res_enroll_instate","res_enroll_outstate","state_enroll_outstate","migration_net")
 migration <- migration %>% mutate(state_pct_outstate = state_enroll_outstate / state_enroll)
 
-
 fig1 <- formatState(fig1)
 fig2 <- formatState(fig2)
 fig3 <- formatState(fig3)
-fig4 <- formatState(fig4)
-fig5 <- formatState(fig5)
-fig6 <- formatState(fig6)
-fig7 <- formatState(fig7)
-fig8 <- formatState(fig8)
-fig9 <- formatState(fig9)
 tab6 <- formatState(tab6)
-a1 <- formatState(a1)
 migration <- formatState(migration)
 
 #Join non-annual data - not using flagship or race data
 dt <- left_join(states,fig1,by="state")
 dt <- left_join(dt,fig2,by="state")
 dt <- left_join(dt,fig3,by="state")
-dt <- left_join(dt,fig7,by="state")
-dt <- left_join(dt,fig8,by="state")
-dt <- left_join(dt,fig9,by="state")
 dt <- left_join(dt,tab6,by="state")
-dt <- left_join(dt,a1,by="state")
 dt <- left_join(dt,migration,by="state")
 dt <- dt %>% filter (statefip != 11) %>% select(-region)
-write.csv(dt,"data/statedata.csv",row.names=F, na="")
-
-rm(fig1,fig2,fig3,fig4,fig5,fig6,fig7,fig8,fig9,tab,a1,migration)
 
 ########################################################################################################
-# Annual enrollment and appropriations data: read, format, make long, join
+# Annual enrollment and appropriations data: read and add percentage change 2001-2015 for maps
 ########################################################################################################
 
 enrollment<-readWorkbook(xlp, sheet="Enrollments", colNames=T, rowNames=F, rows=1:52)
@@ -136,6 +103,60 @@ appropriations<-readWorkbook(xlp, sheet="Appropriations", colNames=T, rowNames=F
 colnames(appropriations) <- c("state","fy_01","fy_02","fy_03","fy_04","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
 colnames(enrollment) <- c("state","fy_01","fy_02","fy_03","fy_04","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
 
+#Data for map
+enrollment_map <- formatState(enrollment) %>% 
+  mutate(enroll0115 = (fy_15 - fy_01)/fy_01)
+appropriations_map <- formatState(appropriations)%>% 
+  mutate(approp0115 = (fy_15 - fy_01)/fy_01)
+
+apen <- left_join(appropriations_map,enrollment_map,by="state") %>% 
+  mutate(approp_percap0115 = (((fy_15.x/fy_15.y) - (fy_01.x/fy_01.y))/ (fy_01.x/fy_01.y))) %>% select(state,approp0115,enroll0115,approp_percap0115)
+dt <- left_join(dt,apen,by="state")
+
+#to match with shapefile
+dt <- dt %>% rename(STATEFP=statefip)
+
+########################################################################################################
+# College Board tab: tuition & fees by year for 2 year public and 4 year public instate 2001-2015
+# Figure 7 tab for 2015 4 year public out of state cost
+########################################################################################################
+
+tuition_pub2<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=1:12)
+tuition_pub4<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,14:25))
+
+formatTuition <- function(dt) {
+  colnames(dt) <-c ("state","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
+  dt <- filter(dt,state!="Puerto Rico" & state!="District of Columbia")
+  dt <- formatState(dt)
+}
+tuition_pub2 <- formatTuition(tuition_pub2)
+tuition_pub4 <- formatTuition(tuition_pub4)
+
+#Coerce numbers to numeric
+cols <- c(2, 3:ncol(tuition_pub2))
+tuition_pub2[cols] <- as.numeric(as.matrix(tuition_pub2[cols]))
+
+#Join 2005 and 2010 tuition for slope charts
+tuition <- left_join(tuition_pub2, tuition_pub4, by="state") %>%
+  select(state, fy_05.x, fy_10.x, fy_15.x, fy_05.y, fy_10.y, fy_15.y)
+colnames(tuition) <- c("state","t2_05","t2_10", "t2_15", "t4_05","t4_10", "t4_15")
+
+#figure 7 data - get 2015 out of state 4 year price
+fig7<-readWorkbook(xlp, sheet="Fig. 7", colNames=T, rowNames=F, rows=2:53, cols=1:4)
+colnames(fig7)<-c("state","t2_15","add4","add_outstate")
+fig7 <- formatState(fig7)
+fig7 <- fig7 %>% mutate(t4outstate_15 = t2_15 + add4 + add_outstate) %>% 
+  select(state, t4outstate_15)
+
+tuition <- left_join(tuition,fig7,by="state")
+
+dt <- left_join(dt, tuition, by="state")
+write.csv(dt,"data/statedata.csv",row.names=F, na="")
+
+########################################################################################################
+# Annual enrollment and appropriations data: format, make long, join
+########################################################################################################
+#Long data
 formatLong <- function(dt) {
   dt <- formatState(dt) %>%
     mutate(base = fy_01)
@@ -160,25 +181,8 @@ apen_long <- right_join(states,apen_long, by="state") %>%
 rm(appropriations, enrollment)
 
 ########################################################################################################
-#College Board tab: tuition & fees for 3 college types by year - used for figure 7 data
+# Annual tuition data for 2 year public and 4 year public instate - make long, join to long dataset
 ########################################################################################################
-
-tuition_pub2<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=1:12)
-tuition_pub4<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,14:25))
-#Not currently using private school data
-#tuition_priv<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,26:38))
-
-formatTuition <- function(dt) {
-  colnames(dt) <-c ("state","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
-  dt <- filter(dt,state!="Puerto Rico" & state!="District of Columbia")
-  dt <- formatState(dt)
-}
-tuition_pub2 <- formatTuition(tuition_pub2)
-tuition_pub4 <- formatTuition(tuition_pub4)
-
-#Coerce numbers to numeric
-cols <- c(2, 3:ncol(tuition_pub2))
-tuition_pub2[cols] <- as.numeric(as.matrix(tuition_pub2[cols]))
 
 #Make long
 formatLong <- function(dt) {
@@ -202,3 +206,29 @@ dt_long <- left_join(apen_long,tuition_long,by=c("state","statefip","abbrev","fi
 write.csv(dt_long,"data/annualdata.csv",row.names=F, na="")
 
 rm(tuition_pub2,tuition_pub4,apen_long,tuition_long)
+
+########################################################################################################
+# Data that we're not currently using, may in future
+########################################################################################################
+#fig4<-readWorkbook(xlp, sheet="Fig. 4", colNames=T, rowNames=F, rows=2:53, cols=1:2)
+#fig5<-readWorkbook(xlp, sheet="Fig. 5", colNames=T, rowNames=F, rows=2:52, cols=1:5)
+#fig6<-readWorkbook(xlp, sheet="Fig. 6", colNames=T, rowNames=F, rows=2:53, cols=1:7)
+#fig8<-readWorkbook(xlp, sheet="Fig. 8", colNames=T, rowNames=F, rows=2:53, cols=1:2)
+#fig9<-readWorkbook(xlp, sheet="Fig. 9", colNames=T, rowNames=F, rows=2:53, cols=1:2)
+#a1<-readWorkbook(xlp, sheet="B1. A1", colNames=T, rowNames=F, rows=2:53, cols=1:2)
+#Not currently using private school data
+#tuition_priv<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,26:38))
+
+#colnames(fig4)<- c("state","hsgradsinstate")
+#colnames(fig5)<- c("flagship","state","flagship_instate","flagship_outstate","flagship_foreign")
+#colnames(fig6)<- c("state","white","black","hispanic","asian","other","nonres")
+#colnames(fig8)<- c("state","expendfte_pub4")
+#colnames(fig9)<- c("state","statefunding_pctgrants")
+#colnames(a1)<- c("state","familyinc_median")
+
+#fig4 <- formatState(fig4)
+#fig5 <- formatState(fig5)
+#fig6 <- formatState(fig6)
+#fig8 <- formatState(fig8)
+#fig9 <- formatState(fig9)
+#a1 <- formatState(a1)
