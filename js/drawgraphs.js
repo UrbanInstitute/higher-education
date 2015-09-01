@@ -23,7 +23,51 @@ var palette = {
     yellowblue: ["#ca5800", "#fcb918", "#ffedcd", "#d7e8f6", "#0096d2", "#00578b"]
 };
 
-//one function for each graph to make
+//one function for each graph & paired map/legend
+
+function tuition15() {
+    //slope chart eventually!
+    COLORS = palette.blue5;
+    BREAKS = [7000, 8000, 9000, 10000]
+    FORMATTER = FORMATTER = d3.format("$,");
+    isMobile = false;
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_tuition15");
+        VAL = "t4_15";
+        MAINMAP = 0;
+        map("#map_tuition15");
+    }
+    pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_tuition15");
+        legend("#legend_tuition15");
+    }
+    maplegend();
+}
+
+function tuitiontime() {
+    //slope chart eventually!
+    COLORS = palette.blue5;
+    BREAKS = [0.2,0.4,0.6,0.8]
+    FORMATTER = FORMATTER = d3.format("%");
+    isMobile = false;
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_tuitiontime");
+        VAL = "t4_0515";
+        MAINMAP = 0;
+        map("#map_tuitiontime");
+    }
+    pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_tuitiontime");
+        legend("#legend_tuitiontime");
+    }
+    maplegend();
+}
 
 function fte2year() {
     $GRAPHDIV = $("#fte2year");
@@ -84,6 +128,7 @@ function map_instate() {
     isMobile = false;
     MAINMAP = 1;
     map("#map_instate");
+
     function maplegend() {
         $LEGENDDIV = $("#legend_instate");
         legend("#legend_instate");
@@ -100,6 +145,7 @@ function map_outstate() {
     isMobile = false;
     MAINMAP = 1;
     map("#map_outstate");
+
     function maplegend() {
         $LEGENDDIV = $("#legend_outstate");
         legend("#legend_outstate");
@@ -130,6 +176,28 @@ function enrollchart() {
     function maplegend() {
         $LEGENDDIV = $("#legend_enroll");
         legend("#legend_enroll");
+    }
+    maplegend();
+}
+
+function fundingchart() {
+    //slope chart eventually!
+    COLORS = palette.blue5;
+    BREAKS = [6000, 7000, 8000, 9000]
+    FORMATTER = FORMATTER = d3.format("$,");
+    isMobile = false;
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_funding");
+        VAL = "approp_percap15";
+        MAINMAP = 0;
+        map("#map_funding");
+    }
+    pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_funding");
+        legend("#legend_funding");
     }
     maplegend();
 }
@@ -178,7 +246,7 @@ function approp_percapchart() {
         map("#map_approppc");
     }
     pairedmap();
-    
+
     function maplegend() {
         FORMATTER = d3.format("%");
         $LEGENDDIV = $("#legend_approppc");
@@ -188,7 +256,8 @@ function approp_percapchart() {
 }
 
 function drawgraphs() {
-
+    tuition15();
+    tuitiontime();
     fte2year();
     grantaid1();
     grantaid2();
@@ -196,6 +265,7 @@ function drawgraphs() {
     map_instate();
     map_outstate();
     enrollchart();
+    fundingchart();
     appropchart();
     approp_percapchart();
 

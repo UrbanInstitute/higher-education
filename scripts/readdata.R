@@ -56,7 +56,7 @@ migration<-readWorkbook(xlp, sheet="Migration", colNames=F, rowNames=F, rows=9:5
 #Table 5 = increases in tuition, 09-14: College Board tab has full data
 
 #give meaningful col names
-colnames(fig1)<- c("state","fundingfte")
+colnames(fig1)<- c("state","approp_percap15")
 colnames(fig2)<- c("state","fundingperthousinc")
 colnames(fig3)<- c("state","ftepubin2year")
 colnames(tab6)<- c("state","grants_perfte","grants_pctneedbased")
@@ -85,14 +85,6 @@ fig3 <- formatState(fig3)
 tab6 <- formatState(tab6)
 migration <- formatState(migration)
 
-#Join non-annual data - not using flagship or race data
-dt <- left_join(states,fig1,by="state")
-dt <- left_join(dt,fig2,by="state")
-dt <- left_join(dt,fig3,by="state")
-dt <- left_join(dt,tab6,by="state")
-dt <- left_join(dt,migration,by="state")
-dt <- dt %>% filter (statefip != 11) %>% select(-region)
-
 ########################################################################################################
 # Annual enrollment and appropriations data: read and add percentage change 2001-2015 for maps
 ########################################################################################################
@@ -111,10 +103,6 @@ appropriations_map <- formatState(appropriations)%>%
 
 apen <- left_join(appropriations_map,enrollment_map,by="state") %>% 
   mutate(approp_percap0115 = (((fy_15.x/fy_15.y) - (fy_01.x/fy_01.y))/ (fy_01.x/fy_01.y))) %>% select(state,approp0115,enroll0115,approp_percap0115)
-dt <- left_join(dt,apen,by="state")
-
-#to match with shapefile
-dt <- dt %>% rename(STATEFP=statefip)
 
 ########################################################################################################
 # College Board tab: tuition & fees by year for 2 year public and 4 year public instate 2001-2015
@@ -148,8 +136,18 @@ fig7 <- formatState(fig7)
 fig7 <- fig7 %>% mutate(t4outstate_15 = t2_15 + add4 + add_outstate) %>% 
   select(state, t4outstate_15)
 
-tuition <- left_join(tuition,fig7,by="state")
+tuition <- left_join(tuition,fig7,by="state") %>% mutate(t4_0515 = ((t4_15-t4_05)/t4_05))
 
+#Join non-annual data for graphs and maps!
+dt <- left_join(states,fig1,by="state")
+dt <- left_join(dt,fig2,by="state")
+dt <- left_join(dt,fig3,by="state")
+dt <- left_join(dt,tab6,by="state")
+dt <- left_join(dt,migration,by="state")
+dt <- dt %>% filter (statefip != 11) %>% select(-region)
+dt <- left_join(dt,apen,by="state")
+#to match with shapefile
+dt <- dt %>% rename(STATEFP=statefip)
 dt <- left_join(dt, tuition, by="state")
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
 

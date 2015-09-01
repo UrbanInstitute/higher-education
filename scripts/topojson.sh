@@ -1,1 +1,1 @@
-topojson -o data/states.json -e data/mapdata.csv --id-property=+STATEFP -p name=NAME,abbrev,+ftepubin2year,+res_pct_instate,+state_pct_outstate,+grants_pctneedbased,+approp0115,+enroll0115,+approp_percap0115 -- geo/cb_2014_us_state_20m/cb_2014_us_state_20m.shp
+topojson -o data/states.json -e data/statedata.csv --id-property=+STATEFP -p name=NAME,abbrev,+t4_15,+t4_0515,+ftepubin2year,+res_pct_instate,+state_pct_outstate,+approp_percap15,+grants_pctneedbased,+approp0115,+enroll0115,+approp_percap0115 -- geo/cb_2014_us_state_20m/cb_2014_us_state_20m.shp
