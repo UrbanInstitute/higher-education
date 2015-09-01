@@ -50,7 +50,7 @@ d3.helper.tooltip = function (accessor) {
 function map(div, id) {
 
     var margin = {
-        top: 20,
+        top: 10,
         right: 5,
         bottom: 10,
         left: 5
@@ -115,10 +115,10 @@ function map(div, id) {
             .attr("class", "boundary_paired")
             .attr("fill", function (d) {
                 //NH doesn't give grant aid
-                if (VAL == "grants_pctneedbased" & d.properties.abbrev=="NH") {
+                if (VAL == "grants_pctneedbased" & d.properties.abbrev == "NH") {
                     return "#ccc";
                 } else {
-                return color(d.properties[VAL]);
+                    return color(d.properties[VAL]);
                 }
             });
     }
@@ -133,15 +133,15 @@ function legend(div) {
         bottom: 2,
         left: 1
     };
-    
+
     var width = $LEGENDDIV.width() - margin.left - margin.right,
-        height = 40 - margin.top - margin.bottom;
+        height = 50 - margin.top - margin.bottom;
 
     $LEGENDDIV.empty();
 
     var svg = d3.select(div).append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", 50 + margin.top + margin.bottom)
+        .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -181,4 +181,58 @@ function legend(div) {
         .style("fill", function (d, i) {
             return COLORS[i];
         })
+}
+
+function catlegend(div) {
+
+    var margin = {
+        top: 8,
+        right: 1,
+        bottom: 2,
+        left: 5
+    };
+
+    var width = $LEGENDDIV.width() - margin.left - margin.right,
+        height = 50 - margin.top - margin.bottom;
+
+    $LEGENDDIV.empty();
+
+    var svg = d3.select(div).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var lp_w = 0,
+        ls_w = 30,
+        ls_h = 18;
+
+    var legend = svg.selectAll("g.legend")
+        .data(COLORS)
+        .enter().append("g")
+        .attr("class", "legend");
+
+    legend.append("text")
+        .data(LABELS)
+        .attr("x", lp_w + ls_w + 8)
+        .attr("y", function (d, i) {
+            return i * (ls_h + 5) + 15;
+        })
+        .text(function (d, i) {
+            return d;
+        });
+
+    legend.append("rect")
+        .data(COLORS)
+        .attr("x", 0)
+        .attr("y", function (d, i) {
+            return i * (ls_h + 5);
+        })
+        .attr("width", ls_w)
+        .attr("height", ls_h)
+        .attr("z-index", 10)
+        .style("fill", function (d, i) {
+            return COLORS[i];
+        })
+
 }

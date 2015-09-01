@@ -14,6 +14,7 @@ var FORMATTER,
     $LEGENDDIV,
     COLORS,
     BREAKS,
+    LABELS,
     stateSelect,
     MAINMAP = 0;
 
@@ -50,7 +51,7 @@ function tuition15() {
 function tuitiontime() {
     //slope chart eventually!
     COLORS = palette.blue5;
-    BREAKS = [0.2,0.4,0.6,0.8]
+    BREAKS = [0.2, 0.4, 0.6, 0.8]
     FORMATTER = FORMATTER = d3.format("%");
     isMobile = false;
 
@@ -116,8 +117,15 @@ function grantmap() {
     MAINMAP = 0;
     BREAKS = [0.5];
     COLORS = ["#fdbf11", "#1696d2"];
+    LABELS = ["More need-based", "Less need-based"];
     VAL = "grants_pctneedbased";
     map("#map_grantaid");
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_grantaid");
+        catlegend("#legend_grantaid");
+    }
+    maplegend();
 }
 
 function map_instate() {
