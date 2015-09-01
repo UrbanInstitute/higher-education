@@ -146,10 +146,12 @@ dt <- left_join(dt,tab6,by="state")
 dt <- left_join(dt,migration,by="state")
 dt <- dt %>% filter (statefip != 11) %>% select(-region)
 dt <- left_join(dt,apen,by="state")
+dt <- left_join(dt, tuition, by="state")
 #to match with shapefile
 dt <- dt %>% rename(STATEFP=statefip)
-dt <- left_join(dt, tuition, by="state")
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
+
+rm(fig1,fig2,fig3,fig7,tab6,migration,apen,tuition,appropriations_map,enrollment_map)
 
 ########################################################################################################
 # Annual enrollment and appropriations data: format, make long, join
