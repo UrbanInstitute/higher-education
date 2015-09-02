@@ -1,5 +1,6 @@
 var slopechart_aspect_width = 1;
 var slopechart_aspect_height = 0.8;
+var slopechart3_aspect_height = 1.4;
 
 function slopechart(div, id) {
 
@@ -25,8 +26,7 @@ function slopechart(div, id) {
     if (isMobile) {}
 
     var width = $GRAPHDIV.width() - margin.left - margin.right,
-        height = Math.ceil((width * slopechart_aspect_height) / slopechart_aspect_width) - margin.top - margin.bottom,
-        padding = 30;
+        height = Math.ceil((width * slopechart_aspect_height) / slopechart_aspect_width) - margin.top - margin.bottom;
 
     $GRAPHDIV.empty();
 
@@ -104,6 +104,129 @@ function slopechart(div, id) {
         .attr("x2", width)
         .attr("stroke", function (d) {
             if (d.abbrev == "US") {
+                return "#000";
+            } else {
+                return "#ccc";
+            }
+        });
+}
+
+//this is really a line chart in disguise
+function slopechart3(div, id) {
+
+    //include US line when we have data for it
+    data_years = data_long.filter(function (d) {
+        return d.abbrev != "US" & (d[YEARVAL] == 2005 | d[YEARVAL] == 2010 | d[YEARVAL] == 2015);
+    });
+
+    var margin = {
+        top: 25,
+        right: 15,
+        bottom: 25,
+        left: 55
+    };
+
+    var width = $GRAPHDIV.width() - margin.left - margin.right,
+        height = Math.ceil((width * slopechart3_aspect_height) / slopechart_aspect_width) - margin.top - margin.bottom,
+        padding = 30;
+
+    $GRAPHDIV.empty();
+
+    var x = d3.scale.linear()
+        .range([0, width]);
+
+    //hardcoding the domain because we want it to be the same for all graphs
+    var y = d3.scale.linear()
+        .domain([0, d3.max(data_years, function (d) {
+            return +d.tuition_4year;
+        })])
+        .range([height, 0]);
+
+    var color = d3.scale.ordinal()
+        .range(["#ccc"]);
+
+    var svg = d3.select(div).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    color.domain(d3.keys(data_long[0]).filter(function (key) {
+        return key == "state";
+    }));
+
+    data = data_years.map(function (d) {
+        return {
+            abbrev: d.abbrev,
+            year: +d[YEARVAL],
+            val: +d[LINEVAL]
+        };
+    });
+
+    x.domain(d3.extent(data, function (d) {
+        return d.year;
+    }));
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickSize(height)
+        .tickFormat(formatYear)
+        .ticks(NUMTICKS);
+
+    var gx = svg.append("g")
+        .attr("class", "x axis")
+        .call(xAxis);
+
+    gx.selectAll("text")
+        .attr("dy", 15);
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .tickFormat(FORMATTER)
+        .outerTickSize(0)
+        .orient("left");
+
+    var gy = svg.append("g")
+        .attr("class", "y axis-show")
+        .call(yAxis);
+
+    svg.append("text")
+        .attr("class", "slope-label")
+        .attr("text-anchor", "middle")
+        .attr("x", 0)
+        .attr("y", -15)
+        .text(LABELS);
+
+    data_nest = d3.nest().key(function (d) {
+        return d.abbrev;
+    }).entries(data);
+
+    var line = d3.svg.line()
+        .x(function (d) {
+            return x(d.year);
+        })
+        .y(function (d) {
+            return y(d.val);
+        });
+
+    var states = svg.selectAll(".state")
+        .data(data_nest, function (d) {
+            return d.key;
+        })
+        .enter().append("g")
+        .attr("class", "state");
+
+    states.append("path")
+        .attr("class", "chartline")
+        .attr("d", function (d) {
+            return line(d.values);
+        })
+        .attr("id", function (d) {
+            return d.key;
+        })
+        .attr("stroke", function (d) {
+            if (d.key == "US") {
                 return "#000";
             } else {
                 return "#ccc";

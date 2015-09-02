@@ -49,7 +49,25 @@ function tuition15() {
 }
 
 function tuitiontime() {
-    //slope chart eventually!
+    FORMATTER = d3.format("$,");
+    NUMTICKS = 3;
+    YEARVAL = "fiscalyear";
+
+    function twoyear() {
+        $GRAPHDIV = $("#tuition2year");
+        LABELS = "In-state 2-year tuition";
+        LINEVAL = "tuition_2year";
+        slopechart3("#tuition2year");
+    };
+    twoyear();
+
+    function fouryear() {
+        $GRAPHDIV = $("#tuition4year");
+        LABELS = "In-state 4-year tuition";
+        LINEVAL = "tuition_4year";
+        slopechart3("#tuition4year");
+    };
+    fouryear();
     COLORS = palette.blue5;
     BREAKS = [0.2, 0.4, 0.6, 0.8]
     FORMATTER = FORMATTER = d3.format("%");
@@ -191,7 +209,7 @@ function enrollchart() {
 function fundingchart() {
     $GRAPHDIV = $("#funding_slope");
     VAL = ["approp_percap15", "fundingperthousinc"];
-    LABELS = ["Funding per FTE student","Funding per $1,000 in personal income"];
+    LABELS = ["Funding per FTE student", "Funding per $1,000 in personal income"];
     COLORS = palette.blue5;
     BREAKS = [6000, 7000, 8000, 9000]
     FORMATTER = FORMATTER = d3.format("$,");

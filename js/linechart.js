@@ -28,7 +28,7 @@ function linechart(div, id) {
         //NUMTICKS = 7;
         linechart_aspect_height = 1;
     }
-
+    
     var width = $GRAPHDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * linechart_aspect_height) / linechart_aspect_width) - margin.top - margin.bottom,
         padding = 30;
