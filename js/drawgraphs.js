@@ -7,6 +7,8 @@ var isMobile = false;
 var data_long, data;
 var FORMATTER,
     VAL,
+    VAL1,
+    VAL2,
     LINEVAL,
     YEARVAL,
     NUMTICKS,
@@ -189,11 +191,14 @@ function enrollchart() {
 }
 
 function fundingchart() {
-    //slope chart eventually!
+    $GRAPHDIV = $("#funding_slope");
+    VAL1 = "approp_percap15";
+    VAL2 = "fundingperthousinc";
     COLORS = palette.blue5;
     BREAKS = [6000, 7000, 8000, 9000]
     FORMATTER = FORMATTER = d3.format("$,");
     isMobile = false;
+    slopechart("#funding_slope");
 
     function pairedmap() {
         $GRAPHDIV = $("#map_funding");

@@ -59,7 +59,7 @@ function barchart(div, id) {
     var ymin = d3.min(data, function (d) {
         return d[VAL];
     });
-
+    
     if (ymin >= 0) {
         y.domain([0, d3.max(data, function (d) {
             return d[VAL];
