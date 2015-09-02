@@ -5,8 +5,8 @@ function slopechart(div, id) {
 
     data = data_main;
     data.forEach(function (d) {
-        d[VAL1] = +d[VAL1]
-        d[VAL2] = +d[VAL2]
+        d[VAL[0]] = +d[VAL[0]]
+        d[VAL[1]] = +d[VAL[1]]
     });
 
     var margin = {
@@ -38,7 +38,7 @@ function slopechart(div, id) {
 
     var y1 = d3.scale.linear()
         .domain(d3.extent(data, function (d) {
-            return d[VAL1];
+            return d[VAL[0]];
         }))
         .range([height, 0]);
 
@@ -53,7 +53,7 @@ function slopechart(div, id) {
 
     var y2 = d3.scale.linear()
         .domain(d3.extent(data, function (d) {
-            return d[VAL2];
+            return d[VAL[1]];
         }))
         .range([height, 0]);
 
@@ -95,10 +95,10 @@ function slopechart(div, id) {
         })
         .attr("class", "chartline")
         .attr("y1", function (d) {
-            return y1(d[VAL1]);
+            return y1(d[VAL[0]]);
         })
         .attr("y2", function (d) {
-            return y2(d[VAL2]);
+            return y2(d[VAL[1]]);
         })
         .attr("x1", 0)
         .attr("x2", width)
