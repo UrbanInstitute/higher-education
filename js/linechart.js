@@ -144,7 +144,7 @@ function linechart(div, id) {
         })
         .attr("stroke", function (d) {
             if (d.key == "US") {
-                return "#1696d2";
+                return "#000";
             } else {
                 return "#ccc";
             }

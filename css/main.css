@@ -59,11 +59,11 @@
 }
 
 .bar.selected {
-    fill: #fdbf11;
+    fill: #ec008b;
 }
 
 .splitbar.selected {
-    fill: #000000;
+    fill: #ec008b;
 }
 
 .needbased {
@@ -81,7 +81,7 @@
 }
 
 .chartline.selected {
-    stroke: #fdbf11;
+    stroke: #ec008b;
     stroke-width: 5;
 }
 /*maps*/
@@ -102,13 +102,13 @@
 }
 
 .boundary:hover {
-    stroke: #000;
+    stroke: #ec008b;
     stroke-width: 3px;
     z-index: 1000;
 }
 
 .boundary_paired.selected {
-    stroke: #000;
+    stroke: #ec008b;
     stroke-width: 3px;
     z-index: 1000;
 }
