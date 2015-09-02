@@ -50,7 +50,6 @@ function tuition15() {
 
 function tuitiontime() {
     FORMATTER = d3.format("$,");
-    NUMTICKS = 3;
     YEARVAL = "fiscalyear";
 
     function twoyear() {
@@ -70,8 +69,6 @@ function tuitiontime() {
     fouryear();
     COLORS = palette.blue5;
     BREAKS = [0.2, 0.4, 0.6, 0.8]
-    FORMATTER = FORMATTER = d3.format("%");
-    isMobile = false;
 
     function pairedmap() {
         $GRAPHDIV = $("#map_tuitiontime");
@@ -83,6 +80,7 @@ function tuitiontime() {
 
     function maplegend() {
         $LEGENDDIV = $("#legend_tuitiontime");
+        FORMATTER = FORMATTER = d3.format("%");
         legend("#legend_tuitiontime");
     }
     maplegend();

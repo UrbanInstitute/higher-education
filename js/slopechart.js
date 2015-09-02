@@ -171,8 +171,8 @@ function slopechart3(div, id) {
         .scale(x)
         .orient("bottom")
         .tickSize(height)
-        .tickFormat(formatYear)
-        .ticks(NUMTICKS);
+        .tickFormat(d3.format("d"))
+        .ticks(3);
 
     var gx = svg.append("g")
         .attr("class", "x axis")
