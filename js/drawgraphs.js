@@ -9,6 +9,8 @@ var FORMATTER,
     VAL,
     VAL1,
     VAL2,
+    LABEL1,
+    LABEL2,
     LINEVAL,
     YEARVAL,
     NUMTICKS,
@@ -194,6 +196,9 @@ function fundingchart() {
     $GRAPHDIV = $("#funding_slope");
     VAL1 = "approp_percap15";
     VAL2 = "fundingperthousinc";
+    LABEL1 = "Funding per FTE student";
+    LABEL2 = "Funding per $1,000 in personal income";
+    LABELS = ["Funding per FTE student","Funding per $1,000 in personal income"];
     COLORS = palette.blue5;
     BREAKS = [6000, 7000, 8000, 9000]
     FORMATTER = FORMATTER = d3.format("$,");

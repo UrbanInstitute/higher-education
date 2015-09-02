@@ -51,6 +51,12 @@
     font-size: 12px;
     color: #333;
 }
+
+.slope-label{
+    font-size: 12px;
+    color: #333;
+    font-style: italic;
+}
 /*State abbreviations for bar chart X axis*/
 
 .abbrevs {

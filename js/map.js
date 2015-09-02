@@ -162,9 +162,10 @@ function legend(div) {
     legend.append("text")
         .data(BREAKS)
         .attr("x", function (d, i) {
-            return (i * ls_w) + lp_w + ls_w - 12;
+            return (i * ls_w) + lp_w + ls_w - 2;
         })
         .attr("y", 15)
+        .attr("text-anchor", "middle")
         .text(function (d, i) {
             return FORMATTER(d);
         });

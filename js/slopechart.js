@@ -1,15 +1,19 @@
 var slopechart_aspect_width = 1;
-var slopechart_aspect_height = 0.5;
+var slopechart_aspect_height = 0.8;
 
 function slopechart(div, id) {
 
     data = data_main;
+    data.forEach(function (d) {
+        d[VAL1] = +d[VAL1]
+        d[VAL2] = +d[VAL2]
+    });
 
     var margin = {
         top: 35,
-        right: 35,
-        bottom: 5,
-        left: 55
+        right: 120,
+        bottom: 15,
+        left: 120
     };
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
@@ -32,20 +36,9 @@ function slopechart(div, id) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var x = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1)
-        .domain(data.map(function (d) {
-            return d.abbrev;
-        }));
-
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .tickSize(0)
-        .orient("bottom");
-
     var y1 = d3.scale.linear()
         .domain(d3.extent(data, function (d) {
-            return +d[VAL1];
+            return d[VAL1];
         }))
         .range([height, 0]);
 
@@ -60,7 +53,7 @@ function slopechart(div, id) {
 
     var y2 = d3.scale.linear()
         .domain(d3.extent(data, function (d) {
-            return +d[VAL2];
+            return d[VAL2];
         }))
         .range([height, 0]);
 
@@ -73,6 +66,22 @@ function slopechart(div, id) {
         .attr("class", "y axis-show")
         .attr("transform", "translate(" + width + " ,0)")
         .call(yAxis2);
+
+    var legend = svg.selectAll("g.legend")
+        .data(LABELS)
+        .enter().append("g")
+        .attr("class", "slope-label");
+
+    legend.append("text")
+        .data(LABELS)
+        .attr("x", function (d, i) {
+            return (i * width);
+        })
+        .attr("y", -15)
+        .attr("text-anchor", "middle")
+        .text(function (d, i) {
+            return d;
+        });
 
     var lines = svg.selectAll(".state")
         .data(data)
