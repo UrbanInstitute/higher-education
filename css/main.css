@@ -123,7 +123,6 @@
     z-index: 1000;
 }
 
-.boundary.selected,
 .boundary_paired.selected {
     stroke: #ec008b;
     stroke-width: 3px;

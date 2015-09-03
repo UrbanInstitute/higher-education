@@ -296,6 +296,7 @@ function drawgraphs() {
     appropchart();
     approp_percapchart();
 
+
     //        var allbars = d3.selectAll(".bar, .chartline, .splitbar, .boundary_paired");
     //        allbars.on("mouseover", function () {
     //            var moused_id = this.id;
@@ -311,8 +312,19 @@ function drawgraphs() {
 }
 
 var dispatch = d3.dispatch("load", "statechange");
+var menu_id;
 
 dispatch.on("load.menu", function (stateById) {
+
+    function tooltip() {
+        data = data_main;
+        var temp = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].ftepubin2year;
+
+        console.log(temp);
+    }
+
 
     var selecter = d3.selectAll(".stateselect")
         .on("change", function () {
@@ -332,11 +344,12 @@ dispatch.on("load.menu", function (stateById) {
     dispatch.on("statechange.menu", function (state) {
         selecter.property("value", state.abbrev);
         //unselect everything else
-        d3.selectAll(".bar, .chartline, .splitbar, .boundary, .boundary_paired").classed("selected", false);
+        d3.selectAll(".bar, .chartline, .splitbar, .boundary_paired").classed("selected", false);
         //select things with the current value
-        var menu_id = state.abbrev;
+        menu_id = state.abbrev;
         d3.selectAll("[id='" + menu_id + "']")
             .classed("selected", true);
+        tooltip();
     });
 });
 
@@ -348,6 +361,8 @@ $(window).load(function () {
                     data_long = annualrates;
                     data_main = rates;
                     us = mapdata;
+
+                    //tooltip();
 
                     var stateById = d3.map();
                     data_main.forEach(function (d) {
