@@ -296,19 +296,49 @@ function drawgraphs() {
     appropchart();
     approp_percapchart();
 
-    var allbars = d3.selectAll(".bar, .chartline, .splitbar, .boundary_paired");
-    allbars.on("mouseover", function () {
-        var moused_id = this.id;
-        allbars.classed("selected", function () {
-            return this.id === moused_id;
-        });
-    })
-
-    allbars.on("mouseout", function () {
-        allbars.classed("selected", false);
-    })
+    //        var allbars = d3.selectAll(".bar, .chartline, .splitbar, .boundary_paired");
+    //        allbars.on("mouseover", function () {
+    //            var moused_id = this.id;
+    //            allbars.classed("selected", function () {
+    //                return this.id === moused_id;
+    //            });
+    //        })
+    //    
+    //        allbars.on("mouseout", function () {
+    //            allbars.classed("selected", false);
+    //        })
 
 }
+
+var dispatch = d3.dispatch("load", "statechange");
+
+dispatch.on("load.menu", function (stateById) {
+
+    var selecter = d3.selectAll(".stateselect")
+        .on("change", function () {
+            dispatch.statechange(stateById.get(this.value));
+        });
+
+    selecter.selectAll("option")
+        .data(stateById.values())
+        .enter().append("option")
+        .attr("value", function (d) {
+            return d.abbrev;
+        })
+        .text(function (d) {
+            return d.state;
+        });
+
+    dispatch.on("statechange.menu", function (state) {
+        selecter.property("value", state.abbrev);
+        //unselect everything else
+        d3.selectAll(".bar, .chartline, .splitbar, .boundary, .boundary_paired").classed("selected", false);
+        //select things with the current value
+        var menu_id = state.abbrev;
+        d3.selectAll("[id='" + menu_id + "']")
+            .classed("selected", true);
+    });
+});
 
 $(window).load(function () {
     if (Modernizr.svg) { // if svg is supported, draw dynamic chart
@@ -318,6 +348,13 @@ $(window).load(function () {
                     data_long = annualrates;
                     data_main = rates;
                     us = mapdata;
+
+                    var stateById = d3.map();
+                    data_main.forEach(function (d) {
+                        stateById.set(d.abbrev, d);
+                    });
+                    dispatch.load(stateById);
+                    dispatch.statechange(stateById.get("US"));
 
                     drawgraphs();
                     window.onresize = drawgraphs;
