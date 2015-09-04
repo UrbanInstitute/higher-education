@@ -114,9 +114,8 @@ function slopechart(div, id) {
 //this is really a line chart in disguise
 function slopechart3(div, id) {
 
-    //include US line when we have data for it
     data_years = data_long.filter(function (d) {
-        return d.abbrev != "US" & (d[YEARVAL] == 2005 | d[YEARVAL] == 2010 | d[YEARVAL] == 2015);
+        return (d[YEARVAL] == 2005 | d[YEARVAL] == 2010 | d[YEARVAL] == 2015);
     });
 
     var margin = {

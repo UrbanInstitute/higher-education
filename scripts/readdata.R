@@ -13,6 +13,7 @@ states<-read.csv("data/states.csv",stringsAsFactors = F)
 
 #File path of spreadsheet
 xlp = "data/original/Data for Brief_8.26.2015.xlsx"
+xlp2 = "data/original/Data for Brief_9.4.2015.xlsx"
 
 ########################################################################################################
 # formatState for matching on state name column
@@ -109,10 +110,11 @@ apen <- left_join(appropriations_map,enrollment_map,by="state") %>%
 ########################################################################################################
 # College Board tab: tuition & fees by year for 2 year public and 4 year public instate 2001-2015
 # Figure 7 tab for 2015 4 year public out of state cost
+# Use US data for slope charts, not annual line charts
 ########################################################################################################
 
-tuition_pub2<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=1:12)
-tuition_pub4<-readWorkbook(xlp, sheet="College Board", colNames=T, rowNames=F, rows=3:55, cols=c(1,14:25))
+tuition_pub2<-readWorkbook(xlp2, sheet="College Board", colNames=T, rowNames=F, rows=3:56, cols=1:12)
+tuition_pub4<-readWorkbook(xlp2, sheet="College Board", colNames=T, rowNames=F, rows=3:56, cols=c(1,14:25))
 
 formatTuition <- function(dt) {
   colnames(dt) <-c ("state","fy_05","fy_06","fy_07","fy_08","fy_09","fy_10","fy_11","fy_12","fy_13","fy_14","fy_15")
@@ -132,13 +134,13 @@ tuition <- left_join(tuition_pub2, tuition_pub4, by="state") %>%
 colnames(tuition) <- c("state","t2_05","t2_10", "t2_15", "t4_05","t4_10", "t4_15")
 
 #figure 7 data - get 2015 out of state 4 year price
-fig7<-readWorkbook(xlp, sheet="Fig. 7", colNames=T, rowNames=F, rows=2:53, cols=1:4)
-colnames(fig7)<-c("state","t2_15","add4","add_outstate")
+fig7<-readWorkbook(xlp2, sheet="Tuition", colNames=T, rowNames=F, rows=3:54, cols=1:4)
+colnames(fig7)<-c("state","t2_15","t4_14","t4outstate_15")
 fig7 <- formatState(fig7)
-fig7 <- fig7 %>% mutate(t4outstate_15 = t2_15 + add4 + add_outstate) %>% 
-  select(state, t4outstate_15)
+fig7 <- fig7 %>% select(state, t4outstate_15)
 
-tuition <- left_join(tuition,fig7,by="state") %>% mutate(t4_0515 = ((t4_15-t4_05)/t4_05))
+tuition <- left_join(tuition,fig7,by="state") %>% 
+  mutate(t4_0515 = ((t4_15-t4_05)/t4_05), t2_0515 = ((t2_15-t2_05)/t2_05))
 
 #Join non-annual data for graphs and maps!
 dt <- left_join(states,fig1,by="state")
@@ -150,7 +152,8 @@ dt <- dt %>% filter (statefip != 11) %>% select(-region)
 dt <- left_join(dt,apen,by="state")
 dt <- left_join(dt, tuition, by="state")
 #to match with shapefile
-dt <- dt %>% rename(STATEFP=statefip)
+dt <- dt %>% rename(STATEFP=statefip) %>% 
+  arrange(STATEFP)
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
 
 rm(fig1,fig2,fig3,fig7,tab6,migration,apen,tuition,appropriations_map,enrollment_map)
