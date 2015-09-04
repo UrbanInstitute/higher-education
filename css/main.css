@@ -33,9 +33,23 @@
     font-size: 20px;
     margin-bottom: 4px;
 }
+
+table {
+    width: 100%
+}
+
+th,
+td {
+    text-align: right !important;
+}
+
+th {
+    border-bottom: 1px solid #ccc;
+}
 /*standard axes*/
 
-.axis, .axis-show {
+.axis,
+.axis-show {
     font-size: 12px;
     color: #333;
 }
@@ -55,9 +69,9 @@
 
 .axis-show path,
 .axis-show line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
 }
 
 .legend {
@@ -65,7 +79,7 @@
     color: #333;
 }
 
-.slope-label{
+.slope-label {
     font-size: 12px;
     color: #333;
     font-style: italic;

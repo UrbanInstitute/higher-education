@@ -361,6 +361,28 @@ dispatch.on("load.menu", function (stateById) {
             return d.abbrev == menu_id
         })[0].state;
 
+        //tuition
+
+        var tt_t2_05 = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].t2_05;
+
+        var tt_t2_15 = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].t2_15;
+
+        var tt_t4_05 = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].t4_05;
+
+        var tt_t4_15 = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].t4_15;
+
+        var tt_t4_0515 = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].t4_0515;
+
         //enrollment
         var tt_ftepubin2year = data.filter(function (d) {
             return d.abbrev == menu_id
@@ -375,6 +397,14 @@ dispatch.on("load.menu", function (stateById) {
         })[0].enroll0115;
 
         //funding
+        var tt_approp_percap15 = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].approp_percap15;
+
+        var tt_fundingperthousinc = data.filter(function (d) {
+            return d.abbrev == menu_id
+        })[0].fundingperthousinc;
+
         var tt_grants_needbased = data.filter(function (d) {
             return d.abbrev == menu_id
         })[0].grants_needbased;
@@ -391,25 +421,29 @@ dispatch.on("load.menu", function (stateById) {
             return d.abbrev == menu_id
         })[0].approp0115;
 
-        var tt_approp_percap15 = data.filter(function (d) {
-            return d.abbrev == menu_id
-        })[0].approp_percap15;
-
         var tt_approp_percap0115 = data.filter(function (d) {
             return d.abbrev == menu_id
         })[0].approp_percap0115;
 
         d3.selectAll(".tt-name").text(tt_name);
+        d3.select("#tt_t2_05").text(formatmoney(tt_t2_05));
+        d3.select("#tt_t2_15").text(formatmoney(tt_t2_15));
+        d3.select("#tt_t4_05").text(formatmoney(tt_t4_05));
+        d3.select("#tt_t4_15").text(formatmoney(tt_t4_15));
+        d3.select("#tt_t4_0515").text(formatpct(tt_t4_0515));
+
         d3.select("#tt_ftepubin2year").text(formatpct(tt_ftepubin2year));
         d3.select("#tt_enroll15").text(formatnum(tt_enroll15));
         d3.select("#tt_enroll0115").text(formatpct(tt_enroll0115));
 
+        //per capita funding is used twice
+        d3.selectAll(".tt_approp_percap15").text(formatmoney(tt_approp_percap15));
+        d3.select("#tt_fundingperthousinc").text(formatmoney(tt_fundingperthousinc));
         d3.select("#tt_grants_needbased").text(formatmoney(tt_grants_needbased));
         d3.select("#tt_grants_nonneedbased").text(formatmoney(tt_grants_nonneedbased));
         d3.select("#tt_approp_15").text(formatfunding(tt_approp_15));
         d3.select("#tt_approp0115").text(formatpct(tt_approp0115));
-            d3.select("#tt_approp_percap15").text(formatmoney(tt_approp_percap15));
-        d3.select("#tt_approp_percap0115").text(formatpct(tt_approp_percap0115));
+        d3.select(".tt_approp_percap0115").text(formatpct(tt_approp_percap0115));
     }
 
 
