@@ -20,6 +20,14 @@
     font-style: italic;
     font-weight: 700;
 }
+
+.tt {
+    margin-bottom: 1em;
+}
+
+.tt-value {
+    display: inline-block;
+}
 /*standard axes*/
 
 .axis, .axis-show {

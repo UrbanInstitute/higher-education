@@ -321,8 +321,10 @@ dispatch.on("load.menu", function (stateById) {
         var temp = data.filter(function (d) {
             return d.abbrev == menu_id
         })[0].ftepubin2year;
+        
+        FORMATTER = d3.format("%");
 
-        console.log(temp);
+        d3.select("#tt_fte2year").text(FORMATTER(temp));
     }
 
 
