@@ -2,7 +2,7 @@
 
 //globals
 var linechart_aspect_width = 1;
-var linechart_aspect_height = 0.6;
+var linechart_aspect_height = 0.7;
 
 var yearf = d3.format("02d");
 

@@ -28,6 +28,11 @@
 .tt-value {
     display: inline-block;
 }
+
+.tt-name {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
 /*standard axes*/
 
 .axis, .axis-show {

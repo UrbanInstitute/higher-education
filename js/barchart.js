@@ -1,5 +1,5 @@
 var barchart_aspect_width = 1;
-var barchart_aspect_height = 0.5;
+var barchart_aspect_height = 0.7;
 
 function barchart(div, id) {
 

@@ -102,7 +102,9 @@ appropriations_map <- formatState(appropriations)%>%
   mutate(approp0115 = (fy_15 - fy_01)/fy_01)
 
 apen <- left_join(appropriations_map,enrollment_map,by="state") %>% 
-  mutate(approp_percap0115 = (((fy_15.x/fy_15.y) - (fy_01.x/fy_01.y))/ (fy_01.x/fy_01.y))) %>% select(state,approp0115,enroll0115,approp_percap0115)
+  mutate(approp_percap0115 = (((fy_15.x/fy_15.y) - (fy_01.x/fy_01.y))/ (fy_01.x/fy_01.y))) %>% 
+  select(state,approp0115,enroll0115,approp_percap0115,fy_15.x,fy_15.y) %>% 
+  rename(approp_15 = fy_15.x, enroll_15 = fy_15.y)
 
 ########################################################################################################
 # College Board tab: tuition & fees by year for 2 year public and 4 year public instate 2001-2015
