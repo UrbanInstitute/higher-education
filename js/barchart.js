@@ -59,7 +59,7 @@ function barchart(div, id) {
     var ymin = d3.min(data, function (d) {
         return d[VAL];
     });
-    
+
     if (ymin >= 0) {
         y.domain([0, d3.max(data, function (d) {
             return d[VAL];
@@ -122,6 +122,7 @@ function barchart(div, id) {
     //US value
     svg.append("g")
         .append("line")
+        .attr("id", "US")
         .attr("class", "labelline")
         .attr("y1", function (d) {
             return y(0.459912672);
@@ -130,6 +131,15 @@ function barchart(div, id) {
             return y(0.459912672);
         })
         .attr("x1", 0)
-        .attr("x2", width - x.rangeBand());
+        .attr("x2", width);
+
+    svg.append("text")
+        .attr("x", -15)
+        .attr("y", function (d) {
+            return y(0.459912672) + 4;
+        })
+        .attr("class", "legend")
+        .attr("text-anchor", "middle")
+        .text("US");
 
 }

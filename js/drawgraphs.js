@@ -18,15 +18,21 @@ var FORMATTER,
     stateSelect,
     MAINMAP = 0;
 
+var formatpct = d3.format("%");
+var formatnum = d3.format(",.0f");
+var formatmoney = d3.format("$,.0f");
+var formatdollars = d3.format("$,.2f");
+var formatfunding = d3.format("$,.3s");
+
 var palette = {
     blue5: ["#b0d5f1", "#82c4e9", "#1696d2", "#00578b", "#00152A"],
     yellow5: ["#fff2cf", "#fdd870", "#fdbf11", "#e88e2d", "#ca5800"],
     yellowblue: ["#ca5800", "#fcb918", "#ffedcd", "#d7e8f6", "#0096d2", "#00578b"]
 };
 
+// Override d3's formatPrefix function - billions label as G, not B with d3 defaults
 var d3_formatPrefixes = ["e-24", "e-21", "e-18", "e-15", "e-12", "e-9", "e-6", "e-3", "", "K", "M", "B", "T", "P", "E", "Z", "Y"].map(d3_formatPrefix);
 
-// Override d3's formatPrefix function
 d3.formatPrefix = function (value, precision) {
     var i = 0;
     if (value) {
@@ -64,7 +70,7 @@ function tuition15() {
     //slope chart eventually!
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]
-    FORMATTER = FORMATTER = d3.format("$,");
+    FORMATTER = formatmoney;
     isMobile = false;
 
     function pairedmap() {
@@ -83,7 +89,7 @@ function tuition15() {
 }
 
 function tuitiontime() {
-    FORMATTER = d3.format("$,");
+    FORMATTER = formatmoney;
     YEARVAL = "fiscalyear";
 
     function twoyear() {
@@ -114,7 +120,7 @@ function tuitiontime() {
 
     function maplegend() {
         $LEGENDDIV = $("#legend_tuitiontime");
-        FORMATTER = FORMATTER = d3.format("%");
+        FORMATTER = formatpct;
         legend("#legend_tuitiontime");
     }
     maplegend();
@@ -122,7 +128,7 @@ function tuitiontime() {
 
 function fte2year() {
     $GRAPHDIV = $("#fte2year");
-    FORMATTER = d3.format("%");
+    FORMATTER = formatpct;
     VAL = "ftepubin2year";
     numticks = 6;
     BREAKS = [0.2, 0.3, 0.4, 0.5];
@@ -146,7 +152,7 @@ function fte2year() {
 
 function grantaid1() {
     $GRAPHDIV = $("#grantaid1");
-    FORMATTER = d3.format("%");
+    FORMATTER = formatpct;
     VAL = "grants_needbased";
     splitchart_aspect_height = 1.9;
     isMobile = false;
@@ -155,7 +161,7 @@ function grantaid1() {
 
 function grantaid2() {
     $GRAPHDIV = $("#grantaid2");
-    FORMATTER = d3.format("%");
+    FORMATTER = formatpct;
     VAL = "grants_nonneedbased";
     splitchart_aspect_height = 1.9 * (16 / 34);
     isMobile = false;
@@ -190,7 +196,7 @@ function map_instate() {
     function maplegend() {
         $LEGENDDIV = $("#legend_instate");
         legend("#legend_instate");
-        FORMATTER = d3.format("%");
+        FORMATTER = formatpct;
     }
     maplegend();
 }
@@ -207,7 +213,7 @@ function map_outstate() {
     function maplegend() {
         $LEGENDDIV = $("#legend_outstate");
         legend("#legend_outstate");
-        FORMATTER = d3.format("%");
+        FORMATTER = formatpct;
     }
     maplegend();
 }
@@ -216,7 +222,7 @@ function enrollchart() {
     $GRAPHDIV = $("#enrollment");
     LINEVAL = "enroll_change";
     YEARVAL = "fiscalyear";
-    FORMATTER = d3.format("%");
+    FORMATTER = formatpct;
     isMobile = false;
     NUMTICKS = 14;
     linechart("#enrollment");
@@ -244,7 +250,7 @@ function fundingchart() {
     LABELS = ["Funding per FTE student", "Funding per $1,000 in personal income"];
     COLORS = palette.blue5;
     BREAKS = [6000, 7000, 8000, 9000]
-    FORMATTER = FORMATTER = d3.format("$,");
+    FORMATTER = formatmoney;
     isMobile = false;
     slopechart("#funding_slope");
 
@@ -267,7 +273,7 @@ function appropchart() {
     $GRAPHDIV = $("#appropriations");
     LINEVAL = "approp_change";
     YEARVAL = "fiscalyear";
-    FORMATTER = d3.format("%");
+    FORMATTER = formatpct;
     isMobile = false;
     NUMTICKS = 14;
     linechart("#appropriations");
@@ -293,7 +299,7 @@ function approp_percapchart() {
     $GRAPHDIV = $("#approp_percap");
     LINEVAL = "approp_percap";
     YEARVAL = "fiscalyear";
-    FORMATTER = d3.format("$,");
+    FORMATTER = formatmoney;
     isMobile = false;
     NUMTICKS = 14;
     linechart("#approp_percap");
@@ -309,7 +315,7 @@ function approp_percapchart() {
     pairedmap();
 
     function maplegend() {
-        FORMATTER = d3.format("%");
+        FORMATTER = formatpct;
         $LEGENDDIV = $("#legend_approppc");
         legend("#legend_approppc");
     }
@@ -329,6 +335,9 @@ function drawgraphs() {
     fundingchart();
     appropchart();
     approp_percapchart();
+
+    d3.selectAll("[id='US']")
+        .classed("selected", true);
 
 
     //        var allbars = d3.selectAll(".bar, .chartline, .splitbar, .boundary_paired");
@@ -350,12 +359,8 @@ var menu_id;
 
 dispatch.on("load.menu", function (stateById) {
 
+    //pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
     function tooltip() {
-        var formatpct = d3.format("%");
-        var formatnum = d3.format(",.0f");
-        var formatmoney = d3.format("$,.0f");
-        var formatfunding = d3.format("$,.3s");
-
         data = data_main;
         var row = data.filter(function (d) {
             return d.abbrev == menu_id
@@ -369,14 +374,14 @@ dispatch.on("load.menu", function (stateById) {
             d3.select("#tt_t2_0515").text(formatpct(d.t2_0515));
             d3.select("#tt_t4_05").text(formatmoney(+d.t4_05));
             d3.select("#tt_t4_15").text(formatmoney(+d.t4_15));
-            d3.select("#tt_t4_0515").text(formatpct(d.t4_0515));
+            d3.select("#tt_t4_0515").text(formatpct(+d.t4_0515));
             //enrollment
             d3.select("#tt_ftepubin2year").text(formatpct(+d.ftepubin2year));
             d3.select("#tt_enroll15").text(formatnum(+d.enroll_15));
             d3.select("#tt_enroll0115").text(formatpct(+d.enroll0115));
             //funding - per capita funding is used twice
             d3.selectAll(".tt_approp_percap15").text(formatmoney(+d.approp_percap15));
-            d3.select("#tt_fundingperthousinc").text(formatmoney(+d.fundingperthousinc));
+            d3.select("#tt_fundingperthousinc").text(formatdollars(+d.fundingperthousinc));
             d3.select("#tt_grants_needbased").text(formatmoney(+d.grants_needbased));
             d3.select("#tt_grants_nonneedbased").text(formatmoney(+d.grants_nonneedbased));
             d3.select("#tt_approp_15").text(formatfunding(+d.approp_15));
@@ -385,6 +390,7 @@ dispatch.on("load.menu", function (stateById) {
         });
     }
 
+    //populate the dropdowns using main csv's state names & abbreviations
     var selecter = d3.selectAll(".stateselect")
         .on("change", function () {
             dispatch.statechange(stateById.get(this.value));
@@ -400,11 +406,10 @@ dispatch.on("load.menu", function (stateById) {
             return d.state;
         });
 
+    //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
     dispatch.on("statechange.menu", function (state) {
         selecter.property("value", state.abbrev);
-        //unselect everything else
-        d3.selectAll(".bar, .chartline, .splitbar, .boundary_paired").classed("selected", false);
-        //select things with the current value
+        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired").classed("selected", false);
         menu_id = state.abbrev;
         d3.selectAll("[id='" + menu_id + "']")
             .classed("selected", true);

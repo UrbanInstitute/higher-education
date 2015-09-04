@@ -74,6 +74,13 @@ th {
     shape-rendering: crispEdges;
 }
 
+.zeroline {
+    stroke: #000;
+    stroke-width: 1;
+    fill: none;
+    shape-rendering: crispEdges;
+}
+
 .legend {
     font-size: 12px;
     color: #333;
@@ -94,10 +101,14 @@ th {
 
 .labelline {
     stroke: #000;
-    stroke-width: 1;
+    stroke-width: 1.5;
     fill: none;
     shape-rendering: crispEdges;
-    /*stroke-dasharray: 2, 2;*/
+}
+
+.recession {
+    fill: #fff2cf;
+    opacity: 0.3;
 }
 
 .bar.selected {
@@ -122,6 +133,7 @@ th {
     stroke-width: 1px;
 }
 
+.labelline.selected,
 .chartline.selected {
     stroke: #ec008b;
     stroke-width: 5;

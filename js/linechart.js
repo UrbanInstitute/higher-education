@@ -28,7 +28,7 @@ function linechart(div, id) {
         //NUMTICKS = 7;
         linechart_aspect_height = 1;
     }
-    
+
     var width = $GRAPHDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * linechart_aspect_height) / linechart_aspect_width) - margin.top - margin.bottom,
         padding = 30;
@@ -90,6 +90,18 @@ function linechart(div, id) {
         }));
     }
 
+    //highlight recession
+    var recession = svg.append("rect")
+        .attr("x", function (d) {
+            return x(2008);
+        })
+        .attr("y", 0)
+        .attr("width", function (d) {
+            return x(2012) - x(2008);
+        })
+        .attr("height", height)
+        .attr("class", "recession");
+
     var gx = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x axis")
@@ -97,23 +109,24 @@ function linechart(div, id) {
 
     var yAxis = d3.svg.axis()
         .scale(y)
-        .tickSize(-width)
+        //.tickSize(-width)
+        .outerTickSize(0)
         .tickFormat(FORMATTER)
         .orient("left");
 
     var gy = svg.append("g")
-        .attr("class", "y axis")
+        .attr("class", "y axis-show")
         .call(yAxis);
 
-    gy.selectAll("g").filter(function (d) {
-            return d;
-        })
-        .classed("minor", true);
+    //    gy.selectAll("g").filter(function (d) {
+    //            return d;
+    //        })
+    //        .classed("minor", true);
 
-    gy.selectAll("text")
-        .attr("x", -4)
-        .attr("dy", 4);
-    
+    //    gy.selectAll("text")
+    //        .attr("x", -4)
+    //        .attr("dy", 4);
+
     data_nest = d3.nest().key(function (d) {
         return d.abbrev;
     }).entries(data);
@@ -149,5 +162,18 @@ function linechart(div, id) {
                 return "#ccc";
             }
         });
+    
+    //manual line for axis at 0
+    svg.append("g")
+        .append("line")
+        .attr("class", "zeroline")
+        .attr("y1", function (d) {
+            return y(0);
+        })
+        .attr("y2", function (d) {
+            return y(0);
+        })
+        .attr("x1", 0)
+        .attr("x2", width);
 
 }
