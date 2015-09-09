@@ -1,5 +1,5 @@
 var slopechart_aspect_width = 1;
-var slopechart_aspect_height = 0.8;
+var slopechart_aspect_height = 0.9;
 var slopechart3_aspect_height = 1.6;
 
 function slopechart(div, id) {
