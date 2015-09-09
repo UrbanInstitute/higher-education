@@ -62,7 +62,7 @@ function linechart(div, id) {
         return key == "state";
     }));
 
-    data = data_long.map(function (d) {
+    data = data2.map(function (d) {
         return {
             abbrev: d.abbrev,
             year: +d[YEARVAL],

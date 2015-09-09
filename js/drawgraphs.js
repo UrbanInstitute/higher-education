@@ -218,7 +218,39 @@ function map_outstate() {
     maplegend();
 }
 
+function enrollchart2() {
+    data2 = data_long.filter(function (d) {
+        return d.abbrev != "US";
+    });
+
+    $GRAPHDIV = $("#enrollment2");
+    LINEVAL = "enrollment";
+    YEARVAL = "fiscalyear";
+    FORMATTER = d3.format("2s");
+    isMobile = false;
+    NUMTICKS = 14;
+    linechart("#enrollment2");
+    COLORS = palette.blue5;
+    BREAKS = [0.1, 0.2, 0.3, 0.4];
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_enroll2");
+        VAL = "enroll0115";
+        MAINMAP = 0;
+        map("#map_enroll2");
+    }
+    pairedmap();
+
+    function maplegend() {
+        FORMATTER = formatpct;
+        $LEGENDDIV = $("#legend_enroll2");
+        legend("#legend_enroll2");
+    }
+    maplegend();
+}
+
 function enrollchart() {
+    data2 = data_long;
     $GRAPHDIV = $("#enrollment");
     LINEVAL = "enroll_change";
     YEARVAL = "fiscalyear";
@@ -269,7 +301,38 @@ function fundingchart() {
     maplegend();
 }
 
+function appropchart2() {
+    data2 = data_long.filter(function (d) {
+        return d.abbrev != "US";
+    });
+    $GRAPHDIV = $("#appropriations2");
+    LINEVAL = "appropriations";
+    YEARVAL = "fiscalyear";
+    FORMATTER = d3.format("$,s");
+    isMobile = false;
+    NUMTICKS = 14;
+    linechart("#appropriations2");
+    COLORS = palette.yellowblue;
+    BREAKS = [-0.3, -0.15, 0, 0.15, 0.3];
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_approp2");
+        VAL = "approp0115";
+        MAINMAP = 0;
+        map("#map_approp2");
+    }
+    pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_approp2");
+        FORMATTER = formatpct;
+        legend("#legend_approp2");
+    }
+    maplegend();
+}
+
 function appropchart() {
+    data2 = data_long;
     $GRAPHDIV = $("#appropriations");
     LINEVAL = "approp_change";
     YEARVAL = "fiscalyear";
@@ -296,6 +359,7 @@ function appropchart() {
 }
 
 function approp_percapchart() {
+    data2 = data_long;
     $GRAPHDIV = $("#approp_percap");
     LINEVAL = "approp_percap";
     YEARVAL = "fiscalyear";
@@ -331,8 +395,10 @@ function drawgraphs() {
     grantmap();
     map_instate();
     map_outstate();
+    enrollchart2();
     enrollchart();
     fundingchart();
+    appropchart2();
     appropchart();
     approp_percapchart();
 
