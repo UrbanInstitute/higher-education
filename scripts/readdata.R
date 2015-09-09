@@ -158,6 +158,14 @@ write.csv(dt,"data/statedata.csv",row.names=F, na="")
 
 rm(fig1,fig2,fig3,fig7,tab6,migration,apen,tuition,appropriations_map,enrollment_map)
 
+#Add tuition ranks for slope charts
+dt<-read.csv("data/statedata.csv",stringsAsFactors = F)
+dt_nous <- dt %>% filter(abbrev != "US")
+dt_nous <- dt_nous %>% mutate(t2_15_rank = rank(-t2_15, ties.method = "first"), t4_15_rank = rank(-t4_15, ties.method = "first"), t4outstate_15_rank = rank(-t4outstate_15, ties.method = "first")) %>% 
+  select(STATEFP, t2_15_rank, t4_15_rank, t4outstate_15_rank)
+dt <- left_join(dt,dt_nous,by="STATEFP")
+write.csv(dt,"data/statedata.csv",row.names=F, na="")
+
 ########################################################################################################
 # Annual enrollment and appropriations data: format, make long, join
 ########################################################################################################

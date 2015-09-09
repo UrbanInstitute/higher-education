@@ -111,6 +111,157 @@ function slopechart(div, id) {
         });
 }
 
+//slope chart for 3 ranked tuition values
+function rankchart(div, id) {
+
+    data = data_main.filter(function (d) {
+        return d.abbrev != "US";
+    });
+    data.forEach(function (d) {
+        d[VAL[0]] = +d[VAL[0]]
+        d[VAL[1]] = +d[VAL[1]]
+        d[VAL[2]] = +d[VAL[2]]
+    });
+
+    var margin = {
+        top: 35,
+        right: 120,
+        bottom: 15,
+        left: 120
+    };
+
+    if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
+        isMobile = true;
+    } else {
+        isMobile = false;
+    }
+
+    if (isMobile) {}
+
+    var width = $GRAPHDIV.width() - margin.left - margin.right,
+        height = Math.ceil((width * slopechart_aspect_height) / slopechart_aspect_width) - margin.top - margin.bottom;
+
+    $GRAPHDIV.empty();
+
+    var svg = d3.select(div).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var y = d3.scale.linear()
+        .domain([1, 50])
+        .range([0, height]);
+
+    var yAxis1 = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+    var gy1 = svg.append("g")
+        .attr("class", "y axis-show")
+        .call(yAxis1);
+
+    var yAxis2 = d3.svg.axis()
+        .scale(y)
+        .tickSize(0)
+        .tickFormat('')
+        .orient("right");
+
+    var gy2 = svg.append("g")
+        .attr("class", "y axis-show")
+        .attr("transform", "translate(" + width / 2 + " ,0)")
+        .call(yAxis2);
+
+    var gy3 = svg.append("g")
+        .attr("class", "y axis-show")
+        .attr("transform", "translate(" + width + " ,0)")
+        .call(yAxis2);
+
+    var legend = svg.selectAll("g.legend")
+        .data(LABELS)
+        .enter().append("g")
+        .attr("class", "slope-label");
+
+    legend.append("text")
+        .data(LABELS)
+        .attr("x", function (d, i) {
+            return (i * width / 2);
+        })
+        .attr("y", -15)
+        .attr("text-anchor", "middle")
+        .text(function (d, i) {
+            return d;
+        });
+
+    svg.append("text")
+        .attr("x", -55)
+        .attr("y", function (d) {
+            return y(3);
+        })
+        .attr("class", "legend")
+        .attr("text-anchor", "middle")
+        .text("Most expensive");
+
+    svg.append("text")
+        .attr("x", -55)
+        .attr("y", function (d) {
+            return y(48);
+        })
+        .attr("class", "legend")
+        .attr("text-anchor", "middle")
+        .text("Least expensive");
+
+    var lines = svg.selectAll(".state")
+        .data(data)
+        .enter()
+        .append("g");
+
+    lines.append("g")
+        .append("line")
+        .attr('id', function (d) {
+            return d.abbrev;
+        })
+        .attr("class", "chartline")
+        .attr("y1", function (d) {
+            return y(d[VAL[0]]);
+        })
+        .attr("y2", function (d) {
+            return y(d[VAL[1]]);
+        })
+        .attr("x1", 0)
+        .attr("x2", width / 2)
+        .attr("stroke", function (d) {
+            if (d.abbrev == "US") {
+                return "#000";
+            } else {
+                return "#ccc";
+            }
+        });
+
+    lines.append("g")
+        .append("line")
+        .attr('id', function (d) {
+            return d.abbrev;
+        })
+        .attr("class", "chartline")
+        .attr("y1", function (d) {
+            return y(d[VAL[1]]);
+        })
+        .attr("y2", function (d) {
+            return y(d[VAL[2]]);
+        })
+        .attr("x1", width / 2)
+        .attr("x2", width)
+        .attr("stroke", function (d) {
+            if (d.abbrev == "US") {
+                return "#000";
+            } else {
+                return "#ccc";
+            }
+        });
+}
+
+
 //this is really a line chart in disguise
 function slopechart3(div, id) {
 

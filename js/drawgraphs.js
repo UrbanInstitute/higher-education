@@ -67,7 +67,10 @@ function d3_format_precision(x, p) {
 //one function for each graph & paired map/legend
 
 function tuition15() {
-    //slope chart eventually!
+    $GRAPHDIV = $("#tuitionrank");
+    VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
+    LABELS = ["Two-year", "Four-year in-state", "Four-year out-of-state"];
+    rankchart("#tuitionrank");
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]
     FORMATTER = formatmoney;
@@ -435,6 +438,9 @@ dispatch.on("load.menu", function (stateById) {
         row.forEach(function (d) {
             d3.selectAll(".tt-name").text(d.state);
             //tuition
+            d3.select("#tt_t2_15_rank").text(+d.t2_15_rank);
+            d3.select("#tt_t4_15_rank").text(+d.t4_15_rank);
+            d3.select("#tt_t4outstate_15_rank").text(+d.t4outstate_15_rank);
             d3.select("#tt_t2_05").text(formatmoney(+d.t2_05));
             d3.select("#tt_t2_15").text(formatmoney(+d.t2_15));
             d3.select("#tt_t2_0515").text(formatpct(d.t2_0515));

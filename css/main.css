@@ -136,7 +136,7 @@ th {
 .labelline.selected,
 .chartline.selected {
     stroke: #ec008b;
-    stroke-width: 5;
+    stroke-width: 3;
 }
 /*maps*/
 
