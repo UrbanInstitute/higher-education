@@ -4,16 +4,14 @@
 }
 
 #background-image{
-    top: 50px;
+    /*top: 50px;*/
     position: absolute;
     bottom: 0px;
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
     background-image: url(../img/background.jpg);
-    background-size: cover;
-
-   
+    background-size: cover;   
 }
 
 .intro{
@@ -54,4 +52,35 @@ margin-top:50px;
 }
 .research:hover{
 background-color: #000;
+}
+
+footer{
+    background-color: #000;
+    bottom: 0px;
+    height: 50px;
+    position: absolute;
+    width: 100%;
+}
+
+@media (max-width: 600px){
+#title{
+    font-size: 2em;
+}
+.chapter{
+    font-size: 14px;
+}
+.intro-desc{
+    font-size: 1em;
+}
+#background-image {
+    top: 0px;
+    position: relative;
+    padding-top: 10px;
+    bottom: 0px;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../img/background.jpg);
+    background-size: cover;
+}
 }
