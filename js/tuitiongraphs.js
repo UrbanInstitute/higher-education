@@ -1,28 +1,3 @@
-function tuition15() {
-    $GRAPHDIV = $("#tuitionrank");
-    VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
-    LABELS = ["Two-year", "Four-year in-state", "Four-year out-of-state"];
-    rankchart("#tuitionrank");
-    COLORS = palette.blue5;
-    BREAKS = [7000, 8000, 9000, 10000]
-    FORMATTER = formatmoney;
-    isMobile = false;
-
-    function pairedmap() {
-        $GRAPHDIV = $("#map_tuition15");
-        VAL = "t4_15";
-        MAINMAP = 0;
-        map("#map_tuition15");
-    }
-    pairedmap();
-
-    function maplegend() {
-        $LEGENDDIV = $("#legend_tuition15");
-        legend("#legend_tuition15");
-    }
-    maplegend();
-}
-
 function tuitiontime() {
     FORMATTER = formatmoney;
     YEARVAL = "fiscalyear";
@@ -61,9 +36,34 @@ function tuitiontime() {
     maplegend();
 }
 
+function tuition15() {
+    $GRAPHDIV = $("#tuitionrank");
+    VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
+    LABELS = ["Two-year in-district", "Four-year in-state", "Four-year out-of-state"];
+    rankchart("#tuitionrank");
+    COLORS = palette.blue5;
+    BREAKS = [7000, 8000, 9000, 10000]
+    FORMATTER = formatmoney;
+    isMobile = false;
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_tuition15");
+        VAL = "t4_15";
+        MAINMAP = 0;
+        map("#map_tuition15");
+    }
+    pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_tuition15");
+        legend("#legend_tuition15");
+    }
+    maplegend();
+}
+
 function drawgraphs() {
-    tuition15();
     tuitiontime();
+    tuition15();
 
     d3.selectAll("[id='US']")
         .classed("selected", true);

@@ -101,7 +101,7 @@ function map(div, id) {
             })
             .call(d3.helper.tooltip(
                 function (d, i) {
-                    return "<b>" + d.properties.name + "</b></br>Residents who stay in state: " + d3.format("%")(d.properties.res_pct_instate) + "</br>State students enrolling from another state: " + d3.format("%")(d.properties.state_pct_outstate);
+                    return "<b>" + d.properties.name + "</b></br>Share of college-going high school graduates who enroll in-state: " + d3.format("%")(d.properties.res_pct_instate) + "</br>Share of first-time college students who are from another state: " + d3.format("%")(d.properties.state_pct_outstate);
                 }
             ));
     } else {
