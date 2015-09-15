@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tuition</title>
 
+    <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
     <link rel="stylesheet" type="text/css" href="css/urban-text.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/urban-selects.css">
@@ -15,104 +17,174 @@
 </head>
 
 <body>
-    <div class="container">
+    <!--nav bar-->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobsocials">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div id="logo">
+                    <a href="http://www.urban.org">
+                        <img src="img/logo-03.png" alt="The Urban Institute" />
+                    </a>
+                </div>
+                <div id="navTitle" class="clickable f1">
+                    <!--a class="navDC" id="titleLink" href="http://www.urban.org/features/our-changing-city-collection" target="_blank">WASHINGTON, DC:</br></a-->
+                    <a class="navOCC" id="titleLink" href="http://www.urban.org/features/our-changing-city-collection" target="_blank">Higher Education Explorer</a> :: Tuition
+                </div>
+            </div>
+            <!--previous chapters-->
+            <div id="previousChapters">
+                <a href="enrollment.html">
+                    <button class="urban-button">Enrollment</button>
+                </a>
+                <a href="funding.html">
+                    <button class="urban-button">Funding</button>
+                </a>
+            </div>
+
+            <!--share icons for desktop-->
+            <div id="share">
+                <div id="shareMaster">
+                    <div id="shareCircle" class="circle">
+                        <i class="fa fa-share"></i>
+                    </div>
+                </div>
+                <div id="socials">
+                    <a href="http://twitter.com/intent/tweet?text=%23DC%20residents%3A%20Crime%20%26%20public%20safety%20in%20your%20neighborhood%2C%20then%20%26%20now%20http%3A%2F%2Furbn.is%2Fdcsafety%20(via%20%40urbaninstitute)" target="_blank">
+                        <div id="twitter" class="circle">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://urbn.is/dcsafety" target="_blank">
+                        <div id="facebook" class="circle">
+                            <i class="fa fa-facebook"></i>
+                        </div>
+                    </a>
+                    <a href="mailto:%20?Subject= New interactive feature from the Urban Institute &amp;Body=Hi! I thought you'd be interested in the latest chapter of Urban Institute’s “Washington, DC: Our Changing City” series: http://urbn.is/dcsafety" target="_blank">
+                        <div id="email" class="circle">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!--share icons = hamburger on mobile, different classes-->
+            <div class="collapse navbar-collapse" div id="mobsocials">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="social" target="_blank" href="http://twitter.com/intent/tweet?text=%23DC%20residents%3A%20Crime%20%26%20public%20safety%20in%20your%20neighborhood%2C%20then%20%26%20now%20http%3A%2F%2Furbn.is%2Fdcsafety%20(via%20%40urbaninstitute)"><i class="circle fa fa-twitter"></i></a>
+                    </li>
+                    <li><a class="social" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://urbn.is/dcsafety"><i class="fa fa-facebook circle"></i></a>
+                    </li>
+                    <li><a class="social" target="_blank" href="mailto:%20?Subject= New interactive feature from the Urban Institute &amp;Body=Hi! I thought you'd be interested in the latest chapter of Urban Institute’s “Washington, DC: Our Changing City” series: http://urbn.is/dcsafety"><i class="fa fa-envelope circle"></i></a>
+                    </li>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <div id="mainSection" class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1>THIS WILL BE A HEADER</h1>
 
-                    <h2>Tuition and Fees</h2>
-                    <p>Both tuition and fee levels at public colleges and universities and their growth over time vary considerably across states. Differences in state funding levels explain much of the variation in prices, but other factors also contribute. Differences in income levels, cost-of-living, and state financial aid programs affect the relationship between tuition levels and college affordability.</p>
+                <h2>Tuition and Fees</h2>
+                <p>Both tuition and fee levels at public colleges and universities and their growth over time vary considerably across states. Differences in state funding levels explain much of the variation in prices, but other factors also contribute. Differences in income levels, cost-of-living, and state financial aid programs affect the relationship between tuition levels and college affordability.</p>
 
 
-                    <h3>Tuition and Fees for Two-Year In-District and Four-Year In-State Institutions over Time in 2015 Dollars</h3>
-                    <p>In all states, in-state four year tuition and fees have risen in constant dollars since 2004-05. Public four-year tuition and fees are higher than two-year tuition and fees in every state. Two-year tuition and fees have actually declined in real terms in some states since 2009-10, however, and two-year prices in some states exceed four-year prices in other states.</p>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div id="tuition2year" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div id="tuition4year" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                <table>
-                                    <tr>
-                                        <th></th>
-                                        <th>Two-year in-district</th>
-                                        <th>Four-year in-state</th>
-                                    </tr>
-                                    <tr>
-                                        <td>2004-05: </td>
-                                        <td>
-                                            <div id="tt_t2_05" class="tt-value"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tt_t4_05" class="tt-value"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2014-15:</td>
-                                        <td>
-                                            <div id="tt_t2_15" class="tt-value"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tt_t4_15" class="tt-value"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Change:</td>
-                                        <td>
-                                            <div id="tt_t2_0515" class="tt-value"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tt_t4_0515" class="tt-value"></div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <div class="legendtitle">Change in in-state 4 year tuition and fees, 2005-2015</div>
-                            <div id="legend_tuitiontime"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_tuitiontime" class="pairedmap"></div>
-                        </div>
+                <h3>Tuition and Fees for Two-Year In-District and Four-Year In-State Institutions over Time in 2015 Dollars</h3>
+                <p>In all states, in-state four year tuition and fees have risen in constant dollars since 2004-05. Public four-year tuition and fees are higher than two-year tuition and fees in every state. Two-year tuition and fees have actually declined in real terms in some states since 2009-10, however, and two-year prices in some states exceed four-year prices in other states.</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div id="tuition2year" class="bingraph"></div>
                     </div>
-
-                    <h3>Tuition and Fees Ranking, 2014-2015</h3>
-                    <p>Despite similar trends over time, neither public two-year college tuition and fees nor out-of-state prices are strongly correlated with in-state tuition and fees at public four-year institutions. States with relatively high four-year in-state tuition may have relatively low two-year or out-of-state prices.</p>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="tuitionrank" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Two-year in-district rank:
-                                <div id="tt_t2_15_rank" class="tt-value"></div> of 50
-                                </br>
-                                Four-year in-state rank:
-                                <div id="tt_t4_15_rank" class="tt-value"></div> of 50
-                                </br>
-                                Four-year out-of-state rank:
-                                <div id="tt_t4outstate_15_rank" class="tt-value"></div> of 50
-                            </div>
-
-                            <div class="legendtitle">In-state 4 year tuition and fees, 2015</div>
-                            <div id="legend_tuition15"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_tuition15" class="pairedmap"></div>
-                        </div>
+                    <div class="col-md-4">
+                        <div id="tuition4year" class="bingraph"></div>
                     </div>
-            
+                    <div class="col-md-4">
+                        <div class="tt">
+                            <div class="tt-name"></div>
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th>Two-year in-district</th>
+                                    <th>Four-year in-state</th>
+                                </tr>
+                                <tr>
+                                    <td>2004-05: </td>
+                                    <td>
+                                        <div id="tt_t2_05" class="tt-value"></div>
+                                    </td>
+                                    <td>
+                                        <div id="tt_t4_05" class="tt-value"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2014-15:</td>
+                                    <td>
+                                        <div id="tt_t2_15" class="tt-value"></div>
+                                    </td>
+                                    <td>
+                                        <div id="tt_t4_15" class="tt-value"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Change:</td>
+                                    <td>
+                                        <div id="tt_t2_0515" class="tt-value"></div>
+                                    </td>
+                                    <td>
+                                        <div id="tt_t4_0515" class="tt-value"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="legendtitle">Change in in-state 4 year tuition and fees, 2005-2015</div>
+                        <div id="legend_tuitiontime"></div>
+
+                        <div class="styled-select">
+                            <select class="stateselect">
+                            </select>
+                        </div>
+                        <div id="map_tuitiontime" class="pairedmap"></div>
+                    </div>
+                </div>
+
+                <h3>Tuition and Fees Ranking, 2014-2015</h3>
+                <p>Despite similar trends over time, neither public two-year college tuition and fees nor out-of-state prices are strongly correlated with in-state tuition and fees at public four-year institutions. States with relatively high four-year in-state tuition may have relatively low two-year or out-of-state prices.</p>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div id="tuitionrank" class="bingraph"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="tt">
+                            <div class="tt-name"></div>
+                            Two-year in-district rank:
+                            <div id="tt_t2_15_rank" class="tt-value"></div> of 50
+                            </br>
+                            Four-year in-state rank:
+                            <div id="tt_t4_15_rank" class="tt-value"></div> of 50
+                            </br>
+                            Four-year out-of-state rank:
+                            <div id="tt_t4outstate_15_rank" class="tt-value"></div> of 50
+                        </div>
+
+                        <div class="legendtitle">In-state 4 year tuition and fees, 2015</div>
+                        <div id="legend_tuition15"></div>
+
+                        <div class="styled-select">
+                            <select class="stateselect">
+                            </select>
+                        </div>
+                        <div id="map_tuition15" class="pairedmap"></div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
