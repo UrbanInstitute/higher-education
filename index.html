@@ -5,374 +5,123 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Higher education affordability</title>
+    <title>State Higher Education Affordability</title>
 
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/urban-text.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/landing-page.css">
     <link rel="stylesheet" type="text/css" href="css/urban-selects.css">
+    <link rel="stylesheet" href="css/logos.css">
+    <link rel="stylesheet" href="css/urban-header.css">
+    <script src="js/header.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>THIS WILL BE A HEADER</h1>
 
-                <div id="tuition-section">
-                    <h2>Tuition and Fees</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<!--    header-->
+   
 
-                    
+    <div id="header-pinned" class="no-touch">
+        <div class="content">
+            <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
+            <div class="title"><a href="http://www.urban.org/features" class="title-linkback">Features</a> <span>: :</span> State Higher Education Explorer</div>
+            <div class="share-icons">
+                <div class="shareThisP">
+                    <span onclick="toggle_visibility('shareBox');">
+                        <div class="shareThisB"></div>
+                    </span>
+                    <div class="shareThisW" id="shareBox">
+                      
 
-                    <h3>Tuition and Fees for Two-Year and Four-Year In-State Institutions over Time in 2015 Dollars</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div id="tuition2year" class="bingraph"></div>
+
+
+                        <div class="addthis_toolbox addthis_default_style  " addthis:title="" addthis:url="">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=http://urbn.is/massincarceration" target="_blank" class="addthis_button_facebook at300b" title="Facebook" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-facebook" style="background-color: rgb(48, 88, 145);"><span class="at_a11y">Share on facebook</span></span></a>
+
+                            <a href="http://twitter.com/intent/tweet?text=Interactive%20tool%20from%20%40urbaninstitute%3A%20Explore%20how%20policy%20changes%20could%20affect%20the%20US%20prison%20population%20http%3A%2F%2Furbn.is%2Fmassincarceration%20%23prisonreform" target="_blank" class="addthis_button_twitter at300b" title="Tweet" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-twitter" style="background-color: rgb(44, 168, 210);"><span class="at_a11y">Share on twitter</span></span></a>
+
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://urbn.is/massincarceration&title=Reducing%20Mass%20Incarceration%20Requires%20Far-Reaching%20Reforms&summary=A%20new%20Urban%20Institute%20tool%20lets%20you%20explore%20how%20potential%20policy%20changes%20could%20affect%20the%20US%20prison%20population.&source=Urban%20Institute" target="_blank" class="addthis_button_linkedin at300b" target="_blank" title="LinkedIn" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-linkedin" style="background-color: rgb(68, 152, 200);"><span class="at_a11y">Share on linkedin</span></span></a>
+
+                            <a href="mailto:%20?Subject= New interactive tool from the Urban Institute &amp;Body=Hi! I thought you'd be interested in this new interactive tool from the Urban Institute: “Reducing Mass Incarceration Requires Far-Reaching Reforms.” http://urbn.is/massincarceration" target="_blank" class="addthis_button_email at300b" target="_blank" title="Email" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-email" style="background-color: rgb(115, 138, 141);"><span class="at_a11y">Share on email</span></span></a>
+                            <div class="atclear"></div>
                         </div>
-                        <div class="col-md-4">
-                            <div id="tuition4year" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                <table>
-                                    <tr>
-                                        <th></th>
-                                        <th>Two-year in-state</th>
-                                        <th>Four-year in-state</th>
-                                    </tr>
-                                    <tr>
-                                        <td>2004-05: </td>
-                                        <td>
-                                            <div id="tt_t2_05" class="tt-value"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tt_t4_05" class="tt-value"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2014-15:</td>
-                                        <td>
-                                            <div id="tt_t2_15" class="tt-value"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tt_t4_15" class="tt-value"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Change:</td>
-                                        <td>
-                                            <div id="tt_t2_0515" class="tt-value"></div>
-                                        </td>
-                                        <td>
-                                            <div id="tt_t4_0515" class="tt-value"></div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
 
-                            <div class="legendtitle">Change in in-state 4 year tuition and fees, 2005-2015</div>
-                            <div id="legend_tuitiontime"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_tuitiontime" class="pairedmap"></div>
-                        </div>
-                    </div>
-
-                    <h3>Tuition and Fees Ranking, 2014-2015</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="tuitionrank" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Two-year rank:
-                                <div id="tt_t2_15_rank" class="tt-value"></div> of 50
-                                </br>
-                                Four-year in-state rank:
-                                <div id="tt_t4_15_rank" class="tt-value"></div> of 50
-                                </br>
-                                Four-year out-of-state rank:
-                                <div id="tt_t4outstate_15_rank" class="tt-value"></div> of 50
-                            </div>
-
-                            <div class="legendtitle">In-state 4 year tuition and fees, 2015</div>
-                            <div id="legend_tuition15"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_tuition15" class="pairedmap"></div>
-                        </div>
                     </div>
                 </div>
-                <hr/>
-
-                <div id="enrollment-section">
-                    <h2>Enrollment</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <h3>Share of Public FTE Enrollments that are in a Two-Year School</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="fte2year" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Share of public FTE enrollments that are in a two-year school:
-                                <div id="tt_ftepubin2year" class="tt-value"></div>
-                            </div>
-
-                            <div class="legendtitle">Share of enrollments that are in a 2-year school</div>
-                            <div id="legend_fte2year"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_fte2year" class="pairedmap"></div>
-                        </div>
-                    </div>
-
-                    <h3>Recent High School Graduates</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="legendtitle">Share of state resident first-time college students who stay in state</div>
-                            <div id="legend_instate"></div>
-                            <div id="map_instate" class="bingraph"></div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="legendtitle">Share of students at state colleges who are from another state</div>
-                            <div id="legend_outstate"></div>
-                            <div id="map_outstate" class="bingraph"></div>
-                        </div>
-                    </div>
-
-                    <h3>Enrollment since 2000-01</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="enrollment2" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Enrollment in 2014-15:
-                                </br>
-                                Increase since 2000-01:
-                            </div>
-
-                            <div class="legendtitle">Increase in Enrollment since 2000-01</div>
-                            <div id="legend_enroll2"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_enroll2" class="pairedmap"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Percentage Change in Enrollment since 2000-01</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div id="enrollment" class="bingraph"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="tt">
-                            <div class="tt-name"></div>
-                            Enrollment in 2014-15:
-                            <div id="tt_enroll15" class="tt-value"></div>
-                            </br>
-                            Increase since 2000-01:
-                            <div id="tt_enroll0115" class="tt-value"></div>
-                        </div>
-
-                        <div class="legendtitle">Increase in Enrollment since 2000-01</div>
-                        <div id="legend_enroll"></div>
-
-                        <div class="styled-select">
-                            <select class="stateselect">
-                            </select>
-                        </div>
-                        <div id="map_enroll" class="pairedmap"></div>
-                    </div>
-                </div>
-    
-                <hr/>
-
-                <div id="funding-section">
-                    <h2>Funding</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <h3>Funding per FTE student vs. Funding per $1,000 in Personal Income, 2014-15</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="funding_slope" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Funding per FTE student:
-                                <div class="tt_approp_percap15 tt-value"></div>
-                                </br>
-                                Funding per $1,000 in personal income:
-                                <div id="tt_fundingperthousinc" class="tt-value"></div>
-                            </div>
-
-                            <div class="legendtitle">State funding per FTE student</div>
-                            <div id="legend_funding"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_funding" class="pairedmap"></div>
-                        </div>
-                    </div>
-
-                    <h3>State Grant Aid to Students: Need-Based vs. Non-Need-Based, 2013-14</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>NOTE: New Hampshire does not give grant aid</p>
-                    <p>LEGEND HERE</p>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h4 class="charttitle">More Need-Based</h4>
-                            <div id="grantaid1" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="charttitle">More Non-Need-Based</h4>
-                            <div id="grantaid2" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Need-based:
-                                <div id="tt_grants_needbased" class="tt-value"></div>
-                                </br>
-                                Non-need-based:
-                                <div id="tt_grants_nonneedbased" class="tt-value"></div>
-                            </div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-
-                            <div id="legend_grantaid"></div>
-                            <div id="map_grantaid" class="pairedmap"></div>
-                        </div>
-                    </div>
-
-                    <h3>Total Funding since 2000-01</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="appropriations2" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Total funding in 2014-15:
-                                </br>
-                                Change since 2000-01:
-                            </div>
-
-                            <div class="legendtitle">Change in Total Funding since 2000-01</div>
-                            <div id="legend_approp2"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_approp2" class="pairedmap"></div>
-                        </div>
-                    </div>
-
-
-                    <h3>Percentage Change in Total Funding since 2000-01</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="appropriations" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Total funding in 2014-15:
-                                <div id="tt_approp_15" class="tt-value"></div>
-                                </br>
-                                Change since 2000-01:
-                                <div id="tt_approp0115" class="tt-value"></div>
-                            </div>
-
-                            <div class="legendtitle">Change in Total Funding since 2000-01</div>
-                            <div id="legend_approp"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_approp" class="pairedmap"></div>
-                        </div>
-                    </div>
-
-                    <h3>Funding per FTE student since 2000-01, in 2015 Dollars</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div id="approp_percap" class="bingraph"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="tt">
-                                <div class="tt-name"></div>
-                                Funding per FTE student in 2014-15:
-                                <div class="tt_approp_percap15 tt-value"></div>
-                                </br>
-                                Change since 2000-01:
-                                <div id="tt_approp_percap0115" class="tt-value"></div>
-                            </div>
-
-                            <div class="legendtitle">Change in Funding per FTE student since 2000-01</div>
-                            <div id="legend_approppc"></div>
-
-                            <div class="styled-select">
-                                <select class="stateselect">
-                                </select>
-                            </div>
-                            <div id="map_approppc" class="pairedmap"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr/>
-
-                <h3>Project Credits</h3>
-                <p>Lorem ipsum dolor met amit.</p>
-                <btn class="urban-button">DOWNLOAD THE DATA</btn>
             </div>
         </div>
     </div>
+    <!--    end header-->
+
+    <!-- Page Content -->
+    <div id="background-image">
+        <div class="container intro">
+            <div class="row">
+
+
+                <div class="col-lg-12 ">
+                    <div class="text-center">
+                        <div id="title">State Higher Education Explorer</div>
+                        <div class="intro-desc">Lorem ipsum dolor sit amet, duis pellentesque in, vel fringilla ultricies vehicula sapien sociis, lobortis auctor, augue a euismod tempor tellus vel adipiscing, nunc venenatis erat id. Velit fusce luctus mi ut, tortor wisi justo, viverra vehicula turpis amet, vestibulum elit ipsum nunc. Ut primis non dui cras amet, ipsum fusce congue reiciendis. Diam commodo id porttitor, orci sed sem volutpat sed. Auctor nec auctor maecenas massa. Mi magna eget, justo mollis suspendisse. Turpis diam fringilla ultricies libero nec integer. Tempor pede feugiat, in amet. Augue nec congue, sed varius tristique integer mattis.</div>
+                    </div>
+                    <div class="chapter-btns">
+                    <div class="col-lg-4 text-center">
+                        <a href="tuition.html"><button class="btn-lg chapter">Tuition</button></a>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <a href="enrollment.html"><button class="btn-lg chapter">Enrollment</button></a>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <a href="funding.html"><button class="btn-lg chapter">Funding</button></a>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-12 research-btns">
+                    <div class="text-center">
+                        <button class="btn-md chapter research">Read the research</button>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-md chapter research">Download detailed data</button>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-md chapter about-btn">About this project</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- /.row -->
+
+
+
+        </div>
+        <!-- /.container -->
+
+        <footer>
+            <div class="container">
+                <div class="col-lg-12">
+                    <p class="copy">Copyright &copy; <a href="http://www.urban.org" target="_blank">Urban Institute</a> August 2015. <a href="https://github.com/UrbanInstitute/higher-ed" target="_blank">View this on GitHub.</a>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+    <!-- background image -->
+
+
 
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
@@ -389,6 +138,5 @@
     <script src="js/linechart.js"></script>
     <script src="js/drawgraphs.js"></script>
 
-</body>
 
 </html>
