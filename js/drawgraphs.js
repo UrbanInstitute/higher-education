@@ -27,7 +27,7 @@ var formatfunding = d3.format("$,.3s");
 var palette = {
     blue5: ["#b0d5f1", "#82c4e9", "#1696d2", "#00578b", "#00152A"],
     yellow5: ["#fff2cf", "#fdd870", "#fdbf11", "#e88e2d", "#ca5800"],
-    yellowblue: ["#ca5800", "#fcb918", "#ffedcd", "#d7e8f6", "#0096d2", "#00578b"]
+    yellowblue: ["#ca5800", "#fcb918", "#ffedcd", "#d7e8f6", "#1696d2", "#00578b"]
 };
 
 // Override d3's formatPrefix function - billions label as G, not B with d3 defaults

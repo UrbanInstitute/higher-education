@@ -44,17 +44,23 @@ function grantaid2() {
 function grantmap() {
     $GRAPHDIV = $("#map_grantaid");
     MAINMAP = 0;
-    BREAKS = [0.5];
-    COLORS = ["#fdbf11", "#1696d2"];
-    LABELS = ["Less need-based", "More need-based"];
+    BREAKS = [0.25, 0.5, 0.75];
+    COLORS = ["#fcb918", "#ffedcd", "#d7e8f6", "#1696d2"];
     VAL = "grants_pctneedbased";
     map("#map_grantaid");
 
     function maplegend() {
         $LEGENDDIV = $("#legend_grantaid");
-        catlegend("#legend_grantaid");
+        legend("#legend_grantaid");
     }
     maplegend();
+}
+
+function grantlegend() {
+    $LEGENDDIV = $("#legend_grantbars");
+    COLORS = ["#1696d2", "#fcb918"];
+    LABELS = ["Need-based", "Non-need-based"];
+    catlegend("#legend_grantbars");
 }
 
 function appropchart() {
@@ -119,6 +125,7 @@ function drawgraphs() {
     grantaid1();
     grantaid2();
     grantmap();
+    grantlegend();
     appropchart();
     approp_percapchart();
 
