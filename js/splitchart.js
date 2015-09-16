@@ -11,7 +11,7 @@ function splitchart(div, id) {
     });
 
     var margin = {
-        top: 20,
+        top: 15,
         right: 5,
         bottom: 25,
         left: 85
@@ -79,6 +79,33 @@ function splitchart(div, id) {
             return d;
         })
         .classed("minor", true);
+
+    //US averages as lines for comparison, behind bars
+    var usline = svg.selectAll("g.usline")
+        .data([-534, 173])
+        .enter().append("g");
+
+    usline.append("text")
+        .attr("class", "legend")
+        .attr("y", height + 15)
+        .attr("x", function (d) {
+            return x(d);
+        })
+        .attr("text-anchor", "middle")
+        .text("US");
+
+    usline.append("line")
+        .data([-534, 173])
+        .attr("class", "labelline")
+        .attr("x1", function (d) {
+            return x(d);
+        })
+        .attr("x2", function (d) {
+            return x(d);
+        })
+        .attr("y1", 0)
+        .attr("y2", height)
+        .attr("id", "US");
 
     var pctbar = svg.selectAll(".bar")
         .data(data)

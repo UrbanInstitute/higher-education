@@ -97,14 +97,19 @@ th {
     font-size: 9px;
     text-align: center;
 }
-/*United States line for bar chart*/
+/*United States line for bar charts*/
 
 .labelline {
-    stroke: #000;
-    stroke-width: 1.5;
+    stroke: #555;
+    stroke-width: 1;
+    stroke-dasharray: 2, 2;
     fill: none;
     shape-rendering: crispEdges;
 }
+/*.labelline.selected {
+    stroke: #ec008b;
+    stroke-width: 2;
+}*/
 
 .recession {
     fill: #fff2cf;
@@ -133,7 +138,6 @@ th {
     stroke-width: 1px;
 }
 
-.labelline.selected,
 .chartline.selected {
     stroke: #ec008b;
     stroke-width: 3;

@@ -95,6 +95,29 @@ function barchart(div, id) {
         .attr("x", -4)
         .attr("dy", 4);
 
+    //US average as line for comparison
+    svg.append("g")
+        .append("line")
+        .attr("id", "US")
+        .attr("class", "labelline")
+        .attr("y1", function (d) {
+            return y(0.459912672);
+        })
+        .attr("y2", function (d) {
+            return y(0.459912672);
+        })
+        .attr("x1", 0)
+        .attr("x2", width);
+
+    svg.append("text")
+        .attr("x", -15)
+        .attr("y", function (d) {
+            return y(0.459912672) + 4;
+        })
+        .attr("class", "legend")
+        .attr("text-anchor", "middle")
+        .text("US");
+
     var pctbar = svg.selectAll(".bar")
         .data(data)
         .enter()
@@ -118,28 +141,5 @@ function barchart(div, id) {
         .attr("height", function (d) {
             return Math.abs(y(0) - (y(d[VAL])));
         });
-
-    //US value
-    svg.append("g")
-        .append("line")
-        .attr("id", "US")
-        .attr("class", "labelline")
-        .attr("y1", function (d) {
-            return y(0.459912672);
-        })
-        .attr("y2", function (d) {
-            return y(0.459912672);
-        })
-        .attr("x1", 0)
-        .attr("x2", width);
-
-    svg.append("text")
-        .attr("x", -15)
-        .attr("y", function (d) {
-            return y(0.459912672) + 4;
-        })
-        .attr("class", "legend")
-        .attr("text-anchor", "middle")
-        .text("US");
 
 }
