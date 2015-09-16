@@ -44,8 +44,8 @@ function grantaid2() {
 function grantmap() {
     $GRAPHDIV = $("#map_grantaid");
     MAINMAP = 0;
-    BREAKS = [0.25, 0.5, 0.75];
-    COLORS = ["#fcb918", "#ffedcd", "#d7e8f6", "#1696d2"];
+    BREAKS = [0.2, 0.4, 0.6, 0.8];
+    COLORS = palette.gray5;
     VAL = "grants_pctneedbased";
     map("#map_grantaid");
 
