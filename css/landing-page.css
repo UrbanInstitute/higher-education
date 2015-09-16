@@ -10,15 +10,22 @@
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
+    background-color: #fff;
     background-image: url(../img/background.jpg);
     background-size: cover;   
 }
 
 .intro{
     color: #fff;
-margin:25%;
+margin:15%;
+text-shadow: 3px 3px #000;
 }
-
+.logo{
+    float: left;
+}
+.navbar-nav{
+    float: right !important;
+}
 .intro-desc{
     font-size: 1.3em;
     margin-bottom: 25px;
@@ -52,6 +59,20 @@ margin-top:50px;
 }
 .research:hover{
 background-color: #000;
+}
+.chapter-btns a{
+    text-decoration: none;
+    color: #fff;
+}
+.chapter-btns a:hover{
+    color: #fff;
+}
+
+.about-btn{
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 0px !important;
+    margin-top: 50px;
 }
 
 footer{
