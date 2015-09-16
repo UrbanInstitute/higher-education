@@ -261,7 +261,6 @@ function rankchart(div, id) {
         });
 }
 
-
 //this is really a line chart in disguise
 function slopechart3(div, id) {
 
@@ -271,7 +270,7 @@ function slopechart3(div, id) {
 
     var margin = {
         top: 25,
-        right: 15,
+        right: 25,
         bottom: 25,
         left: 55
     };
@@ -317,11 +316,17 @@ function slopechart3(div, id) {
         return d.year;
     }));
 
+    var yearf = d3.format("02d");
+
+    function formatYear(d) {
+        return (d-1) +"-" + yearf(d-2000);
+    }
+
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
         .tickSize(height)
-        .tickFormat(d3.format("d"))
+        .tickFormat(formatYear)
         .ticks(3);
 
     var gx = svg.append("g")

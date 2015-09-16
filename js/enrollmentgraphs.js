@@ -58,7 +58,9 @@ function map_outstate() {
 }
 
 function enrollchart() {
-    data2 = data_long;
+    data2 = data_long.filter(function (d) {
+        return d.fiscalyear < 2015;
+    });;
     $GRAPHDIV = $("#enrollment");
     LINEVAL = "enroll_change";
     YEARVAL = "fiscalyear";

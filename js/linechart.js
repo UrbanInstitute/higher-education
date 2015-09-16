@@ -7,7 +7,7 @@ var linechart_aspect_height = 0.7;
 var yearf = d3.format("02d");
 
 function formatYear(d) {
-    return "'" + yearf(Math.abs(2000 - d));
+    return "'" + yearf(Math.abs(2000 - d) -1);
 }
 
 function linechart(div, id) {

@@ -85,7 +85,9 @@ function appropchart() {
 }
 
 function approp_percapchart() {
-    data2 = data_long;
+    data2 = data_long.filter(function (d) {
+        return d.fiscalyear < 2015;
+    });;
     $GRAPHDIV = $("#approp_percap");
     LINEVAL = "approp_percap";
     YEARVAL = "fiscalyear";
