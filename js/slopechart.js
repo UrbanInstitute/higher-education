@@ -35,10 +35,6 @@ function slopechart(div, id) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-    var linecolor = d3.scale.threshold()
-        .domain(BREAKS)
-        .range(COLORS)
 
     var y1 = d3.scale.linear()
         .domain(d3.extent(data, function (d) {
@@ -110,7 +106,7 @@ function slopechart(div, id) {
             if (d.abbrev == "US") {
                 return "#000";
             } else {
-                return linecolor(d[VAL[0]]);
+                return "#ccc";
             }
         });
 }
@@ -368,10 +364,6 @@ function slopechart3(div, id) {
         .y(function (d) {
             return y(d.val);
         });
-    
-/*    var linecolor = d3.scale.threshold()
-        .domain(BREAKS)
-        .range(COLORS)*/
 
     var states = svg.selectAll(".state")
         .data(data_nest, function (d) {
