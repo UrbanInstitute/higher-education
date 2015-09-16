@@ -145,15 +145,10 @@ function legend(div) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    if ($LEGENDDIV.width() < 500) {
-        var lp_w = 0,
-            ls_w = (width / COLORS.length),
-            ls_h = 15;
-    } else {
-        var lp_w = 0,
-            ls_w = 60,
-            ls_h = 15;
-    }
+    var lp_w = 0,
+        ls_w = (width / COLORS.length),
+        ls_h = 15;
+
     var legend = svg.selectAll("g.legend")
         .data(COLORS)
         .enter().append("g")
@@ -178,7 +173,6 @@ function legend(div) {
         .attr("y", 20)
         .attr("width", ls_w - 3)
         .attr("height", ls_h)
-        .attr("z-index", 10)
         .style("fill", function (d, i) {
             return COLORS[i];
         })
@@ -187,14 +181,14 @@ function legend(div) {
 function catlegend(div) {
 
     var margin = {
-        top: 8,
+        top: 3,
         right: 1,
-        bottom: 2,
-        left: 5
+        bottom: 5,
+        left: 1
     };
 
     var width = $LEGENDDIV.width() - margin.left - margin.right,
-        height = 50 - margin.top - margin.bottom;
+        height = 30 - margin.top - margin.bottom;
 
     $LEGENDDIV.empty();
 
@@ -204,36 +198,47 @@ function catlegend(div) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var lp_w = 0,
+    var lp_w = 130,
         ls_w = 30,
-        ls_h = 18;
+        ls_h = 15;
 
     var legend = svg.selectAll("g.legend")
-        .data(COLORS)
+        .data(LABELS)
         .enter().append("g")
         .attr("class", "legend");
 
     legend.append("text")
         .data(LABELS)
-        .attr("x", lp_w + ls_w + 8)
-        .attr("y", function (d, i) {
-            return i * (ls_h + 5) + 15;
+        .attr("x", function (d, i) {
+            return (i * (ls_w + lp_w)) + ls_w + 5;
         })
+        .attr("y", 22)
         .text(function (d, i) {
             return d;
         });
 
     legend.append("rect")
         .data(COLORS)
-        .attr("x", 0)
-        .attr("y", function (d, i) {
-            return i * (ls_h + 5);
+        .attr("x", function (d, i) {
+            return (i * (ls_w + lp_w));
         })
+        .attr("y", 10)
         .attr("width", ls_w)
         .attr("height", ls_h)
-        .attr("z-index", 10)
         .style("fill", function (d, i) {
             return COLORS[i];
         })
+
+    //manual dashed line
+    legend.append("line")
+        .attr("x1", function (d, i) {
+            return (2 * (ls_w + lp_w));
+        })
+        .attr("x2", function (d, i) {
+            return (2 * (ls_w + lp_w)) + ls_w;
+        })
+        .attr("y1", 18)
+        .attr("y2", 18)
+        .attr("class", "labelline");
 
 }

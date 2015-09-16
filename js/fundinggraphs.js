@@ -59,7 +59,7 @@ function grantmap() {
 function grantlegend() {
     $LEGENDDIV = $("#legend_grantbars");
     COLORS = ["#1696d2", "#fcb918"];
-    LABELS = ["Need-based", "Non-need-based"];
+    LABELS = ["Need-based", "Non-need-based", "National average"];
     catlegend("#legend_grantbars");
 }
 

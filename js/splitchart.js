@@ -85,14 +85,14 @@ function splitchart(div, id) {
         .data([-534, 173])
         .enter().append("g");
 
-    usline.append("text")
+/*    usline.append("text")
         .attr("class", "legend")
         .attr("y", height + 15)
         .attr("x", function (d) {
             return x(d);
         })
         .attr("text-anchor", "middle")
-        .text("US");
+        .text("US");*/
 
     usline.append("line")
         .data([-534, 173])
