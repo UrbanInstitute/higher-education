@@ -116,7 +116,7 @@ function map(div, id) {
             .attr("fill", function (d) {
                 //NH doesn't give grant aid
                 if (VAL == "grants_pctneedbased" & d.properties.abbrev == "NH") {
-                    return "#ccc";
+                    return "#fff";
                 } else {
                     return color(d.properties[VAL]);
                 }
