@@ -106,7 +106,7 @@ function approp_percapchart() {
 
     function pairedmap() {
         $GRAPHDIV = $("#map_approppc");
-        VAL = "approp_percap0115";
+        VAL = "approp_percap0114";
         MAINMAP = 0;
         map("#map_approppc");
     }
@@ -147,14 +147,14 @@ dispatch.on("load.menu", function (stateById) {
 
         row.forEach(function (d) {
             d3.selectAll(".tt-name").text(d.state);
-            //funding - per capita funding is used twice
-            d3.selectAll(".tt_approp_percap15").text(formatmoney(+d.approp_percap15));
+            d3.select("#tt_approp_percap15").text(formatmoney(+d.approp_percap15));
             d3.select("#tt_fundingperthousinc").text(formatdollars(+d.fundingperthousinc));
             d3.select("#tt_grants_needbased").text(formatmoney(+d.grants_needbased));
             d3.select("#tt_grants_nonneedbased").text(formatmoney(+d.grants_nonneedbased));
             d3.select("#tt_approp_15").text(formatfunding(+d.approp_15));
             d3.select("#tt_approp0115").text(formatpct(+d.approp0115));
-            d3.select("#tt_approp_percap0115").text(formatpct(+d.approp_percap0115));
+            d3.select("#tt_approp_percap14").text(formatmoney(+d.approp_percap14));
+            d3.select("#tt_approp_percap0114").text(formatpct(+d.approp_percap0114));
         });
     }
 

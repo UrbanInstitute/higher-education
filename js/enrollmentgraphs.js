@@ -73,7 +73,7 @@ function enrollchart() {
 
     function pairedmap() {
         $GRAPHDIV = $("#map_enroll");
-        VAL = "enroll0115";
+        VAL = "enroll0114";
         MAINMAP = 0;
         map("#map_enroll");
     }
@@ -109,8 +109,8 @@ dispatch.on("load.menu", function (stateById) {
         row.forEach(function (d) {
             d3.selectAll(".tt-name").text(d.state);
             d3.select("#tt_ftepubin2year").text(formatpct(+d.ftepubin2year));
-            d3.select("#tt_enroll15").text(formatnum(+d.enroll_15));
-            d3.select("#tt_enroll0115").text(formatpct(+d.enroll0115));
+            d3.select("#tt_enroll14").text(formatnum(+d.enroll_14));
+            d3.select("#tt_enroll0114").text(formatpct(+d.enroll0114));
         });
     }
 
