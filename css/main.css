@@ -138,6 +138,16 @@ th {
     font-size: 12px;
 }
 
+/*scatterplot*/
+.scatterdot {
+    fill: #ccc;
+    width: 5px;
+}
+
+.scatterdot.selected {
+    fill: #ec008b
+}
+
 .recession {
     fill: #fff2cf;
     opacity: 0.3;

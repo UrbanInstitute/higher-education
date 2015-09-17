@@ -120,3 +120,91 @@ function rankingchart(div, id) {
             });
     }
 }
+
+function scatterplot(div, id) {
+
+    data = data_main.filter(function (d) {
+        return d.abbrev != "US";
+    });
+    var margin = {
+        top: 20,
+        right: 15,
+        bottom: 50,
+        left: 55
+    };
+
+    if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
+        isMobile = true;
+    } else {
+        isMobile = false;
+    }
+
+    var width = $GRAPHDIV.width() - margin.left - margin.right,
+        height = Math.ceil((width * 1) / 1) - margin.top - margin.bottom,
+        padding = 30;
+
+    $GRAPHDIV.empty();
+
+    var svg = d3.select(div).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var y = d3.scale.linear()
+        .domain([0, 50])
+        .range([height, 0]);
+
+    var x = d3.scale.linear()
+        .domain([0, 50])
+        .range([0, width]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .ticks(5);
+
+    var gx = svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "x axis-show")
+        .call(xAxis);
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(5);
+
+    var gy = svg.append("g")
+        .attr("class", "y axis-show")
+        .call(yAxis);
+
+    svg.append("text")
+        .attr("class", "legend")
+        .attr("text-anchor", "middle")
+        .attr("x", width/2)
+        .attr("y", height + 30)
+        .text(LABELS[0]);
+    
+    svg.append("text")
+        .attr("class", "legend")
+        .attr("text-anchor", "middle")
+        .attr("transform", function (d) {
+            return "translate(" + -35 + "," + (y(25)) + ") rotate(-90)";
+        })
+        .text(LABELS[1]);
+
+    svg.selectAll(".dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("class", "scatterdot")
+        .attr("id", function (d) {
+            return d.abbrev;
+        })
+        .attr("r", 3.5)
+        .attr("cx", function (d) {
+            return x(d[VAL[0]]);
+        })
+        .attr("cy", function (d) {
+            return y(d[VAL[1]]);
+        });
+}
