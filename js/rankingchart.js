@@ -126,6 +126,10 @@ function scatterplot(div, id) {
     data = data_main.filter(function (d) {
         return d.abbrev != "US";
     });
+    data.forEach(function (d) {
+        d[VAL[0]] = +d[VAL[0]]
+        d[VAL[1]] = +d[VAL[1]]
+    });
     var margin = {
         top: 20,
         right: 15,
@@ -152,15 +156,21 @@ function scatterplot(div, id) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var y = d3.scale.linear()
-        .domain([0, 50])
+        .domain(d3.extent(data, function (d) {
+            return d[VAL[1]];
+        }))
         .range([height, 0]);
 
     var x = d3.scale.linear()
-        .domain([0, 50])
+        .domain(d3.extent(data, function (d) {
+            return d[VAL[0]];
+        }))
         .range([0, width]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
+        .outerTickSize(0)
+        .tickFormat(FORMATTER)
         .orient("bottom")
         .ticks(5);
 
@@ -171,6 +181,8 @@ function scatterplot(div, id) {
 
     var yAxis = d3.svg.axis()
         .scale(y)
+        .outerTickSize(0)
+        .tickFormat(FORMATTER)
         .orient("left")
         .ticks(5);
 
@@ -181,15 +193,15 @@ function scatterplot(div, id) {
     svg.append("text")
         .attr("class", "legend")
         .attr("text-anchor", "middle")
-        .attr("x", width/2)
+        .attr("x", width / 2)
         .attr("y", height + 30)
         .text(LABELS[0]);
-    
+
     svg.append("text")
         .attr("class", "legend")
         .attr("text-anchor", "middle")
         .attr("transform", function (d) {
-            return "translate(" + -35 + "," + (y(25)) + ") rotate(-90)";
+            return "translate(" + -45 + "," + (height/2) + ") rotate(-90)";
         })
         .text(LABELS[1]);
 

@@ -141,7 +141,6 @@ th {
 /*scatterplot*/
 .scatterdot {
     fill: #ccc;
-    width: 5px;
 }
 
 .scatterdot.selected {

@@ -88,12 +88,15 @@ function tuition15() {
 
 function scatterrank() {
     $GRAPHDIV = $("#scatterrank");
-    VAL = ["t4_15_rank", "t2_15_rank"];
-    LABELS = ["Four-year in-state","Two-year in-district"];
+    VAL = ["t4_15", "t2_15"];
+    FORMATTER = d3.format("$2s");
+    LABELS = ["Four-year in-state", "Two-year in-district"];
+    //VAL = ["t4_15_rank", "t2_15_rank"];
+    //FORMATTER = formatnum;
     scatterplot("#scatterrank");
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]
-    FORMATTER = formatmoney;
+
     function pairedmap() {
         $GRAPHDIV = $("#map_tuition152");
         VAL = "t4_15";
@@ -104,16 +107,34 @@ function scatterrank() {
 
     function maplegend() {
         $LEGENDDIV = $("#legend_tuition152");
+        FORMATTER = formatmoney;
         legend("#legend_tuition152");
     }
     maplegend();
 }
 
+function scatterrankb() {
+    $GRAPHDIV = $("#scatterrankb");
+    LABELS = ["Four-year in-state", "Two-year in-district"];
+    VAL = ["t4_15_rank", "t2_15_rank"];
+    FORMATTER = formatnum;
+    scatterplot("#scatterrankb");
+}
+
 function scatterrank2() {
     $GRAPHDIV = $("#scatterrank2");
-    VAL = ["t4_15_rank", "t4outstate_15_rank"];
+    VAL = ["t4_15", "t4outstate_15"];
+    FORMATTER = d3.format("$2s");
     LABELS = ["Four-year in-state", "Four-year out-of-state"];
     scatterplot("#scatterrank2");
+}
+
+function scatterrank2b() {
+    $GRAPHDIV = $("#scatterrank2b");
+    LABELS = ["Four-year in-state", "Four-year out-of-state"];
+    VAL = ["t4_15_rank", "t4outstate_15_rank"];
+    FORMATTER = formatnum;
+    scatterplot("#scatterrank2b");
 }
 
 function drawgraphs() {
@@ -121,6 +142,8 @@ function drawgraphs() {
     tuition15();
     scatterrank();
     scatterrank2();
+    scatterrankb();
+    scatterrank2b();
     d3.selectAll("[id='US']")
         .classed("selected", true);
 
@@ -153,10 +176,10 @@ dispatch.on("load.menu", function (stateById) {
             d3.select("#tt_t4_05").text(formatmoney(+d.t4_05));
             d3.selectAll(".tt_t4_15").text(formatmoney(+d.t4_15));
             d3.select("#tt_t4_0515").text(formatpct(+d.t4_0515));
-            d3.select("#tt_t4outstate_15").text(formatmoney(+d.t4outstate_15));
-            d3.select("#tt_t2_15_rank").text(formatRank(+d.t2_15_rank));
-            d3.select("#tt_t4_15_rank").text(formatRank(+d.t4_15_rank));
-            d3.select("#tt_t4outstate_15_rank").text(formatRank(+d.t4outstate_15_rank));
+            d3.selectAll(".tt_t4outstate_15").text(formatmoney(+d.t4outstate_15));
+            d3.selectAll(".tt_t2_15_rank").text(formatRank(+d.t2_15_rank));
+            d3.selectAll(".tt_t4_15_rank").text(formatRank(+d.t4_15_rank));
+            d3.selectAll(".tt_t4outstate_15_rank").text(formatRank(+d.t4outstate_15_rank));
         });
     }
 
