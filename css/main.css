@@ -86,6 +86,7 @@ th {
     color: #333;
 }
 
+
 .slope-label {
     font-size: 12px;
     color: #333;
@@ -110,6 +111,26 @@ th {
     stroke: #ec008b;
     stroke-width: 2;
 }*/
+
+/*rank chart*/
+.ranktext {
+    font-size: 10px;
+    font-weight: 400;
+    color: #666;
+}
+
+.ranktext.selected {
+    font-weight: 700;
+    color: #ffffff !important;
+}
+
+.rankbar {
+    fill: #DCDBDB
+}
+
+.rankbar.selected {
+    fill: #ec008b
+}
 
 .recession {
     fill: #fff2cf;

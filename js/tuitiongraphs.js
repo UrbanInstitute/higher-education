@@ -36,11 +36,36 @@ function tuitiontime() {
     maplegend();
 }
 
-function tuition15() {
+/*function tuition15() {
     $GRAPHDIV = $("#tuitionrank");
     VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
     LABELS = ["Two-year in-district", "Four-year in-state", "Four-year out-of-state"];
     rankchart("#tuitionrank");
+    COLORS = palette.blue5;
+    BREAKS = [7000, 8000, 9000, 10000]
+    FORMATTER = formatmoney;
+    isMobile = false;
+
+    function pairedmap() {
+        $GRAPHDIV = $("#map_tuition15");
+        VAL = "t4_15";
+        MAINMAP = 0;
+        map("#map_tuition15");
+    }
+    pairedmap();
+
+    function maplegend() {
+        $LEGENDDIV = $("#legend_tuition15");
+        legend("#legend_tuition15");
+    }
+    maplegend();
+}*/
+
+function tuition15() {
+    $GRAPHDIV = $("#tuitionrank");
+    VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
+    LABELS = ["Two-year in-district", "Four-year in-state", "Four-year out-of-state"];
+    rankingchart("#tuitionrank");
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]
     FORMATTER = formatmoney;
@@ -113,7 +138,7 @@ dispatch.on("load.menu", function (stateById) {
     //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
     dispatch.on("statechange.menu", function (state) {
         selecter.property("value", state.abbrev);
-        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired").classed("selected", false);
+        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext").classed("selected", false);
         menu_id = state.abbrev;
         d3.selectAll("[id='" + menu_id + "']")
             .classed("selected", true);
