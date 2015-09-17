@@ -4,7 +4,7 @@ function tuitiontime() {
 
     function twoyear() {
         $GRAPHDIV = $("#tuition2year");
-        LABELS = "In-state 2-year tuition";
+        LABELS = "Two-year in-district";
         LINEVAL = "tuition_2year";
         slopechart3("#tuition2year");
     };
@@ -12,7 +12,7 @@ function tuitiontime() {
 
     function fouryear() {
         $GRAPHDIV = $("#tuition4year");
-        LABELS = "In-state 4-year tuition";
+        LABELS = "Four-year in-state";
         LINEVAL = "tuition_4year";
         slopechart3("#tuition4year");
     };
@@ -104,18 +104,28 @@ dispatch.on("load.menu", function (stateById) {
             return d.abbrev == menu_id
         });
 
+
+        function formatRank(d) {
+            if (d>=1) {
+                return d = d + " of 50";
+            } else {
+                return "";
+            }
+        }
+
         row.forEach(function (d) {
             d3.selectAll(".tt-name").text(d.state);
             //tuition
-            d3.select("#tt_t2_15_rank").text(+d.t2_15_rank);
-            d3.select("#tt_t4_15_rank").text(+d.t4_15_rank);
-            d3.select("#tt_t4outstate_15_rank").text(+d.t4outstate_15_rank);
             d3.select("#tt_t2_05").text(formatmoney(+d.t2_05));
-            d3.select("#tt_t2_15").text(formatmoney(+d.t2_15));
+            d3.selectAll(".tt_t2_15").text(formatmoney(+d.t2_15));
             d3.select("#tt_t2_0515").text(formatpct(d.t2_0515));
             d3.select("#tt_t4_05").text(formatmoney(+d.t4_05));
-            d3.select("#tt_t4_15").text(formatmoney(+d.t4_15));
+            d3.selectAll(".tt_t4_15").text(formatmoney(+d.t4_15));
             d3.select("#tt_t4_0515").text(formatpct(+d.t4_0515));
+            d3.select("#tt_t4outstate_15").text(formatmoney(+d.t4outstate_15));
+            d3.select("#tt_t2_15_rank").text(formatRank(+d.t2_15_rank));
+            d3.select("#tt_t4_15_rank").text(formatRank(+d.t4_15_rank));
+            d3.select("#tt_t4outstate_15_rank").text(formatRank(+d.t4outstate_15_rank));
         });
     }
 
@@ -145,4 +155,3 @@ dispatch.on("load.menu", function (stateById) {
         tooltip();
     });
 });
-

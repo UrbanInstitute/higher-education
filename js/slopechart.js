@@ -349,7 +349,7 @@ function slopechart3(div, id) {
     svg.append("text")
         .attr("class", "slope-label")
         .attr("text-anchor", "middle")
-        .attr("x", 0)
+        .attr("x", width/2)
         .attr("y", -15)
         .text(LABELS);
 
