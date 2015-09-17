@@ -114,14 +114,14 @@ th {
 
 /*rank chart*/
 .ranktext {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
-    color: #666;
+    fill: #666;
 }
 
 .ranktext.selected {
     font-weight: 700;
-    color: #ffffff !important;
+    fill: #ffffff !important;
 }
 
 .rankbar {
@@ -130,6 +130,12 @@ th {
 
 .rankbar.selected {
     fill: #ec008b
+}
+
+.ranklegend {
+    text-transform: uppercase;
+    fill: #666;
+    font-size: 12px;
 }
 
 .recession {

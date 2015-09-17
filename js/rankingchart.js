@@ -1,5 +1,5 @@
 var ranking_aspect_width = 1;
-var ranking_aspect_height = 1.2;
+var ranking_aspect_height = 1.1;
 
 function rankingchart(div, id) {
 
@@ -10,8 +10,8 @@ function rankingchart(div, id) {
     var margin = {
         top: 15,
         right: 5,
-        bottom: 25,
-        left: 25
+        bottom: 5,
+        left: 50
     };
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
@@ -23,8 +23,7 @@ function rankingchart(div, id) {
     if (isMobile) {}
 
     var width = $GRAPHDIV.width() - margin.left - margin.right,
-        height = Math.ceil((width * ranking_aspect_height) / ranking_aspect_width) - margin.top - margin.bottom,
-        padding = 30;
+        height = Math.ceil((width * ranking_aspect_height) / ranking_aspect_width) - margin.top - margin.bottom;
 
     $GRAPHDIV.empty();
 
@@ -47,6 +46,27 @@ function rankingchart(div, id) {
     var gy = svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
+
+    var legend = svg.selectAll("g.legend")
+        .data([0])
+        .enter().append("g")
+        .attr("class", "ranklegend");
+
+    legend.append("text")
+        .attr("text-anchor", "end")
+        .attr("class", "legend")
+        .text("Most expensive")
+        .attr("transform", function (d) {
+            return "translate(" + -30 + "," + y0(1) + ") rotate(-90)";
+        });
+
+    legend.append("text")
+        .attr("text-anchor", "start")
+        .attr("class", "legend")
+        .text("Least expensive")
+        .attr("transform", function (d) {
+            return "translate(" + -30 + "," + (y0(50) + y0.rangeBand()) + ") rotate(-90)";
+        });
 
     var barwidth = width / 4
 
@@ -99,5 +119,4 @@ function rankingchart(div, id) {
                 return d.state;
             });
     }
-
 }
