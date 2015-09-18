@@ -125,7 +125,7 @@ $(window).load(function () {
                     });
                     dispatch.load(stateById);
                     dispatch.statechange(stateById.get("US"));
-
+                    tooltip("US");
                     drawgraphs();
                     window.onresize = drawgraphs;
                 });
