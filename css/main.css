@@ -64,6 +64,7 @@ th {
 .axis-show path,
 .axis-show line {
     fill: none;
+    width: 1px;
     stroke: #000;
     shape-rendering: crispEdges;
 }
