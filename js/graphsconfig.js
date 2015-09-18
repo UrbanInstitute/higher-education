@@ -94,7 +94,7 @@ dispatch.on("statechange.menu", function (statebyId) {
     menuId = statebyId.abbrev;
     d3.selectAll("[id='" + menuId + "']")
         .classed("selected", true);
-    tooltip(statebyId);
+    tooltip(menuId);
 });
 
 //on hover, class those states "hovered" (turn em pink) and change the tooltip
