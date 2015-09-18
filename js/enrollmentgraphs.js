@@ -87,21 +87,21 @@ function enrollchart() {
 }
 
 function drawgraphs() {
-        fte2year();
-        map_instate();
-        map_outstate();
-        enrollchart();
+    fte2year();
+    map_instate();
+    map_outstate();
+    enrollchart();
 
-        d3.selectAll("[id='US']")
-            .classed("selected", true);
+    d3.selectAll("[id='US']")
+        .classed("selected", true);
 
-    }
+}
 
 //pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
 function tooltip() {
     data = data_main;
     var row = data.filter(function (d) {
-        return d.abbrev == menu_id
+        return d.abbrev == menuId
     });
 
     row.forEach(function (d) {
@@ -111,4 +111,3 @@ function tooltip() {
         d3.select("#tt_enroll0114").text(formatpct(+d.enroll0114));
     });
 }
-

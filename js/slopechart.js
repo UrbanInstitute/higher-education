@@ -108,6 +108,12 @@ function slopechart(div, id) {
             } else {
                 return "#ccc";
             }
+        })
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
         });
 }
 
@@ -236,6 +242,12 @@ function rankchart(div, id) {
             } else {
                 return "#ccc";
             }
+        })
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
         });
 
     lines.append("g")
@@ -258,7 +270,13 @@ function rankchart(div, id) {
             } else {
                 return "#ccc";
             }
-        });
+        })
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
+        });;
 }
 
 //this is really a line chart in disguise
@@ -386,5 +404,11 @@ function slopechart3(div, id) {
             } else {
                 return "#ccc";
             }
+        })
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
         });
 }

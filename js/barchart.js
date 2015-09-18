@@ -140,6 +140,11 @@ function barchart(div, id) {
         })
         .attr("height", function (d) {
             return Math.abs(y(0) - (y(d[VAL])));
+        })
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
         });
-
 }

@@ -103,7 +103,13 @@ function rankingchart(div, id) {
             .attr("y", function (d) {
                 return y(d[VAL[i]]);
             })
-            .attr("height", y.rangeBand());
+            .attr("height", y.rangeBand())
+            .on("mouseover", function (d) {
+                dispatch.hoverState(this.id);
+            })
+            .on("mouseout", function (d) {
+                dispatch.dehoverState(this.id);
+            });
 
         rankbar.append("text")
             .attr('id', function (d) {
@@ -117,6 +123,12 @@ function rankingchart(div, id) {
             })
             .text(function (d, i) {
                 return d.state;
+            })
+            .on("mouseover", function (d) {
+                dispatch.hoverState(this.id);
+            })
+            .on("mouseout", function (d) {
+                dispatch.dehoverState(this.id);
             });
     }
 }
@@ -201,7 +213,7 @@ function scatterplot(div, id) {
         .attr("class", "legend")
         .attr("text-anchor", "middle")
         .attr("transform", function (d) {
-            return "translate(" + -45 + "," + (height/2) + ") rotate(-90)";
+            return "translate(" + -45 + "," + (height / 2) + ") rotate(-90)";
         })
         .text(LABELS[1]);
 
@@ -218,5 +230,11 @@ function scatterplot(div, id) {
         })
         .attr("cy", function (d) {
             return y(d[VAL[1]]);
+        })
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
         });
 }

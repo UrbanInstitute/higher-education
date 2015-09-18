@@ -135,7 +135,7 @@ function drawgraphs() {
 function tooltip() {
     data = data_main;
     var row = data.filter(function (d) {
-        return d.abbrev == menu_id
+        return d.abbrev == menuId
     });
 
     row.forEach(function (d) {

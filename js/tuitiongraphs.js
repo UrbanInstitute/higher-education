@@ -153,9 +153,8 @@ function drawgraphs() {
 function tooltip() {
     data = data_main;
     var row = data.filter(function (d) {
-        return d.abbrev == menu_id
+        return d.abbrev == menuId
     });
-
 
     function formatRank(d) {
         if (d >= 1) {

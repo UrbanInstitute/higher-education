@@ -127,7 +127,13 @@ function splitchart(div, id) {
         .attr("y", function (d) {
             return y(d.state);
         })
-        .attr("height", y.rangeBand());
+        .attr("height", y.rangeBand())
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
+        });
 
     //non-need-based on right
     pctbar.append("rect")
@@ -144,6 +150,12 @@ function splitchart(div, id) {
         .attr("y", function (d) {
             return y(d.state);
         })
-        .attr("height", y.rangeBand());
+        .attr("height", y.rangeBand())
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
+        });
 
 }

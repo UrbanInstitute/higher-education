@@ -7,7 +7,7 @@ var linechart_aspect_height = 0.7;
 var yearf = d3.format("02d");
 
 function formatYear(d) {
-    return "'" + yearf(Math.abs(2000 - d) -1);
+    return "'" + yearf(Math.abs(2000 - d) - 1);
 }
 
 function linechart(div, id) {
@@ -151,8 +151,14 @@ function linechart(div, id) {
             } else {
                 return "#ccc";
             }
+        })
+        .on("mouseover", function (d) {
+            dispatch.hoverState(this.id);
+        })
+        .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
         });
-    
+
     //manual line for axis at 0
     svg.append("g")
         .append("line")

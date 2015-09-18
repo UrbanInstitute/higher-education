@@ -31,9 +31,6 @@ var palette = {
     gray5: ["#ECECEC", "#DCDBDB", "#ccc", "#777", "#000"]
 };
 
-var dispatch = d3.dispatch("load", "statechange");
-var menu_id;
-
 // Override d3's formatPrefix function - billions label as G, not B with d3 defaults
 var d3_formatPrefixes = ["e-24", "e-21", "e-18", "e-15", "e-12", "e-9", "e-6", "e-3", "", "K", "M", "B", "T", "P", "E", "Z", "Y"].map(d3_formatPrefix);
 
@@ -68,13 +65,15 @@ function d3_format_precision(x, p) {
     return p - (x ? Math.ceil(Math.log(x) / Math.LN10) : 1);
 }
 
-dispatch.on("load.menu", function (stateById) {
+var dispatch = d3.dispatch("load", "statechange", "hoverState", "dehoverState");
+var menuId;
+var selecter = d3.selectAll(".stateselect")
 
+dispatch.on("load.menu", function (stateById) {
     //populate the dropdowns using main csv's state names & abbreviations
-    var selecter = d3.selectAll(".stateselect")
-        .on("change", function () {
-            dispatch.statechange(stateById.get(this.value));
-        });
+    selecter.on("change", function () {
+        dispatch.statechange(stateById.get(this.value));
+    });
 
     selecter.selectAll("option")
         .data(stateById.values())
@@ -85,16 +84,27 @@ dispatch.on("load.menu", function (stateById) {
         .text(function (d) {
             return d.state;
         });
+});
 
-    //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
-    dispatch.on("statechange.menu", function (state) {
-        selecter.property("value", state.abbrev);
-        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
-        menu_id = state.abbrev;
-        d3.selectAll("[id='" + menu_id + "']")
-            .classed("selected", true);
-        tooltip();
-    });
+var allbars = d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot")
+
+//on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
+dispatch.on("statechange.menu", function (state) {
+    selecter.property("value", state.abbrev);
+    d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
+    menuId = state.abbrev;
+    d3.selectAll("[id='" + menuId + "']")
+        .classed("selected", true);
+    tooltip();
+});
+
+//hover
+dispatch.on("hoverState", function (statebyId) {
+    d3.selectAll("[id='" + statebyId + "']").classed("hovered", true);
+});
+
+dispatch.on("dehoverState", function (statebyId) {
+    d3.selectAll("[id='" + statebyId + "']").classed("hovered", false);
 });
 
 $(window).load(function () {
