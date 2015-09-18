@@ -86,25 +86,26 @@ dispatch.on("load.menu", function (stateById) {
         });
 });
 
-var allbars = d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot")
-
 //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
-dispatch.on("statechange.menu", function (state) {
-    selecter.property("value", state.abbrev);
+dispatch.on("statechange.menu", function (statebyId) {
+    selecter.property("value", statebyId.abbrev);
     d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
-    menuId = state.abbrev;
+    menuId = statebyId.abbrev;
     d3.selectAll("[id='" + menuId + "']")
         .classed("selected", true);
-    tooltip();
+    tooltip(statebyId);
 });
 
 //hover
 dispatch.on("hoverState", function (statebyId) {
     d3.selectAll("[id='" + statebyId + "']").classed("hovered", true);
+    tooltip(statebyId);
 });
 
 dispatch.on("dehoverState", function (statebyId) {
     d3.selectAll("[id='" + statebyId + "']").classed("hovered", false);
+    menuId = selecter.property("value");
+    tooltip(menuId);
 });
 
 $(window).load(function () {

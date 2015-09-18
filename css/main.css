@@ -192,7 +192,8 @@ th {
     z-index: 1000;
 }
 
-.boundary_paired.selected {
+.boundary_paired.selected,
+.boundary_paired.hovered {
     stroke: #ec008b;
     stroke-width: 3px;
     z-index: 1000;

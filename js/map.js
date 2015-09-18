@@ -120,6 +120,12 @@ function map(div, id) {
                 } else {
                     return color(d.properties[VAL]);
                 }
+            })
+            .on("mouseover", function (d) {
+                dispatch.hoverState(this.id);
+            })
+            .on("mouseout", function (d) {
+                dispatch.dehoverState(this.id);
             });
     }
 

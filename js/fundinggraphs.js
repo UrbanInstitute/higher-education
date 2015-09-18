@@ -132,10 +132,10 @@ function drawgraphs() {
 }
 
 //pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
-function tooltip() {
+function tooltip(state) {
     data = data_main;
     var row = data.filter(function (d) {
-        return d.abbrev == menuId
+        return d.abbrev == state;
     });
 
     row.forEach(function (d) {
