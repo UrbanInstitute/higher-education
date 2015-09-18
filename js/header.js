@@ -10,7 +10,6 @@ $(function () {
     var shrinkHeader = 200;
     $(window).scroll(function () {
         var scroll = getCurrentScroll();
-        console.log(scroll);
         if (scroll >= shrinkHeader) {
             $('#header-pinned').addClass('is-visible');
         } else {

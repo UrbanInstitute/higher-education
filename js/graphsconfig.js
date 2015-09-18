@@ -86,7 +86,8 @@ dispatch.on("load.menu", function (stateById) {
         });
 });
 
-//on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
+//tooltip function is defined in each [content]graphs.js
+//on change of the dropdown, unselect all graph components and then select ones with id = dropdown value, make tooltip state be dropdown value
 dispatch.on("statechange.menu", function (statebyId) {
     selecter.property("value", statebyId.abbrev);
     d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
@@ -96,12 +97,13 @@ dispatch.on("statechange.menu", function (statebyId) {
     tooltip(statebyId);
 });
 
-//hover
+//on hover, class those states "hovered" (turn em pink) and change the tooltip
 dispatch.on("hoverState", function (statebyId) {
     d3.selectAll("[id='" + statebyId + "']").classed("hovered", true);
     tooltip(statebyId);
 });
 
+//declass "hovered" and return tooltip back to value in dropdowns
 dispatch.on("dehoverState", function (statebyId) {
     d3.selectAll("[id='" + statebyId + "']").classed("hovered", false);
     menuId = selecter.property("value");
