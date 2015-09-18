@@ -87,56 +87,28 @@ function enrollchart() {
 }
 
 function drawgraphs() {
-    fte2year();
-    map_instate();
-    map_outstate();
-    enrollchart();
+        fte2year();
+        map_instate();
+        map_outstate();
+        enrollchart();
 
-    d3.selectAll("[id='US']")
-        .classed("selected", true);
+        d3.selectAll("[id='US']")
+            .classed("selected", true);
 
-}
-
-dispatch.on("load.menu", function (stateById) {
-
-    //pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
-    function tooltip() {
-        data = data_main;
-        var row = data.filter(function (d) {
-            return d.abbrev == menu_id
-        });
-
-        row.forEach(function (d) {
-            d3.selectAll(".tt-name").text(d.state);
-            d3.select("#tt_ftepubin2year").text(formatpct(+d.ftepubin2year));
-            d3.select("#tt_enroll14").text(formatnum(+d.enroll_14));
-            d3.select("#tt_enroll0114").text(formatpct(+d.enroll0114));
-        });
     }
 
-    //populate the dropdowns using main csv's state names & abbreviations
-    var selecter = d3.selectAll(".stateselect")
-        .on("change", function () {
-            dispatch.statechange(stateById.get(this.value));
-        });
-
-    selecter.selectAll("option")
-        .data(stateById.values())
-        .enter().append("option")
-        .attr("value", function (d) {
-            return d.abbrev;
-        })
-        .text(function (d) {
-            return d.state;
-        });
-
-    //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
-    dispatch.on("statechange.menu", function (state) {
-        selecter.property("value", state.abbrev);
-        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired").classed("selected", false);
-        menu_id = state.abbrev;
-        d3.selectAll("[id='" + menu_id + "']")
-            .classed("selected", true);
-        tooltip();
+//pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
+function tooltip() {
+    data = data_main;
+    var row = data.filter(function (d) {
+        return d.abbrev == menu_id
     });
-});
+
+    row.forEach(function (d) {
+        d3.selectAll(".tt-name").text(d.state);
+        d3.select("#tt_ftepubin2year").text(formatpct(+d.ftepubin2year));
+        d3.select("#tt_enroll14").text(formatnum(+d.enroll_14));
+        d3.select("#tt_enroll0114").text(formatpct(+d.enroll0114));
+    });
+}
+

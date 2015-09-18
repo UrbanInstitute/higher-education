@@ -131,53 +131,21 @@ function drawgraphs() {
         .classed("selected", true);
 }
 
-var dispatch = d3.dispatch("load", "statechange");
-var menu_id;
-
-dispatch.on("load.menu", function (stateById) {
-
-    //pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
-    function tooltip() {
-        data = data_main;
-        var row = data.filter(function (d) {
-            return d.abbrev == menu_id
-        });
-
-        row.forEach(function (d) {
-            d3.selectAll(".tt-name").text(d.state);
-            d3.selectAll(".tt_approp_percap15").text(formatmoney(+d.approp_percap15));
-            d3.select("#tt_fundingperthousinc").text(formatdollars(+d.fundingperthousinc));
-            d3.select("#tt_grants_needbased").text(formatmoney(+d.grants_needbased));
-            d3.select("#tt_grants_nonneedbased").text(formatmoney(+d.grants_nonneedbased));
-            d3.select("#tt_approp_15").text(formatfunding(+d.approp_15));
-            d3.select("#tt_approp0115").text(formatpct(+d.approp0115));
-            d3.select("#tt_approp_percap0115").text(formatpct(+d.approp_percap0115));
-        });
-    }
-
-    //populate the dropdowns using main csv's state names & abbreviations
-    var selecter = d3.selectAll(".stateselect")
-        .on("change", function () {
-            dispatch.statechange(stateById.get(this.value));
-        });
-
-    selecter.selectAll("option")
-        .data(stateById.values())
-        .enter().append("option")
-        .attr("value", function (d) {
-            return d.abbrev;
-        })
-        .text(function (d) {
-            return d.state;
-        });
-
-    //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
-    dispatch.on("statechange.menu", function (state) {
-        selecter.property("value", state.abbrev);
-        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired").classed("selected", false);
-        menu_id = state.abbrev;
-        d3.selectAll("[id='" + menu_id + "']")
-            .classed("selected", true);
-        tooltip();
+//pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
+function tooltip() {
+    data = data_main;
+    var row = data.filter(function (d) {
+        return d.abbrev == menu_id
     });
-});
+
+    row.forEach(function (d) {
+        d3.selectAll(".tt-name").text(d.state);
+        d3.selectAll(".tt_approp_percap15").text(formatmoney(+d.approp_percap15));
+        d3.select("#tt_fundingperthousinc").text(formatdollars(+d.fundingperthousinc));
+        d3.select("#tt_grants_needbased").text(formatmoney(+d.grants_needbased));
+        d3.select("#tt_grants_nonneedbased").text(formatmoney(+d.grants_nonneedbased));
+        d3.select("#tt_approp_15").text(formatfunding(+d.approp_15));
+        d3.select("#tt_approp0115").text(formatpct(+d.approp0115));
+        d3.select("#tt_approp_percap0115").text(formatpct(+d.approp_percap0115));
+    });
+}

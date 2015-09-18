@@ -28,7 +28,7 @@ var palette = {
     blue5: ["#b0d5f1", "#82c4e9", "#1696d2", "#00578b", "#00152A"],
     yellow5: ["#fff2cf", "#fdd870", "#fdbf11", "#e88e2d", "#ca5800"],
     yellowblue: ["#ca5800", "#fcb918", "#ffedcd", "#d7e8f6", "#1696d2", "#00578b"],
-    gray5: ["#ECECEC","#DCDBDB","#ccc","#777","#000"]
+    gray5: ["#ECECEC", "#DCDBDB", "#ccc", "#777", "#000"]
 };
 
 var dispatch = d3.dispatch("load", "statechange");
@@ -67,6 +67,35 @@ function d3_formatPrefix(d, i) {
 function d3_format_precision(x, p) {
     return p - (x ? Math.ceil(Math.log(x) / Math.LN10) : 1);
 }
+
+dispatch.on("load.menu", function (stateById) {
+
+    //populate the dropdowns using main csv's state names & abbreviations
+    var selecter = d3.selectAll(".stateselect")
+        .on("change", function () {
+            dispatch.statechange(stateById.get(this.value));
+        });
+
+    selecter.selectAll("option")
+        .data(stateById.values())
+        .enter().append("option")
+        .attr("value", function (d) {
+            return d.abbrev;
+        })
+        .text(function (d) {
+            return d.state;
+        });
+
+    //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
+    dispatch.on("statechange.menu", function (state) {
+        selecter.property("value", state.abbrev);
+        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
+        menu_id = state.abbrev;
+        d3.selectAll("[id='" + menu_id + "']")
+            .classed("selected", true);
+        tooltip();
+    });
+});
 
 $(window).load(function () {
     if (Modernizr.svg) { // if svg is supported, draw dynamic chart

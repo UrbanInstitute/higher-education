@@ -149,63 +149,34 @@ function drawgraphs() {
 
 }
 
-dispatch.on("load.menu", function (stateById) {
-
-    //pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
-    function tooltip() {
-        data = data_main;
-        var row = data.filter(function (d) {
-            return d.abbrev == menu_id
-        });
+//pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
+function tooltip() {
+    data = data_main;
+    var row = data.filter(function (d) {
+        return d.abbrev == menu_id
+    });
 
 
-        function formatRank(d) {
-            if (d >= 1) {
-                return d = d + " of 50";
-            } else {
-                return "";
-            }
+    function formatRank(d) {
+        if (d >= 1) {
+            return d = d + " of 50";
+        } else {
+            return "";
         }
-
-        row.forEach(function (d) {
-            d3.selectAll(".tt-name").text(d.state);
-            //tuition
-            d3.select("#tt_t2_05").text(formatmoney(+d.t2_05));
-            d3.selectAll(".tt_t2_15").text(formatmoney(+d.t2_15));
-            d3.select("#tt_t2_0515").text(formatpct(d.t2_0515));
-            d3.select("#tt_t4_05").text(formatmoney(+d.t4_05));
-            d3.selectAll(".tt_t4_15").text(formatmoney(+d.t4_15));
-            d3.select("#tt_t4_0515").text(formatpct(+d.t4_0515));
-            d3.selectAll(".tt_t4outstate_15").text(formatmoney(+d.t4outstate_15));
-            d3.selectAll(".tt_t2_15_rank").text(formatRank(+d.t2_15_rank));
-            d3.selectAll(".tt_t4_15_rank").text(formatRank(+d.t4_15_rank));
-            d3.selectAll(".tt_t4outstate_15_rank").text(formatRank(+d.t4outstate_15_rank));
-        });
     }
 
-    //populate the dropdowns using main csv's state names & abbreviations
-    var selecter = d3.selectAll(".stateselect")
-        .on("change", function () {
-            dispatch.statechange(stateById.get(this.value));
-        });
-
-    selecter.selectAll("option")
-        .data(stateById.values())
-        .enter().append("option")
-        .attr("value", function (d) {
-            return d.abbrev;
-        })
-        .text(function (d) {
-            return d.state;
-        });
-
-    //on change of the dropdown, unselect all graph components and then select ones with id = dropdown value
-    dispatch.on("statechange.menu", function (state) {
-        selecter.property("value", state.abbrev);
-        d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
-        menu_id = state.abbrev;
-        d3.selectAll("[id='" + menu_id + "']")
-            .classed("selected", true);
-        tooltip();
+    row.forEach(function (d) {
+        d3.selectAll(".tt-name").text(d.state);
+        //tuition
+        d3.select("#tt_t2_05").text(formatmoney(+d.t2_05));
+        d3.selectAll(".tt_t2_15").text(formatmoney(+d.t2_15));
+        d3.select("#tt_t2_0515").text(formatpct(d.t2_0515));
+        d3.select("#tt_t4_05").text(formatmoney(+d.t4_05));
+        d3.selectAll(".tt_t4_15").text(formatmoney(+d.t4_15));
+        d3.select("#tt_t4_0515").text(formatpct(+d.t4_0515));
+        d3.selectAll(".tt_t4outstate_15").text(formatmoney(+d.t4outstate_15));
+        d3.selectAll(".tt_t2_15_rank").text(formatRank(+d.t2_15_rank));
+        d3.selectAll(".tt_t4_15_rank").text(formatRank(+d.t4_15_rank));
+        d3.selectAll(".tt_t4outstate_15_rank").text(formatRank(+d.t4outstate_15_rank));
     });
-});
+}
