@@ -126,10 +126,10 @@
                                 <tr>
                                     <td>2014-15:</td>
                                     <td>
-                                        <div id="tt_t2_15" class="tt-value"></div>
+                                        <div class="tt_t2_15 tt-value"></div>
                                     </td>
                                     <td>
-                                        <div id="tt_t4_15" class="tt-value"></div>
+                                        <div class="tt_t4_15 tt-value"></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -165,13 +165,16 @@
                         <div class="tt">
                             <div class="tt-name"></div>
                             Two-year in-district rank:
-                            <div id="tt_t2_15_rank" class="tt-value"></div> of 50
+                            <div class="tt_t2_15_rank tt-value"></div> (
+                            <div class="tt_t2_15 tt-value"></div>)
                             </br>
                             Four-year in-state rank:
-                            <div id="tt_t4_15_rank" class="tt-value"></div> of 50
+                            <div class="tt_t4_15_rank tt-value"></div> (
+                            <div class="tt_t4_15 tt-value"></div>)
                             </br>
                             Four-year out-of-state rank:
-                            <div id="tt_t4outstate_15_rank" class="tt-value"></div> of 50
+                            <div class="tt_t4outstate_15_rank tt-value"></div> (
+                            <div class="tt_t4outstate_15 tt-value"></div>)
                         </div>
 
                         <div class="legendtitle">In-state 4 year tuition and fees, fall 2014</div>
@@ -184,10 +187,49 @@
                         <div id="map_tuition15" class="pairedmap"></div>
                     </div>
                 </div>
-
             </div>
+
+            <h3>Tuition and Fees Ranking, Fall 2014</h3>
+            <p>Despite similar trends over time, neither public two-year college tuition and fees nor out-of-state prices are strongly correlated with in-state tuition and fees at public four-year institutions. States with relatively high four-year in-state tuition may have relatively low two-year or out-of-state prices.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="scatterrank" class="bingraph"></div>
+                    <div id="scatterrankb" class="bingraph"></div>
+                </div>
+                <div class="col-md-4">
+                    <div id="scatterrank2" class="bingraph"></div>
+                    <div id="scatterrank2b" class="bingraph"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tt">
+                        <div class="tt-name"></div>
+                        Two-year in-district rank:
+                        <div class="tt_t2_15_rank tt-value"></div> (
+                        <div class="tt_t2_15 tt-value"></div>)
+                        </br>
+                        Four-year in-state rank:
+                        <div class="tt_t4_15_rank tt-value"></div> (
+                        <div class="tt_t4_15 tt-value"></div>)
+                        </br>
+                        Four-year out-of-state rank:
+                        <div class="tt_t4outstate_15_rank tt-value"></div> (
+                        <div class="tt_t4outstate_15 tt-value"></div>)
+                    </div>
+
+                    <div class="legendtitle">In-state 4 year tuition and fees, fall 2014</div>
+                    <div id="legend_tuition152"></div>
+
+                    <div class="styled-select">
+                        <select class="stateselect">
+                        </select>
+                    </div>
+                    <div id="map_tuition152" class="pairedmap"></div>
+                </div>
+            </div>
+
         </div>
     </div>
+
 
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>

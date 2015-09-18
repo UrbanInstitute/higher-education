@@ -109,7 +109,6 @@ function linechart(div, id) {
 
     var yAxis = d3.svg.axis()
         .scale(y)
-        //.tickSize(-width)
         .outerTickSize(0)
         .tickFormat(FORMATTER)
         .orient("left");
@@ -117,15 +116,6 @@ function linechart(div, id) {
     var gy = svg.append("g")
         .attr("class", "y axis-show")
         .call(yAxis);
-
-    //    gy.selectAll("g").filter(function (d) {
-    //            return d;
-    //        })
-    //        .classed("minor", true);
-
-    //    gy.selectAll("text")
-    //        .attr("x", -4)
-    //        .attr("dy", 4);
 
     data_nest = d3.nest().key(function (d) {
         return d.abbrev;
