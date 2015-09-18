@@ -9,90 +9,70 @@
 
     <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="css/header.css">
     <link rel="stylesheet" type="text/css" href="css/urban-text.css">
+    <link rel="stylesheet" type="text/css" href="css/urban-header.css">
+    <link rel="stylesheet" type="text/css" href="css/landing-page.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/urban-selects.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 
 <body>
-    <!--nav bar-->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobsocials">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div id="logo">
-                    <a href="http://www.urban.org">
-                        <img src="img/logo-03.png" alt="The Urban Institute" />
-                    </a>
-                </div>
-                <div id="navTitle" class="clickable f1">
-                    <!--a class="navDC" id="titleLink" href="http://www.urban.org/features/our-changing-city-collection" target="_blank">WASHINGTON, DC:</br></a-->
-                    <a class="navOCC" id="titleLink" href="http://www.urban.org/features/our-changing-city-collection" target="_blank">Higher Education Explorer</a> :: Tuition
-                </div>
-            </div>
-            <!--previous chapters-->
-            <div id="previousChapters">
-                <a href="enrollment.html">
-                    <button class="urban-button">Enrollment</button>
-                </a>
-                <a href="funding.html">
-                    <button class="urban-button">Funding</button>
-                </a>
-            </div>
 
-            <!--share icons for desktop-->
-            <div id="share">
-                <div id="shareMaster">
-                    <div id="shareCircle" class="circle">
-                        <i class="fa fa-share"></i>
+    <!--    header-->
+
+
+    <div id="header-pinned" class="no-touch">
+        <div class="content">
+            <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
+            <div class="title"><a href="http://www.urban.org/features" class="title-linkback">Features</a> <span>: :</span> State Higher Education Explorer</div>
+            <div class="share-icons">
+                <div class="shareThisP">
+                    <span onclick="toggle_visibility('shareBox');">
+                            <div class="shareThisB"></div>
+                        </span>
+                    <div class="shareThisW" id="shareBox">
+
+
+
+
+                        <div class="addthis_toolbox addthis_default_style  " addthis:title="" addthis:url="">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=http://urbn.is/massincarceration" target="_blank" class="addthis_button_facebook at300b" title="Facebook" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-facebook" style="background-color: rgb(48, 88, 145);"><span class="at_a11y">Share on facebook</span></span></a>
+
+                            <a href="http://twitter.com/intent/tweet?text=Interactive%20tool%20from%20%40urbaninstitute%3A%20Explore%20how%20policy%20changes%20could%20affect%20the%20US%20prison%20population%20http%3A%2F%2Furbn.is%2Fmassincarceration%20%23prisonreform" target="_blank" class="addthis_button_twitter at300b" title="Tweet" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-twitter" style="background-color: rgb(44, 168, 210);"><span class="at_a11y">Share on twitter</span></span></a>
+
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://urbn.is/massincarceration&title=Reducing%20Mass%20Incarceration%20Requires%20Far-Reaching%20Reforms&summary=A%20new%20Urban%20Institute%20tool%20lets%20you%20explore%20how%20potential%20policy%20changes%20could%20affect%20the%20US%20prison%20population.&source=Urban%20Institute" target="_blank" class="addthis_button_linkedin at300b" target="_blank" title="LinkedIn" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-linkedin" style="background-color: rgb(68, 152, 200);"><span class="at_a11y">Share on linkedin</span></span></a>
+
+                            <a href="mailto:%20?Subject= New interactive tool from the Urban Institute &amp;Body=Hi! I thought you'd be interested in this new interactive tool from the Urban Institute: “Reducing Mass Incarceration Requires Far-Reaching Reforms.” http://urbn.is/massincarceration" target="_blank" class="addthis_button_email at300b" target="_blank" title="Email" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-email" style="background-color: rgb(115, 138, 141);"><span class="at_a11y">Share on email</span></span></a>
+                            <div class="atclear"></div>
+                        </div>
+
                     </div>
                 </div>
-                <div id="socials">
-                    <a href="http://twitter.com/intent/tweet?text=%23DC%20residents%3A%20Crime%20%26%20public%20safety%20in%20your%20neighborhood%2C%20then%20%26%20now%20http%3A%2F%2Furbn.is%2Fdcsafety%20(via%20%40urbaninstitute)" target="_blank">
-                        <div id="twitter" class="circle">
-                            <i class="fa fa-twitter"></i>
-                        </div>
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://urbn.is/dcsafety" target="_blank">
-                        <div id="facebook" class="circle">
-                            <i class="fa fa-facebook"></i>
-                        </div>
-                    </a>
-                    <a href="mailto:%20?Subject= New interactive feature from the Urban Institute &amp;Body=Hi! I thought you'd be interested in the latest chapter of Urban Institute’s “Washington, DC: Our Changing City” series: http://urbn.is/dcsafety" target="_blank">
-                        <div id="email" class="circle">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                    </a>
-                </div>
             </div>
-
-            <!--share icons = hamburger on mobile, different classes-->
-            <div class="collapse navbar-collapse" div id="mobsocials">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a class="social" target="_blank" href="http://twitter.com/intent/tweet?text=%23DC%20residents%3A%20Crime%20%26%20public%20safety%20in%20your%20neighborhood%2C%20then%20%26%20now%20http%3A%2F%2Furbn.is%2Fdcsafety%20(via%20%40urbaninstitute)"><i class="circle fa fa-twitter"></i></a>
-                    </li>
-                    <li><a class="social" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://urbn.is/dcsafety"><i class="fa fa-facebook circle"></i></a>
-                    </li>
-                    <li><a class="social" target="_blank" href="mailto:%20?Subject= New interactive feature from the Urban Institute &amp;Body=Hi! I thought you'd be interested in the latest chapter of Urban Institute’s “Washington, DC: Our Changing City” series: http://urbn.is/dcsafety"><i class="fa fa-envelope circle"></i></a>
-                    </li>
-            </div>
-
         </div>
-    </nav>
+        <!-- end content -->
+        <div class="header-links">
+            <ul>
+                <a href="tuition.html">
+                    <li class="active">TUITION</li>
+                </a>
+                <a href="enrollment.html">
+                    <li>ENROLLMENT</li>
+                </a>
+                <a href="funding.html">
+                    <li>FUNDING</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <!--    end header-->
 
-
-    <div id="mainSection" class="container">
+    <div class="container mainSection">
         <div class="row">
             <div class="col-lg-12">
 
-                <h2>Tuition and Fees</h2>
+                <h1>Tuition and Fees</h1>
                 <p>Both tuition and fee levels at public colleges and universities and their growth over time vary considerably across states. Differences in state funding levels explain much of the variation in prices, but other factors also contribute. Differences in income levels, cost-of-living, and state financial aid programs affect the relationship between tuition levels and college affordability.</p>
 
 

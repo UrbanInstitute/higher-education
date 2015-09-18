@@ -2,20 +2,27 @@
     background-color: #000;
     color: #fff;
 }
-
 /*body{height: 100%;}
 html{height: 100%;}*/
+
 .main-content {
     position: relative;
     margin-top: 150px;
     margin-bottom: 300px;
 }
+/*Section pages content*/
+
+.mainSection {
+    margin-top: 100px;
+}
+
 #header-pinned {
     top: 0px;
 }
-#background-image {
 
+#background-image {
     /*top: 50px;*/
+    
     position: absolute;
     bottom: 0px;
     height: 100%;
@@ -25,6 +32,7 @@ html{height: 100%;}*/
     background-image: url(../img/background.jpg);
     background-size: cover;
 }
+
 .intro {
     color: #fff;
     background-color: black;
@@ -38,46 +46,57 @@ html{height: 100%;}*/
     margin-right: -10px !important;
     margin-bottom: 10px;
 }
+
 .logo {
     float: left;
 }
+
 .navbar-nav {
     float: right !important;
 }
+
 .intro-desc {
     font-size: 1.3em;
     margin-bottom: 25px;
 }
+
 #title {
     font-size: 3.5em;
     font-weight: 100;
 }
+
 .content-block {
     padding: 5px !important;
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
-.blackout{
-    background-color: rgba(0,0,0,0.5);
+
+.blackout {
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
 }
+
 .block {
     background-color: blue;
     height: 250px;
 }
-.tuition{
+
+.tuition {
     background-image: url(../img/shutterstock_245846.jpg);
     background-size: cover;
 }
-.enrollment{
+
+.enrollment {
     background-image: url(../img/shutterstock_296315051.jpg);
     background-size: cover;
 }
-.funding{
+
+.funding {
     background-image: url(../img/shutterstock_96797782.jpg);
     background-size: cover;
 }
+
 .chapter {
     background: none;
     border: 1px solid #fff;
@@ -87,25 +106,31 @@ html{height: 100%;}*/
     padding-right: 15px !important;
     margin-top: 15px;
 }
-.block:hover > .blackout{
+
+.block:hover > .blackout {
     opacity: 0;
 }
-.content-block a{
+
+.content-block a {
     cursor: pointer;
 }
+
 .research-btns {
     margin-top: 50px;
 }
+
 .research {
     background-color: #1696d2;
     border: none;
     padding: 10px;
     margin-top: 10px;
 }
+
 .research:hover {
     background-color: #000;
     color: #fff;
 }
+
 .chapter-btn {
     background-color: #fff;
     padding-left: 4px;
@@ -116,19 +141,24 @@ html{height: 100%;}*/
     bottom: 0px;
     left: 0px;
 }
+
 .about-btn {
     background: none;
     border: 1px solid #fff;
     border-radius: 0px !important;
     margin-top: 50px;
 }
+
 footer {
     background-color: #000;
     bottom: 0px;
-    height: 50px;    /*position: absolute;*/
+    height: 50px;
+    /*position: absolute;*/
+    
     width: 100%;
 }
-@media (max-width:600px) {
+
+@media (max-width: 600px) {
     #title {
         font-size: 2em;
     }
