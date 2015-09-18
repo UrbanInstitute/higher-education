@@ -145,9 +145,15 @@ function legend(div) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var lp_w = 0,
-        ls_w = (width / COLORS.length),
-        ls_h = 15;
+    if ($LEGENDDIV.width() < 500) {
+        var lp_w = 0,
+            ls_w = (width / COLORS.length),
+            ls_h = 15;
+    } else {
+        var lp_w = 0,
+            ls_w = 60,
+            ls_h = 15;
+    }
 
     var legend = svg.selectAll("g.legend")
         .data(COLORS)
