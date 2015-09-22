@@ -19,8 +19,12 @@ function slopechart(div, id) {
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
         isMobile = true;
+        margin.left = 30;
+        margin.right = 30;
+        slope_chart_aspect_height = 1.1;
     } else {
         isMobile = false;
+        slopechart_aspect_height = 0.9;
     }
 
     if (isMobile) {}

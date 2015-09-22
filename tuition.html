@@ -25,7 +25,8 @@
     <div id="header-pinned" class="no-touch">
         <div class="content">
             <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
-            <div class="title"><a href="http://www.urban.org/features" class="title-linkback">Features</a> <span>: :</span> <a href="index.html" class="title-linkback">State Higher Education Explorer</a></div>
+            <div class="title"><a href="http://www.urban.org/features" class="title-linkback">Features</a> <span>: :</span> <a href="index.html" class="title-linkback">State Higher Education Explorer</a>
+            </div>
             <div class="share-icons">
                 <div class="shareThisP">
                     <span onclick="toggle_visibility('shareBox');">
@@ -79,13 +80,7 @@
                 <h3>Tuition and Fees for Two-Year In-District and Four-Year In-State Institutions over Time in 2015 Dollars</h3>
                 <p>In all states, in-state four year tuition and fees have risen in constant dollars since 2004-05. Public four-year tuition and fees are higher than two-year tuition and fees in every state. Two-year tuition and fees have actually declined in real terms in some states since 2009-10, however, and two-year prices in some states exceed four-year prices in other states.</p>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div id="tuition2year" class="bingraph"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div id="tuition4year" class="bingraph"></div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-md-push-8">
                         <div class="tt">
                             <div class="tt-name"></div>
                             <table>
@@ -133,15 +128,21 @@
                         </div>
                         <div id="map_tuitiontime" class="pairedmap"></div>
                     </div>
+
+                    <div class="col-md-4 col-md-pull-4">
+                        <div id="tuition2year" class="bingraph"></div>
+                    </div>
+                    <div class="col-md-4 col-md-pull-4">
+                        <div id="tuition4year" class="bingraph"></div>
+                    </div>
+
                 </div>
 
                 <h3>Tuition and Fees Ranking, Fall 2014</h3>
                 <p>Despite similar trends over time, neither public two-year college tuition and fees nor out-of-state prices are strongly correlated with in-state tuition and fees at public four-year institutions. States with relatively high four-year in-state tuition may have relatively low two-year or out-of-state prices.</p>
                 <div class="row">
-                    <div class="col-md-8">
-                        <div id="tuitionrank" class="bingraph"></div>
-                    </div>
-                    <div class="col-md-4">
+
+                    <div class="col-md-4 col-md-push-8">
                         <div class="tt">
                             <div class="tt-name"></div>
                             Two-year in-district rank:
@@ -166,21 +167,18 @@
                         </div>
                         <div id="map_tuition15" class="pairedmap"></div>
                     </div>
+
+                    <div class="col-md-8 col-md-pull-4">
+                        <div id="tuitionrank" class="bingraph"></div>
+                    </div>
+
                 </div>
             </div>
 
             <h3>Tuition and Fees Ranking, Fall 2014</h3>
             <p>Despite similar trends over time, neither public two-year college tuition and fees nor out-of-state prices are strongly correlated with in-state tuition and fees at public four-year institutions. States with relatively high four-year in-state tuition may have relatively low two-year or out-of-state prices.</p>
             <div class="row">
-                <div class="col-md-4">
-                    <div id="scatterrank" class="bingraph"></div>
-                    <div id="scatterrankb" class="bingraph"></div>
-                </div>
-                <div class="col-md-4">
-                    <div id="scatterrank2" class="bingraph"></div>
-                    <div id="scatterrank2b" class="bingraph"></div>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-md-push-8">
                     <div class="tt">
                         <div class="tt-name"></div>
                         Two-year in-district rank:
@@ -205,6 +203,16 @@
                     </div>
                     <div id="map_tuition152" class="pairedmap"></div>
                 </div>
+
+                <div class="col-md-4 col-md-pull-4">
+                    <div id="scatterrank" class="bingraph"></div>
+                    <div id="scatterrankb" class="bingraph"></div>
+                </div>
+                <div class="col-md-4 col-md-pull-4">
+                    <div id="scatterrank2" class="bingraph"></div>
+                    <div id="scatterrank2b" class="bingraph"></div>
+                </div>
+
             </div>
 
         </div>
