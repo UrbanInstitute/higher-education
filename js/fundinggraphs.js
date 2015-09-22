@@ -1,7 +1,11 @@
+var LABELS1,
+    LABELS2;
 function fundingchart() {
     $GRAPHDIV = $("#funding_slope");
     VAL = ["approp_percap15", "fundingperthousinc"];
     LABELS = ["Funding per FTE student", "Funding per $1,000 in personal income"];
+    LABELS1 = ["Funding per", "Funding per"];
+    LABELS2 = ["FTE student", "$1,000 in personal income"];
     COLORS = palette.blue5;
     BREAKS = [6000, 7000, 8000, 9000]
     FORMATTER = formatmoney;
@@ -27,7 +31,7 @@ function grantaid1() {
     $GRAPHDIV = $("#grantaid1");
     FORMATTER = formatpct;
     VAL = "grants_needbased";
-    splitchart_aspect_height = 1.9;
+    height_multiplier = 1;
     isMobile = false;
     splitchart("#grantaid1");
 }
@@ -36,7 +40,7 @@ function grantaid2() {
     $GRAPHDIV = $("#grantaid2");
     FORMATTER = formatpct;
     VAL = "grants_nonneedbased";
-    splitchart_aspect_height = 1.9 * (16 / 34);
+    height_multiplier = 16/34;
     isMobile = false;
     splitchart("#grantaid2");
 }

@@ -1,6 +1,6 @@
 //acts as if the left (need-based) is a negative value for construction purposes
 var splitchart_aspect_width = 1;
-var splitchart_aspect_height;
+    splitchart_aspect_height = 1.9;
 
 function splitchart(div, id) {
 
@@ -17,17 +17,20 @@ function splitchart(div, id) {
         left: 85
     };
 
-    if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
+    if ($GRAPHDIV.width() <= 350) {
         isMobile = true;
+        splitchart_aspect_height = 2.2;
+
     } else {
         isMobile = false;
+        splitchart_aspect_height = 1.9;
+
     }
 
     if (isMobile) {}
 
     var width = $GRAPHDIV.width() - margin.left - margin.right,
-        height = Math.ceil((width * splitchart_aspect_height) / splitchart_aspect_width) - margin.top - margin.bottom,
-        padding = 30;
+        height = Math.ceil((width * splitchart_aspect_height * height_multiplier) / splitchart_aspect_width) - margin.top - margin.bottom;
 
     $GRAPHDIV.empty();
 

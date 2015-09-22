@@ -19,15 +19,23 @@ function slopechart(div, id) {
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
         isMobile = true;
-        margin.left = 30;
-        margin.right = 30;
-        slope_chart_aspect_height = 1.1;
+            slopechart_aspect_height = 1.5;
+        var margin = {
+            top: 65,
+            right: 30,
+            bottom: 15,
+            left: 60
+        };
     } else {
         isMobile = false;
         slopechart_aspect_height = 0.9;
+        var margin = {
+            top: 35,
+            right: 120,
+            bottom: 15,
+            left: 120
+        };
     }
-
-    if (isMobile) {}
 
     var width = $GRAPHDIV.width() - margin.left - margin.right,
         height = Math.ceil((width * slopechart_aspect_height) / slopechart_aspect_width) - margin.top - margin.bottom;
@@ -71,21 +79,52 @@ function slopechart(div, id) {
         .attr("transform", "translate(" + width + " ,0)")
         .call(yAxis2);
 
-    var legend = svg.selectAll("g.legend")
-        .data(LABELS)
-        .enter().append("g")
-        .attr("class", "slope-label");
+    if (isMobile) {
+        var legend = svg.selectAll("g.legend")
+            .data(LABELS1)
+            .enter().append("g")
+            .attr("class", "slope-label");
 
-    legend.append("text")
-        .data(LABELS)
-        .attr("x", function (d, i) {
-            return (i * width);
-        })
-        .attr("y", -15)
-        .attr("text-anchor", "middle")
-        .text(function (d, i) {
-            return d;
-        });
+        legend.append("text")
+            .data(LABELS1)
+            .attr("x", function (d, i) {
+                return (i * width) + 20;
+            })
+            .attr("y", -35)
+            .attr("text-anchor", "end")
+            .text(function (d, i) {
+                return d;
+            });
+
+        legend.append("text")
+            .data(LABELS2)
+            .attr("x", function (d, i) {
+                return (i * width) + 20;
+            })
+            .attr("y", -15)
+            .attr("text-anchor", "end")
+            .text(function (d, i) {
+                return d;
+            });
+
+    } else {
+        var legend = svg.selectAll("g.legend")
+            .data(LABELS)
+            .enter().append("g")
+            .attr("class", "slope-label");
+
+        legend.append("text")
+            .data(LABELS)
+            .attr("x", function (d, i) {
+                return (i * width);
+            })
+            .attr("y", -15)
+            .attr("text-anchor", "middle")
+            .text(function (d, i) {
+                return d;
+            });
+    }
+
 
     var lines = svg.selectAll(".state")
         .data(data)
@@ -341,7 +380,7 @@ function slopechart3(div, id) {
     var yearf = d3.format("02d");
 
     function formatYear(d) {
-        return (d-1) +"-" + yearf(d-2000);
+        return (d - 1) + "-" + yearf(d - 2000);
     }
 
     var xAxis = d3.svg.axis()
@@ -371,7 +410,7 @@ function slopechart3(div, id) {
     svg.append("text")
         .attr("class", "slope-label")
         .attr("text-anchor", "middle")
-        .attr("x", width/2)
+        .attr("x", width / 2)
         .attr("y", -15)
         .text(LABELS);
 

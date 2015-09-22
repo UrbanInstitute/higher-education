@@ -16,7 +16,8 @@ var FORMATTER,
     BREAKS,
     LABELS,
     stateSelect,
-    MAINMAP = 0;
+    MAINMAP = 0,
+    height_multiplier;
 
 var formatpct = d3.format("%");
 var formatnum = d3.format(",.0f");
