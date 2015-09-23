@@ -66,7 +66,7 @@ function d3_format_precision(x, p) {
     return p - (x ? Math.ceil(Math.log(x) / Math.LN10) : 1);
 }
 
-var dispatch = d3.dispatch("load", "statechange", "hoverState", "dehoverState");
+var dispatch = d3.dispatch("load", "statechange", "hoverState", "dehoverState", "clickState");
 var menuId;
 var selecter = d3.selectAll(".stateselect")
 
@@ -97,6 +97,16 @@ dispatch.on("statechange.menu", function (statebyId) {
         .classed("selected", true);
     tooltip(menuId);
 });
+
+//select a state by clicking on the graph/map element. change tooltip and dropdowns too
+dispatch.on("clickState", function (statebyId) {
+    selecter.property("value", statebyId);
+    d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
+    d3.selectAll("[id='" + statebyId + "']")
+        .classed("selected", true);
+    tooltip(statebyId);
+});
+
 
 //on hover, class those states "hovered" (turn em pink) and change the tooltip
 dispatch.on("hoverState", function (statebyId) {

@@ -121,6 +121,9 @@ function map(div, id) {
                     return color(d.properties[VAL]);
                 }
             })
+            .on("click", function (d) {
+                dispatch.clickState(this.id);
+            })
             .on("mouseover", function (d) {
                 dispatch.hoverState(this.id);
             })
