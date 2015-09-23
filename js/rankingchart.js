@@ -136,9 +136,8 @@ function rankingchart(div, id) {
 
 function scatterplot(div, id) {
 
-    data = data_main.filter(function (d) {
-        return d.abbrev != "US";
-    });
+    data = data_main;
+    
     data.forEach(function (d) {
         d[VAL[0]] = +d[VAL[0]];
         d[VAL[1]] = +d[VAL[1]];
@@ -239,6 +238,13 @@ function scatterplot(div, id) {
         })
         .attr("cy", function (d) {
             return y(d[VAL[1]]);
+        })
+        .attr("fill", function (d) {
+            if (d.abbrev == "US") {
+                return "#000";
+            } else {
+                return "#ccc";
+            }
         })
         .on("mouseover", function (d) {
             dispatch.hoverState(this.id);

@@ -128,11 +128,6 @@ th {
     fill: #666;
     font-size: 12px;
 }
-/*scatterplot*/
-
-.scatterdot {
-    fill: #ccc;
-}
 
 .splitbar.selected,
 .bar.selected,

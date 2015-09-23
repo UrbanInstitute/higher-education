@@ -91,8 +91,6 @@ function scatterrank() {
     VAL = ["t4_15", "t2_15"];
     FORMATTER = d3.format("$2s");
     LABELS = ["Four-year in-state", "Two-year in-district"];
-    //VAL = ["t4_15_rank", "t2_15_rank"];
-    //FORMATTER = formatnum;
     scatterplot("#scatterrank");
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]
@@ -113,14 +111,6 @@ function scatterrank() {
     maplegend();
 }
 
-/*function scatterrankb() {
-    $GRAPHDIV = $("#scatterrankb");
-    LABELS = ["Four-year in-state", "Two-year in-district"];
-    VAL = ["t4_15_rank", "t2_15_rank"];
-    FORMATTER = formatnum;
-    scatterplot("#scatterrankb");
-}*/
-
 function scatterrank2() {
     $GRAPHDIV = $("#scatterrank2");
     VAL = ["t4_15", "t4outstate_15"];
@@ -128,14 +118,6 @@ function scatterrank2() {
     LABELS = ["Four-year in-state", "Four-year out-of-state"];
     scatterplot("#scatterrank2");
 }
-
-/*function scatterrank2b() {
-    $GRAPHDIV = $("#scatterrank2b");
-    LABELS = ["Four-year in-state", "Four-year out-of-state"];
-    VAL = ["t4_15_rank", "t4outstate_15_rank"];
-    FORMATTER = formatnum;
-    scatterplot("#scatterrank2b");
-}*/
 
 function drawgraphs() {
     tuitiontime();
