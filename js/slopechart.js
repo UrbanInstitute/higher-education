@@ -19,7 +19,7 @@ function slopechart(div, id) {
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
         isMobile = true;
-            slopechart_aspect_height = 1.5;
+        slopechart_aspect_height = 1.5;
         var margin = {
             top: 65,
             right: 30,
@@ -152,6 +152,9 @@ function slopechart(div, id) {
                 return "#ccc";
             }
         })
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
+        })
         .on("mouseover", function (d) {
             dispatch.hoverState(this.id);
         })
@@ -161,7 +164,7 @@ function slopechart(div, id) {
 }
 
 //slope chart for 3 ranked tuition values
-function rankchart(div, id) {
+/*function rankchart(div, id) {
 
     data = data_main.filter(function (d) {
         return d.abbrev != "US";
@@ -314,13 +317,16 @@ function rankchart(div, id) {
                 return "#ccc";
             }
         })
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
+        })
         .on("mouseover", function (d) {
             dispatch.hoverState(this.id);
         })
         .on("mouseout", function (d) {
             dispatch.dehoverState(this.id);
         });;
-}
+}*/
 
 //this is really a line chart in disguise
 function slopechart3(div, id) {
@@ -447,6 +453,9 @@ function slopechart3(div, id) {
             } else {
                 return "#ccc";
             }
+        })
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
         })
         .on("mouseover", function (d) {
             dispatch.hoverState(this.id);

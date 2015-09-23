@@ -125,6 +125,9 @@ function rankingchart(div, id) {
             .text(function (d, i) {
                 return d.state;
             })
+            .on("click", function (d) {
+                dispatch.clickState(this.id);
+            })
             .on("mouseover", function (d) {
                 dispatch.hoverState(this.id);
             })
@@ -137,7 +140,7 @@ function rankingchart(div, id) {
 function scatterplot(div, id) {
 
     data = data_main;
-    
+
     data.forEach(function (d) {
         d[VAL[0]] = +d[VAL[0]];
         d[VAL[1]] = +d[VAL[1]];
@@ -167,22 +170,14 @@ function scatterplot(div, id) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-/*    var max0 = d3.max(data, function (d) {
-        return d[VAL[0]];
-    });
-    var max1 = d3.max(data, function (d) {
-        return d[VAL[1]];
-    });
-    var maxmax = d3.max([max0, max1]);*/
-
     var y = d3.scale.linear()
-        .domain([0,d3.max(data, function (d) {
+        .domain([0, d3.max(data, function (d) {
             return d.t4outstate_15;
         })])
         .range([height, 0]);
 
     var x = d3.scale.linear()
-        .domain([0,d3.max(data, function (d) {
+        .domain([0, d3.max(data, function (d) {
             return d[VAL[0]];
         })])
         .range([0, width]);
@@ -245,6 +240,9 @@ function scatterplot(div, id) {
             } else {
                 return "#ccc";
             }
+        })
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
         })
         .on("mouseover", function (d) {
             dispatch.hoverState(this.id);

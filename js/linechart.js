@@ -150,6 +150,9 @@ function linechart(div, id) {
                 return "#ccc";
             }
         })
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
+        })
         .on("mouseover", function (d) {
             dispatch.hoverState(this.id);
         })

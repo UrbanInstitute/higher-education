@@ -1,6 +1,6 @@
 //acts as if the left (need-based) is a negative value for construction purposes
 var splitchart_aspect_width = 1;
-    splitchart_aspect_height = 1.9;
+splitchart_aspect_height = 1.9;
 
 function splitchart(div, id) {
 
@@ -88,14 +88,14 @@ function splitchart(div, id) {
         .data([-534, 173])
         .enter().append("g");
 
-/*    usline.append("text")
-        .attr("class", "legend")
-        .attr("y", height + 15)
-        .attr("x", function (d) {
-            return x(d);
-        })
-        .attr("text-anchor", "middle")
-        .text("US");*/
+    /*    usline.append("text")
+            .attr("class", "legend")
+            .attr("y", height + 15)
+            .attr("x", function (d) {
+                return x(d);
+            })
+            .attr("text-anchor", "middle")
+            .text("US");*/
 
     usline.append("line")
         .data([-534, 173])
@@ -154,6 +154,9 @@ function splitchart(div, id) {
             return y(d.state);
         })
         .attr("height", y.rangeBand())
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
+        })
         .on("mouseover", function (d) {
             dispatch.hoverState(this.id);
         })

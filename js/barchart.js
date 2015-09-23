@@ -57,7 +57,7 @@ function barchart(div, id) {
             .scale(x)
             .tickSize(height)
             .tickFormat(FORMATTER)
-            .ticks(numticks/2)
+            .ticks(numticks / 2)
             .orient("top");
 
         var gy = svg.append("g")
@@ -121,6 +121,9 @@ function barchart(div, id) {
                 return y(d.abbrev);
             })
             .attr("height", y.rangeBand())
+            .on("click", function (d) {
+                dispatch.clickState(this.id);
+            })
             .on("mouseover", function (d) {
                 dispatch.hoverState(this.id);
             })
@@ -246,6 +249,9 @@ function barchart(div, id) {
             })
             .attr("height", function (d) {
                 return Math.abs(y(0) - (y(d[VAL])));
+            })
+            .on("click", function (d) {
+                dispatch.clickState(this.id);
             })
             .on("mouseover", function (d) {
                 dispatch.hoverState(this.id);
