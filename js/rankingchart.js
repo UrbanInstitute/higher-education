@@ -1,5 +1,6 @@
 var ranking_aspect_width = 1;
 var ranking_aspect_height = 1.1;
+var scatterplot_aspect_height = 2;
 
 function rankingchart(div, id) {
 
@@ -139,14 +140,15 @@ function scatterplot(div, id) {
         return d.abbrev != "US";
     });
     data.forEach(function (d) {
-        d[VAL[0]] = +d[VAL[0]]
-        d[VAL[1]] = +d[VAL[1]]
+        d[VAL[0]] = +d[VAL[0]];
+        d[VAL[1]] = +d[VAL[1]];
+        d.t4outstate_15 = +d.t4outstate_15;
     });
     var margin = {
         top: 20,
-        right: 15,
+        right: 10,
         bottom: 50,
-        left: 55
+        left: 70
     };
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
@@ -156,8 +158,7 @@ function scatterplot(div, id) {
     }
 
     var width = $GRAPHDIV.width() - margin.left - margin.right,
-        height = Math.ceil((width * 1) / 1) - margin.top - margin.bottom,
-        padding = 30;
+        height = Math.ceil((width * scatterplot_aspect_height) / ranking_aspect_width) - margin.top - margin.bottom;
 
     $GRAPHDIV.empty();
 
@@ -167,16 +168,24 @@ function scatterplot(div, id) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+/*    var max0 = d3.max(data, function (d) {
+        return d[VAL[0]];
+    });
+    var max1 = d3.max(data, function (d) {
+        return d[VAL[1]];
+    });
+    var maxmax = d3.max([max0, max1]);*/
+
     var y = d3.scale.linear()
-        .domain(d3.extent(data, function (d) {
-            return d[VAL[1]];
-        }))
+        .domain([0,d3.max(data, function (d) {
+            return d.t4outstate_15;
+        })])
         .range([height, 0]);
 
     var x = d3.scale.linear()
-        .domain(d3.extent(data, function (d) {
+        .domain([0,d3.max(data, function (d) {
             return d[VAL[0]];
-        }))
+        })])
         .range([0, width]);
 
     var xAxis = d3.svg.axis()
@@ -184,7 +193,7 @@ function scatterplot(div, id) {
         .outerTickSize(0)
         .tickFormat(FORMATTER)
         .orient("bottom")
-        .ticks(5);
+        .ticks(6);
 
     var gx = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -196,7 +205,7 @@ function scatterplot(div, id) {
         .outerTickSize(0)
         .tickFormat(FORMATTER)
         .orient("left")
-        .ticks(5);
+        .ticks(6);
 
     var gy = svg.append("g")
         .attr("class", "y axis-show")
@@ -206,14 +215,14 @@ function scatterplot(div, id) {
         .attr("class", "legend")
         .attr("text-anchor", "middle")
         .attr("x", width / 2)
-        .attr("y", height + 30)
+        .attr("y", height + 35)
         .text(LABELS[0]);
 
     svg.append("text")
         .attr("class", "legend")
         .attr("text-anchor", "middle")
         .attr("transform", function (d) {
-            return "translate(" + -45 + "," + (height / 2) + ") rotate(-90)";
+            return "translate(" + -55 + "," + (height / 2) + ") rotate(-90)";
         })
         .text(LABELS[1]);
 

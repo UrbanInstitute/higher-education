@@ -113,13 +113,13 @@ function scatterrank() {
     maplegend();
 }
 
-function scatterrankb() {
+/*function scatterrankb() {
     $GRAPHDIV = $("#scatterrankb");
     LABELS = ["Four-year in-state", "Two-year in-district"];
     VAL = ["t4_15_rank", "t2_15_rank"];
     FORMATTER = formatnum;
     scatterplot("#scatterrankb");
-}
+}*/
 
 function scatterrank2() {
     $GRAPHDIV = $("#scatterrank2");
@@ -129,21 +129,19 @@ function scatterrank2() {
     scatterplot("#scatterrank2");
 }
 
-function scatterrank2b() {
+/*function scatterrank2b() {
     $GRAPHDIV = $("#scatterrank2b");
     LABELS = ["Four-year in-state", "Four-year out-of-state"];
     VAL = ["t4_15_rank", "t4outstate_15_rank"];
     FORMATTER = formatnum;
     scatterplot("#scatterrank2b");
-}
+}*/
 
 function drawgraphs() {
     tuitiontime();
     tuition15();
     scatterrank();
     scatterrank2();
-    scatterrankb();
-    scatterrank2b();
     d3.selectAll("[id='US']")
         .classed("selected", true);
 
