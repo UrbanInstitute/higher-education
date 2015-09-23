@@ -23,9 +23,15 @@
     display: inline-block;
 }
 
-.tt-name {
+.tt-name,
+.tt-title {
     font-size: 20px;
     margin-bottom: 4px;
+}
+
+.tt-name.tt-value {
+    display: inline-block;
+    font-size: 14px;
 }
 
 table {

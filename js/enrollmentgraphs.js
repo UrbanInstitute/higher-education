@@ -29,7 +29,7 @@ function map_instate() {
     COLORS = palette.blue5;
     BREAKS = [0.6, 0.7, 0.8, 0.9];
     isMobile = false;
-    MAINMAP = 1;
+    MAINMAP = 0;
     map("#map_instate");
 
     function maplegend() {
@@ -46,7 +46,7 @@ function map_outstate() {
     COLORS = palette.yellow5;
     BREAKS = [0.1, 0.2, 0.3, 0.4];
     isMobile = false;
-    MAINMAP = 1;
+    MAINMAP = 0;
     map("#map_outstate");
 
     function maplegend() {
@@ -107,6 +107,8 @@ function tooltip(state) {
     row.forEach(function (d) {
         d3.selectAll(".tt-name").text(d.state);
         d3.select("#tt_ftepubin2year").text(formatpct(+d.ftepubin2year));
+        d3.select("#tt_res_pct_instate").text(formatpct(+d.res_pct_instate));
+        d3.select("#tt_state_pct_outstate").text(formatpct(+d.state_pct_outstate));
         d3.select("#tt_enroll14").text(formatnum(+d.enroll_14));
         d3.select("#tt_enroll0114").text(formatpct(+d.enroll0114));
     });
