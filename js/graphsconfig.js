@@ -130,6 +130,8 @@ dispatch.on("dehoverState", function (statebyId) {
     d3.selectAll("[id='" + statebyId + "']").classed("hovered", false);
     menuId = selecter.property("value");
     tooltip(menuId);
+    d3.selectAll("[id='" + menuId + "']")
+        .moveToFront();
 });
 
 $(window).load(function () {
