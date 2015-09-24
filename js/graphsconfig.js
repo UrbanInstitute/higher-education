@@ -73,6 +73,7 @@ var selecter = d3.selectAll(".stateselect")
 d3.selection.prototype.moveToFront = function () {
     return this.each(function () {
         this.parentNode.appendChild(this);
+        this.parentNode.parentNode.appendChild(this.parentNode);
     });
 };
 

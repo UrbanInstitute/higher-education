@@ -188,16 +188,10 @@ th {
     cursor: pointer;
 }
 
-.boundary:hover {
-    stroke: #ec008b;
-    stroke-width: 3px;
-    z-index: 1000;
-}
-
 .boundary_paired.selected,
 .boundary_paired.hovered {
     stroke: #ec008b;
-    stroke-width: 3px;
+    stroke-width: 2px;
     z-index: 1000;
 }
 /*label for bin chart state abbreviation*/

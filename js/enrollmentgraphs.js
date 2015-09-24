@@ -91,10 +91,9 @@ function drawgraphs() {
     map_instate();
     map_outstate();
     enrollchart();
-
     d3.selectAll("[id='US']")
-        .classed("selected", true);
-
+        .classed("selected", true)
+        .moveToFront();
 }
 
 //pass values from the main csv to html for page "tooltips" - switch values on dropdown selection
