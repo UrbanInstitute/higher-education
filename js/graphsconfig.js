@@ -70,6 +70,12 @@ var dispatch = d3.dispatch("load", "statechange", "hoverState", "dehoverState", 
 var menuId;
 var selecter = d3.selectAll(".stateselect")
 
+d3.selection.prototype.moveToFront = function () {
+    return this.each(function () {
+        this.parentNode.appendChild(this);
+    });
+};
+
 dispatch.on("load.menu", function (stateById) {
     //populate the dropdowns using main csv's state names & abbreviations
     selecter.on("change", function () {
@@ -94,7 +100,8 @@ dispatch.on("statechange.menu", function (statebyId) {
     d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
     menuId = statebyId.abbrev;
     d3.selectAll("[id='" + menuId + "']")
-        .classed("selected", true);
+        .classed("selected", true)
+        .moveToFront();
     tooltip(menuId);
 });
 
@@ -103,14 +110,17 @@ dispatch.on("clickState", function (statebyId) {
     selecter.property("value", statebyId);
     d3.selectAll(".bar, .chartline, .labelline, .splitbar, .boundary_paired, .rankbar, .ranktext, .scatterdot").classed("selected", false);
     d3.selectAll("[id='" + statebyId + "']")
-        .classed("selected", true);
+        .classed("selected", true)
+        .moveToFront();
     tooltip(statebyId);
 });
 
 
 //on hover, class those states "hovered" (turn em pink) and change the tooltip
 dispatch.on("hoverState", function (statebyId) {
-    d3.selectAll("[id='" + statebyId + "']").classed("hovered", true);
+    d3.selectAll("[id='" + statebyId + "']")
+        .classed("hovered", true)
+        .moveToFront();
     tooltip(statebyId);
 });
 
