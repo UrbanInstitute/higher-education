@@ -127,7 +127,7 @@ dispatch.on("hoverState", function (statebyId) {
 
 //declass "hovered" and return tooltip back to value in dropdowns
 dispatch.on("dehoverState", function (statebyId) {
-    d3.selectAll("[id='" + statebyId + "']").classed("hovered", false);
+    d3.selectAll("#" + statebyId).classed("hovered", false);
     menuId = selecter.property("value");
     tooltip(menuId);
     d3.selectAll("[id='" + menuId + "']")
