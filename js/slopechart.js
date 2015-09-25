@@ -219,7 +219,7 @@ function slopechart3(div, id) {
     var yearf = d3.format("02d");
 
     function formatYear(d) {
-        return (d - 1) + "-" + yearf(d - 2000);
+        return (d - 1) + "–" + yearf(d - 2000);
     }
 
     var xAxis = d3.svg.axis()
