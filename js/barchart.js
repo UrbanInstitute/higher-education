@@ -127,7 +127,7 @@ function barchart(div, id) {
             .on("mouseover", function (d) {
                 if (isIE) {
                     d3.selectAll(".bar")
-                    .attr("fill","#ec008b");
+                    .style("fill","#ec008b");
                 } else {
                     dispatch.hoverState(this.id);
                 }
