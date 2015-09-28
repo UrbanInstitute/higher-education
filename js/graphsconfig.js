@@ -2,7 +2,7 @@
 var MOBILE_THRESHOLD = 600;
 var main_data_url = "data/statedata.csv";
 var annual_data_url = "data/annualdata.csv";
-var map_data_url = "js/states.json";
+var map_data_url = "states.json";
 var isMobile = false;
 var data_long, data;
 var FORMATTER,
