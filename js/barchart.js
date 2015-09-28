@@ -255,7 +255,7 @@ function barchart(div, id) {
             })
             .on("mouseover", function (d) {
                 if (isIE != false) {
-                    d3.selectAll("#" + this.id)
+                    d3.selectAll("#" + this.id+".bar")
                         .attr("fill", "#ec008b");
                     d3.selectAll(".hovered")
                         .classed("hovered", false)
