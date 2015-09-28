@@ -120,7 +120,7 @@ function linechart(div, id) {
         .attr("x", 0)
         .attr("y", height + 30)
         .attr("text-anchor", "start")
-        .attr("class", "slope-label")
+        .attr("class", "axis")
         .text("Fall");
 
     var yAxis = d3.svg.axis()
