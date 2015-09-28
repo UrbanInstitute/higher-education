@@ -125,12 +125,7 @@ function barchart(div, id) {
                 dispatch.clickState(this.id);
             })
             .on("mouseover", function (d) {
-                if (isIE) {
-                    d3.selectAll(".bar")
-                    .style("fill","#ec008b");
-                } else {
-                    dispatch.hoverState(this.id);
-                }
+                dispatch.hoverState(this.id);
             })
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);
@@ -259,7 +254,12 @@ function barchart(div, id) {
                 dispatch.clickState(this.id);
             })
             .on("mouseover", function (d) {
-                dispatch.hoverState(this.id);
+                if (isIE) {
+                    d3.selectAll("#"+this.id)
+                        .attr("fill", "#ec008b");
+                } else {
+                    dispatch.hoverState(this.id);
+                }
             })
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);
