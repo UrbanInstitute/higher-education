@@ -7,3 +7,4 @@ papers/
 plans/
 *.ai
 data/original
+*.DS_Store
