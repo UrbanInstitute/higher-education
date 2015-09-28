@@ -125,7 +125,13 @@ function map(div, id) {
                 dispatch.clickState(this.id);
             })
             .on("mouseover", function (d) {
-                dispatch.hoverState(this.id);
+                if (isIE != false) {
+                    d3.selectAll(".hovered")
+                        .classed("hovered", false)
+                    console.log("I'm using the worst browser");
+                } else {
+                    dispatch.hoverState(this.id);
+                }
             })
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);

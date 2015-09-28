@@ -255,8 +255,10 @@ function barchart(div, id) {
             })
             .on("mouseover", function (d) {
                 if (isIE != false) {
-                    d3.selectAll("#"+this.id)
+                    d3.selectAll("#" + this.id)
                         .attr("fill", "#ec008b");
+                    d3.selectAll(".hovered")
+                        .classed("hovered", false)
                     console.log("I'm using the worst browser");
                 } else {
                     dispatch.hoverState(this.id);
