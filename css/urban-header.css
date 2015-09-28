@@ -248,6 +248,31 @@
     width: 22%;
 }
 
+@media(max-width:767px) {
+.header-links ul li {
+        width:28%;
+        font:400 13px/24px Lato, sans-serif
+    }
+    p{
+        font:400 13px/18px Lato, sans-serif !important;
+    }
+    h1{
+        font-size: 24px !important;
+    }
+    h2{
+        font-size: 20px !important;
+    }
+    h3{
+        font-size: 18px !important;
+    }
+    h4{
+        font-size: 16px !important;
+    }
+    .tt-name, .tt-title {
+       font-size: 16px !important;
+    }
+}
+
 .header-links a {
     color: #fff;
 }
@@ -263,3 +288,5 @@
     border-bottom-width: 4px;
 }
 /*end css for header*/
+
+ 
