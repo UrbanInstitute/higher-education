@@ -100,6 +100,15 @@ function linechart(div, id) {
         .attr("height", height)
         .attr("class", "recession");
 
+    svg.append("text")
+        .attr("x", function (d) {
+            return x(2008.2);
+        })
+        .attr("y", 15)
+        .attr("text-anchor", "start")
+        .attr("class", "recession-label")
+        .text("Recession");
+
     var gx = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x axis")

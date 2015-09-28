@@ -84,12 +84,11 @@ th {
 
 .legend {
     font-size: 12px;
-    color: #333;
+    fill: #333;
 }
 
 .slope-label {
     font-size: 12px;
-    color: #333;
     font-style: italic;
 }
 /*State abbreviations for bar chart X axis*/
@@ -151,6 +150,13 @@ th {
     opacity: 0.3;
 }
 
+.recession-label {
+    font-size: 12px;
+    fill: #666;
+    font-style: italic;
+}
+
+/*split bar chart*/
 .needbased {
     fill: #1696d2
 }
