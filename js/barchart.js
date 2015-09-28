@@ -125,7 +125,12 @@ function barchart(div, id) {
                 dispatch.clickState(this.id);
             })
             .on("mouseover", function (d) {
-                dispatch.hoverState(this.id);
+                if (isIE) {
+                    d3.selectAll(".bar")
+                    .attr("fill","#ec008b");
+                } else {
+                    dispatch.hoverState(this.id);
+                }
             })
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);
