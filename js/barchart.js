@@ -258,9 +258,11 @@ function barchart(div, id) {
                     d3.selectAll(".hovered")
                         .classed("hovered", false);
                     d3.selectAll("#" + this.id)
-                        .classed("hovered", true);
+                        .classed("hovered", true)
+                        .moveToFront();
+                    tooltip(this.id);
                     this.parentNode.appendChild(this);
-                    console.log("I'm using the worst browser test3");
+                    console.log("I'm using the worst browser test4");
                 } else {
                     dispatch.hoverState(this.id);
                 }
