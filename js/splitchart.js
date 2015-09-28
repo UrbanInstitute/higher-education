@@ -158,7 +158,18 @@ function splitchart(div, id) {
             dispatch.clickState(this.id);
         })
         .on("mouseover", function (d) {
-            dispatch.hoverState(this.id);
+            if (isIE != false) {
+                d3.selectAll(".hovered")
+                    .classed("hovered", false);
+                d3.selectAll("#" + this.id)
+                    .classed("hovered", true)
+                    .moveToFront();
+                tooltip(this.id);
+                this.parentNode.appendChild(this);
+                console.log("I'm using the worst browser test4");
+            } else {
+                dispatch.hoverState(this.id);
+            }
         })
         .on("mouseout", function (d) {
             dispatch.dehoverState(this.id);

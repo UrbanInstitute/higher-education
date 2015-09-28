@@ -127,8 +127,13 @@ function map(div, id) {
             .on("mouseover", function (d) {
                 if (isIE != false) {
                     d3.selectAll(".hovered")
-                        .classed("hovered", false)
-                    console.log("I'm using the worst browser");
+                        .classed("hovered", false);
+                    d3.selectAll("#" + this.id)
+                        .classed("hovered", true)
+                        .moveToFront();
+                    tooltip(this.id);
+                    this.parentNode.appendChild(this);
+                    console.log("I'm using the worst browser test4");
                 } else {
                     dispatch.hoverState(this.id);
                 }
