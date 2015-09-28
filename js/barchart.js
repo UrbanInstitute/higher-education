@@ -255,17 +255,23 @@ function barchart(div, id) {
             })
             .on("mouseover", function (d) {
                 if (isIE != false) {
-                    d3.selectAll(".bar#"+this.id)
+                    d3.selectAll(".bar#" + this.id)
                         .attr("fill", "#ec008b");
                     this.parentNode.appendChild(this);
                     //d3.selectAll(".hovered")
                     //    .classed("hovered", false)
-                    console.log("I'm using the worst browser test2");
+                    console.log("I'm using the worst browser test3");
                 } else {
                     dispatch.hoverState(this.id);
                 }
             })
             .on("mouseout", function (d) {
+                if (isIE != false) {
+                    d3.selectAll(".bar#" + this.id)
+                        .attr("fill", function (d) {
+                            return color(d[VAL]);
+                        })
+                }
                 dispatch.dehoverState(this.id);
             });
     }
