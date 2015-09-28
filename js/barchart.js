@@ -256,9 +256,9 @@ function barchart(div, id) {
             .on("mouseover", function (d) {
                 if (isIE != false) {
                     d3.selectAll(".hovered")
-                        .classed("hovered", false)
-                    d3.selectAll(".bar#" + this.id)
-                        .attr("class", "bar hovered");
+                        .classed("hovered", false);
+                    d3.selectAll("#" + this.id)
+                        .classed("hovered", true);
                     this.parentNode.appendChild(this);
                     console.log("I'm using the worst browser test3");
                 } else {
