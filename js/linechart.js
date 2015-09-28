@@ -14,7 +14,7 @@ function linechart(div, id) {
     var margin = {
         top: 25,
         right: 15,
-        bottom: 25,
+        bottom: 45,
         left: 55
     };
 
@@ -88,31 +88,40 @@ function linechart(div, id) {
         }));
     }
 
-    //highlight recession
-    var recession = svg.append("rect")
-        .attr("x", function (d) {
-            return x(2008);
-        })
-        .attr("y", 0)
-        .attr("width", function (d) {
-            return x(2012) - x(2008);
-        })
-        .attr("height", height)
-        .attr("class", "recession");
+    if (isMobile == false) {
+        //highlight recession
+        var recession = svg.append("rect")
+            .attr("x", function (d) {
+                return x(2008);
+            })
+            .attr("y", 0)
+            .attr("width", function (d) {
+                return x(2012) - x(2008);
+            })
+            .attr("height", height)
+            .attr("class", "recession");
 
-    svg.append("text")
-        .attr("x", function (d) {
-            return x(2008.2);
-        })
-        .attr("y", 15)
-        .attr("text-anchor", "start")
-        .attr("class", "recession-label")
-        .text("Recession");
+        svg.append("text")
+            .attr("x", function (d) {
+                return x(2008.2);
+            })
+            .attr("y", 15)
+            .attr("text-anchor", "start")
+            .attr("class", "recession-label")
+            .text("Recession");
+    }
 
     var gx = svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x axis")
         .call(xAxis);
+
+    svg.append("text")
+        .attr("x", 0)
+        .attr("y", height + 30)
+        .attr("text-anchor", "start")
+        .attr("class", "slope-label")
+        .text("Fall");
 
     var yAxis = d3.svg.axis()
         .scale(y)
