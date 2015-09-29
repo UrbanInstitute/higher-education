@@ -4,7 +4,7 @@ function tuitiontime() {
 
     function twoyear() {
         $GRAPHDIV = $("#tuition2year");
-        LABELS = "Two year in district";
+        LABELS = "Two year, in district";
         LINEVAL = "tuition_2year";
         slopechart3("#tuition2year");
     };
@@ -12,7 +12,7 @@ function tuitiontime() {
 
     function fouryear() {
         $GRAPHDIV = $("#tuition4year");
-        LABELS = "Four year in state";
+        LABELS = "Four year, in state";
         LINEVAL = "tuition_4year";
         slopechart3("#tuition4year");
     };
@@ -36,35 +36,43 @@ function tuitiontime() {
     maplegend();
 }
 
-/*function tuition15() {
-    $GRAPHDIV = $("#tuitionrank");
-    VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
-    LABELS = ["Two-year in-district", "Four-year in-state", "Four-year out-of-state"];
-    rankchart("#tuitionrank");
+function scatter1() {
+    $GRAPHDIV = $("#scatterrank");
+    VAL = ["t4_15", "t2_15"];
+    FORMATTER = d3.format("$2s");
+    LABELS = ["Four year, in state", "Two year, in district"];
+    scatterplot("#scatterrank");
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]
-    FORMATTER = formatmoney;
-    isMobile = false;
 
     function pairedmap() {
-        $GRAPHDIV = $("#map_tuition15");
+        $GRAPHDIV = $("#map_tuition152");
         VAL = "t4_15";
         MAINMAP = 0;
-        map("#map_tuition15");
+        map("#map_tuition152");
     }
     pairedmap();
 
     function maplegend() {
-        $LEGENDDIV = $("#legend_tuition15");
-        legend("#legend_tuition15");
+        $LEGENDDIV = $("#legend_tuition152");
+        FORMATTER = formatmoney;
+        legend("#legend_tuition152");
     }
     maplegend();
-}*/
+}
 
-function tuition15() {
+function scatter2() {
+    $GRAPHDIV = $("#scatterrank2");
+    VAL = ["t4_15", "t4outstate_15"];
+    FORMATTER = d3.format("$2s");
+    LABELS = ["Four year, in state", "Four year, out of state"];
+    scatterplot("#scatterrank2");
+}
+
+function tuitionrank() {
     $GRAPHDIV = $("#tuitionrank");
     VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
-    LABELS = ["Two year in district", "Four year in state", "Four year out of state"];
+    LABELS = ["Two year, in district", "Four year, in state", "Four year, out of state"];
     rankingchart("#tuitionrank");
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]
@@ -86,44 +94,11 @@ function tuition15() {
     maplegend();
 }
 
-function scatterrank() {
-    $GRAPHDIV = $("#scatterrank");
-    VAL = ["t4_15", "t2_15"];
-    FORMATTER = d3.format("$2s");
-    LABELS = ["Four year in state", "Two year in district"];
-    scatterplot("#scatterrank");
-    COLORS = palette.blue5;
-    BREAKS = [7000, 8000, 9000, 10000]
-
-    function pairedmap() {
-        $GRAPHDIV = $("#map_tuition152");
-        VAL = "t4_15";
-        MAINMAP = 0;
-        map("#map_tuition152");
-    }
-    pairedmap();
-
-    function maplegend() {
-        $LEGENDDIV = $("#legend_tuition152");
-        FORMATTER = formatmoney;
-        legend("#legend_tuition152");
-    }
-    maplegend();
-}
-
-function scatterrank2() {
-    $GRAPHDIV = $("#scatterrank2");
-    VAL = ["t4_15", "t4outstate_15"];
-    FORMATTER = d3.format("$2s");
-    LABELS = ["Four year in state", "Four year out of state"];
-    scatterplot("#scatterrank2");
-}
-
 function drawgraphs() {
     tuitiontime();
-    tuition15();
-    scatterrank();
-    scatterrank2();
+    scatter1();
+    scatter2();
+    tuitionrank();
     d3.selectAll("[id='US']")
         .classed("selected", true)
         .moveToFront();
