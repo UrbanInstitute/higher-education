@@ -96,7 +96,6 @@ function detectIE() {
     return false;
 }
 var isIE = detectIE();
-console.log(isIE);
 
 d3.selection.prototype.moveToFront = function () {
     return this.each(function () {

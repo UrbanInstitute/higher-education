@@ -130,7 +130,7 @@ function linechart(div, id) {
         .orient("left");
 
     var gy = svg.append("g")
-        .attr("class", "y axis-show")
+        .attr("class", "y axis")
         .call(yAxis);
 
     data_nest = d3.nest().key(function (d) {
