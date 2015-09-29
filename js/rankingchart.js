@@ -1,6 +1,5 @@
 var ranking_aspect_width = 1;
 var ranking_aspect_height = 1.1;
-var scatterplot_aspect_height = 2;
 
 function rankingchart(div, id) {
 
@@ -21,10 +20,8 @@ function rankingchart(div, id) {
         isMobile = false;
     }
 
-    if (isMobile) {}
-
-    var width = $GRAPHDIV.width() - margin.left - margin.right,
-        height = Math.ceil((width * ranking_aspect_height) / ranking_aspect_width) - margin.top - margin.bottom;
+    var width = $GRAPHDIV.width() - margin.left - margin.right;
+    var height = Math.max(678, Math.ceil((width * ranking_aspect_height) / ranking_aspect_width) - margin.top - margin.bottom);
 
     $GRAPHDIV.empty();
 
@@ -106,7 +103,18 @@ function rankingchart(div, id) {
             })
             .attr("height", y.rangeBand())
             .on("mouseover", function (d) {
-                dispatch.hoverState(this.id);
+                if (isIE != false) {
+                    d3.selectAll(".hovered")
+                        .classed("hovered", false);
+                    d3.selectAll("#" + this.id)
+                        .classed("hovered", true)
+                        .moveToFront();
+                    tooltip(this.id);
+                    this.parentNode.appendChild(this);
+                    console.log("I'm using the worst browser test4");
+                } else {
+                    dispatch.hoverState(this.id);
+                }
             })
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);
@@ -123,7 +131,11 @@ function rankingchart(div, id) {
                 return y(d[VAL[i]]) + (y.rangeBand()) / 2 + 4;
             })
             .text(function (d, i) {
-                return d.state;
+                if (isMobile) {
+                    return d.abbrev;
+                } else {
+                    return d.state;
+                }
             })
             .on("click", function (d) {
                 dispatch.clickState(this.id);
