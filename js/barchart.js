@@ -102,7 +102,6 @@ function barchart(div, id) {
             .enter()
             .append("g");
 
-        //non-need-based on right
         pctbar.append("rect")
             .attr('id', function (d) {
                 return d.abbrev;

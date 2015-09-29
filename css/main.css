@@ -94,6 +94,7 @@ th {
 /*State abbreviations for bar chart X axis*/
 
 .abbrevs {
+    font-family: Verdana;
     font-size: 9px;
     text-align: center;
 }
