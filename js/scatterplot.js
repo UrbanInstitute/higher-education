@@ -71,17 +71,17 @@ function scatterplot(div, id) {
         .call(yAxis);
 
     svg.append("text")
-        .attr("class", "legend")
+        .attr("class", "slope-label")
         .attr("text-anchor", "middle")
         .attr("x", width / 2)
         .attr("y", height + 35)
         .text(LABELS[0]);
 
     svg.append("text")
-        .attr("class", "legend")
-        .attr("text-anchor", "middle")
-        .attr("x", 0)
-        .attr("y", -15)
+        .attr("class", "slope-label")
+        .attr("text-anchor", "start")
+        .attr("x", -36)
+        .attr("y", -10)
         .text(LABELS[1]);
 
     //us lines
@@ -104,8 +104,8 @@ function scatterplot(div, id) {
         .attr("x2", function (d) {
             return x(d[VAL[0]]);
         });
-    
-        lines.append("line")
+
+    lines.append("line")
         .attr("class", "labelline")
         .attr("x1", 0)
         .attr("x2", width)
@@ -115,6 +115,15 @@ function scatterplot(div, id) {
         .attr("y2", function (d) {
             return y(d[VAL[1]]);
         });
+
+    lines.append("text")
+        .attr("y", -10)
+        .attr("x", function (d) {
+            return x(d[VAL[0]]);
+        })
+        .attr("class", "legend")
+        .attr("text-anchor", "middle")
+        .text("US average");
 
     svg.selectAll(".dot")
         .data(data)
