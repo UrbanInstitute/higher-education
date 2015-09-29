@@ -73,6 +73,8 @@ function tuitionrank() {
     $GRAPHDIV = $("#tuitionrank");
     VAL = ["t2_15_rank", "t4_15_rank", "t4outstate_15_rank"];
     LABELS = ["Two year, in district", "Four year, in state", "Four year, out of state"];
+    LABELS1 = ["Two year,", "Four year,", "Four year,"];
+    LABELS2 = ["in district", "in state", "out of state"];
     rankingchart("#tuitionrank");
     COLORS = palette.blue5;
     BREAKS = [7000, 8000, 9000, 10000]

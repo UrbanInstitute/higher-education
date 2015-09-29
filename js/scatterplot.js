@@ -15,7 +15,7 @@ function scatterplot(div, id) {
         top: 30,
         right: 10,
         bottom: 50,
-        left: 70
+        left: 45
     };
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {

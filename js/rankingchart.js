@@ -8,7 +8,6 @@ function rankingchart(div, id) {
     });
 
     var margin = {
-        top: 15,
         right: 5,
         bottom: 5,
         left: 50
@@ -16,8 +15,10 @@ function rankingchart(div, id) {
 
     if ($GRAPHDIV.width() <= MOBILE_THRESHOLD) {
         isMobile = true;
+        margin.top = 35;
     } else {
         isMobile = false;
+        margin.top = 15;
     }
 
     var width = $GRAPHDIV.width() - margin.left - margin.right;
@@ -79,12 +80,29 @@ function rankingchart(div, id) {
                 return d[VAL[i]];
             }));
 
-        svg.append("text")
-            .attr("x", (0.5 * barwidth) + (i * width / 3))
-            .attr("y", 0)
-            .attr("class", "slope-label")
-            .attr("text-anchor", "middle")
-            .text(LABELS[i]);
+        if (isMobile) {
+            svg.append("text")
+                .attr("x", (0.5 * barwidth) + (i * width / 3))
+                .attr("y", -15)
+                .attr("class", "slope-label")
+                .attr("text-anchor", "middle")
+                .text(LABELS1[i]);
+
+            svg.append("text")
+                .attr("x", (0.5 * barwidth) + (i * width / 3))
+                .attr("y", 0)
+                .attr("class", "slope-label")
+                .attr("text-anchor", "middle")
+                .text(LABELS2[i]);
+
+        } else {
+            svg.append("text")
+                .attr("x", (0.5 * barwidth) + (i * width / 3))
+                .attr("y", 0)
+                .attr("class", "slope-label")
+                .attr("text-anchor", "middle")
+                .text(LABELS[i]);
+        }
 
         var rankbar = svg.selectAll("g.rankbar")
             .data(data)
