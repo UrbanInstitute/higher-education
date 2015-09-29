@@ -97,9 +97,7 @@ function scatterplot(div, id) {
     lines.append("line")
         .attr("class", "labelline")
         .attr("y1", height)
-        .attr("y2", function (d) {
-            return y(d[VAL[1]]);
-        })
+        .attr("y2", 0)
         .attr("x1", function (d) {
             return x(d[VAL[0]]);
         })
@@ -110,9 +108,7 @@ function scatterplot(div, id) {
         lines.append("line")
         .attr("class", "labelline")
         .attr("x1", 0)
-        .attr("x2", function (d) {
-            return x(d[VAL[0]]);
-        })
+        .attr("x2", width)
         .attr("y1", function (d) {
             return y(d[VAL[1]]);
         })
