@@ -33,8 +33,6 @@ function linechart(div, id) {
 
     $GRAPHDIV.empty();
 
-    var formatAxis = d3.format(',0f');
-
     var x = d3.scale.linear()
         .range([0, width]);
 

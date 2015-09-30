@@ -121,18 +121,7 @@ function rankingchart(div, id) {
             })
             .attr("height", y.rangeBand())
             .on("mouseover", function (d) {
-                if (isIE != false) {
-                    d3.selectAll(".hovered")
-                        .classed("hovered", false);
-                    d3.selectAll("#" + this.id)
-                        .classed("hovered", true)
-                        .moveToFront();
-                    tooltip(this.id);
-                    this.parentNode.appendChild(this);
-                    console.log("I'm using the worst browser test4");
-                } else {
-                    dispatch.hoverState(this.id);
-                }
+                dispatch.hoverState(this.id);
             })
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);
