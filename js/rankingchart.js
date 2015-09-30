@@ -120,8 +120,7 @@ function rankingchart(div, id) {
         rankbar.append("rect")
             .attr('id', function (d) {
                 return d.abbrev;
-            })
-            .attr("temp", i)
+            }) 
             .attr("class", "rankbar")
             .attr("x", i * width / 3)
             .attr("width", barwidth)
