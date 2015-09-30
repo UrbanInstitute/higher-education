@@ -159,10 +159,21 @@ write.csv(dt,"data/statedata.csv",row.names=F, na="")
 rm(fig1,fig2,fig3,fig7,tab6,migration,apen,tuition,appropriations_map,enrollment_map)
 
 #Add tuition ranks for slope charts
+#09-30-15: Not counting Alaska community colleges. ftepubin2year = 0%, tuition $ = NA, rank = NA
 dt<-read.csv("data/statedata.csv",stringsAsFactors = F)
+dt <- dt %>% mutate(ftepubin2year = replace(ftepubin2year, state=="Alaska", 0), 
+                    t2_05= replace(t2_05, state=="Alaska", NA),
+                    t2_10= replace(t2_10, state=="Alaska", NA),
+                    t2_15= replace(t2_15, state=="Alaska", NA),
+                    t2_0515= replace(t2_0515, state=="Alaska", NA))
+
 dt_nous <- dt %>% filter(abbrev != "US")
-dt_nous <- dt_nous %>% mutate(t2_15_rank = rank(-t2_15, ties.method = "first"), t4_15_rank = rank(-t4_15, ties.method = "first"), t4outstate_15_rank = rank(-t4outstate_15, ties.method = "first")) %>% 
+dt_nous <- dt_nous %>% mutate(t2_15_rank = rank(-t2_15, ties.method = "first", na.last="keep"),
+                              t4_15_rank = rank(-t4_15, ties.method = "first"), 
+                              t4outstate_15_rank = rank(-t4outstate_15, ties.method = "first")) %>% 
   select(STATEFP, t2_15_rank, t4_15_rank, t4outstate_15_rank)
+
+dt <- dt %>% select(-t2_15_rank, -t4_15_rank, -t4outstate_15_rank)
 dt <- left_join(dt,dt_nous,by="STATEFP")
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
 
@@ -217,8 +228,12 @@ tuition_long <- right_join(states,tuition_long, by="state") %>%
 ## Join all the long data!
 dt_long <- left_join(apen_long,tuition_long,by=c("state","statefip","abbrev","fiscalyear"))
 write.csv(dt_long,"data/annualdata.csv",row.names=F, na="")
-
 rm(tuition_pub2,tuition_pub4,apen_long,tuition_long)
+
+#09-30-15: Not counting Alaska community colleges. ftepubin2year = 0%, tuition $ = NA, rank = NA
+dt_long<-read.csv("data/annualdata.csv",stringsAsFactors = F)
+dt_long <- dt_long %>% mutate(tuition_2year = replace(tuition_2year, state=="Alaska", NA))
+write.csv(dt_long,"data/annualdata.csv",row.names=F, na="")
 
 ########################################################################################################
 # Data that we're not currently using, may in future
