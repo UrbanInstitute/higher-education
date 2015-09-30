@@ -1,5 +1,6 @@
 var ranking_aspect_width = 1;
 var ranking_aspect_height = 1.1;
+var dt;
 
 function rankingchart(div, id) {
 
@@ -70,15 +71,22 @@ function rankingchart(div, id) {
     var barwidth = width / 4
 
     for (i in [0, 1, 2]) {
-        data.sort(function (a, b) {
-            return b[VAL[i]] - a[VAL[i]];
+
+        if (i == 0) {
+            dt = data_main.filter(function (d) {
+                return d.abbrev != "US" & d.abbrev != "AK";
+            });
+        } else {
+            dt = data;
+        }
+
+        dt.sort(function (a, b) {
+            return a[VAL[i]] - b[VAL[i]];
         });
 
         var y = d3.scale.ordinal()
-            .rangeRoundBands([height, 0], .1)
-            .domain(data.map(function (d) {
-                return d[VAL[i]];
-            }));
+            .rangeRoundBands([0, height], .1)
+            .domain(d3.range(1, 51));
 
         if (isMobile) {
             svg.append("text")
@@ -105,7 +113,7 @@ function rankingchart(div, id) {
         }
 
         var rankbar = svg.selectAll("g.rankbar")
-            .data(data)
+            .data(dt)
             .enter()
             .append("g");
 
@@ -113,6 +121,7 @@ function rankingchart(div, id) {
             .attr('id', function (d) {
                 return d.abbrev;
             })
+            .attr("temp", i)
             .attr("class", "rankbar")
             .attr("x", i * width / 3)
             .attr("width", barwidth)
