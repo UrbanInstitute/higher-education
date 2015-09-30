@@ -162,7 +162,6 @@ function slopechart(div, id) {
                     .moveToFront();
                 tooltip(this.id);
                 this.parentNode.appendChild(this);
-                console.log("I'm using the worst browser test4");
             } else {
                 dispatch.hoverState(this.id);
             }
@@ -314,7 +313,6 @@ function slopechart3(div, id) {
                     .moveToFront();
                 tooltip(this.id);
                 this.parentNode.appendChild(this);
-                console.log("I'm using the worst browser test4");
             } else {
                 dispatch.hoverState(this.id);
             }

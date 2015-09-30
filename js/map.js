@@ -2,50 +2,6 @@ var us,
     map_aspect_width = 1,
     map_aspect_height = 0.7;
 
-d3.helper = {};
-d3.helper.tooltip = function (accessor) {
-    return function (selection) {
-        var tooltipDiv;
-        var bodyNode = d3.select('body').node();
-        selection.on("mouseover", function (d, i) {
-                // Clean up lost tooltips
-                d3.select('body').selectAll('div.tooltip').remove();
-                // Append tooltip
-                tooltipDiv = d3.select('body').append('div').attr('class', 'urban-map-tooltip');
-                var absoluteMousePos = d3.mouse(bodyNode);
-                if ((absoluteMousePos[0] - 150) < 100) {
-                    tooltipDiv.style('left', (absoluteMousePos[0]) + 'px')
-                        .style('top', (absoluteMousePos[1] - 90) + 'px')
-                        .style('position', 'absolute')
-                        .style('z-index', 1001);
-                } else {
-                    tooltipDiv.style('left', (absoluteMousePos[0] - 150) + 'px')
-                        .style('top', (absoluteMousePos[1] - 90) + 'px')
-                        .style('position', 'absolute')
-                        .style('z-index', 1001);
-                }
-                // Add text using the accessor function
-                var tooltipText = accessor(d, i) || '';
-            })
-            .on('mousemove', function (d, i) {
-                // Move tooltip
-                var absoluteMousePos = d3.mouse(bodyNode);
-                if ((absoluteMousePos[0] - 150) < 100) {
-                    tooltipDiv.style('left', (absoluteMousePos[0]) + 'px')
-                        .style('top', (absoluteMousePos[1] - 90) + 'px');
-                } else {
-                    tooltipDiv.style('left', (absoluteMousePos[0] - 150) + 'px')
-                        .style('top', (absoluteMousePos[1] - 90) + 'px');
-                }
-                var tooltipText = accessor(d, i) || '';
-                tooltipDiv.html(tooltipText);
-            })
-            .on("mouseout", function (d, i) {
-                tooltipDiv.remove();
-            });
-    };
-};
-
 //map of value estimate
 function map(div, id) {
 
@@ -87,24 +43,6 @@ function map(div, id) {
     var path = d3.geo.path()
         .projection(projection);
 
-    if (MAINMAP == 1) {
-        svg.selectAll("path")
-            .data(topojson.feature(us, us.objects.cb_2014_us_state_20m).features)
-            .enter().append("path")
-            .attr("d", path)
-            .attr("id", function (d) {
-                return d.properties.abbrev;
-            })
-            .attr("class", "boundary")
-            .attr("fill", function (d) {
-                return color(d.properties[VAL]);
-            })
-            .call(d3.helper.tooltip(
-                function (d, i) {
-                    return "<b>" + d.properties.name + "</b></br>Share of college-going high school graduates who enroll in-state: " + d3.format("%")(d.properties.res_pct_instate) + "</br>Share of first-time college students who are from another state: " + d3.format("%")(d.properties.state_pct_outstate);
-                }
-            ));
-    } else {
         svg.selectAll("path")
             .data(topojson.feature(us, us.objects.cb_2014_us_state_20m).features)
             .enter().append("path")
@@ -133,7 +71,6 @@ function map(div, id) {
                         .moveToFront();
                     tooltip(this.id);
                     this.parentNode.appendChild(this);
-                    console.log("I'm using the worst browser test4");
                 } else {
                     dispatch.hoverState(this.id);
                 }
@@ -141,7 +78,6 @@ function map(div, id) {
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);
             });
-    }
 
 }
 

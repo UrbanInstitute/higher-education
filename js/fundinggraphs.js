@@ -15,7 +15,6 @@ function fundingchart() {
     function pairedmap() {
         $GRAPHDIV = $("#map_funding");
         VAL = "approp_percap15";
-        MAINMAP = 0;
         map("#map_funding");
     }
     pairedmap();
@@ -47,7 +46,6 @@ function grantaid2() {
 
 function grantmap() {
     $GRAPHDIV = $("#map_grantaid");
-    MAINMAP = 0;
     BREAKS = [0.2, 0.4, 0.6, 0.8];
     COLORS = palette.gray5;
     VAL = "grants_pctneedbased";
@@ -82,7 +80,6 @@ function appropchart() {
     function pairedmap() {
         $GRAPHDIV = $("#map_approp");
         VAL = "approp0115";
-        MAINMAP = 0;
         map("#map_approp");
     }
     pairedmap();
@@ -109,7 +106,6 @@ function approp_percapchart() {
     function pairedmap() {
         $GRAPHDIV = $("#map_approppc");
         VAL = "approp_percap0115";
-        MAINMAP = 0;
         map("#map_approppc");
     }
     pairedmap();

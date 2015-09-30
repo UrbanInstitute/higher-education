@@ -23,7 +23,6 @@ function tuitiontime() {
     function pairedmap() {
         $GRAPHDIV = $("#map_tuitiontime");
         VAL = "t4_0515";
-        MAINMAP = 0;
         map("#map_tuitiontime");
     }
     pairedmap();
@@ -48,7 +47,6 @@ function scatter1() {
     function pairedmap() {
         $GRAPHDIV = $("#map_tuition152");
         VAL = "t4_15";
-        MAINMAP = 0;
         map("#map_tuition152");
     }
     pairedmap();
@@ -84,7 +82,6 @@ function tuitionrank() {
     function pairedmap() {
         $GRAPHDIV = $("#map_tuition15");
         VAL = "t4_15";
-        MAINMAP = 0;
         map("#map_tuition15");
     }
     pairedmap();

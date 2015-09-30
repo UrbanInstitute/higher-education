@@ -10,7 +10,6 @@ function fte2year() {
 
     function pairedmap() {
         $GRAPHDIV = $("#map_fte2year");
-        MAINMAP = 0;
         map("#map_fte2year");
     }
     pairedmap();
@@ -29,7 +28,6 @@ function map_instate() {
     COLORS = palette.blue5;
     BREAKS = [0.6, 0.7, 0.8, 0.9];
     isMobile = false;
-    MAINMAP = 0;
     map("#map_instate");
 
     function maplegend() {
@@ -46,7 +44,6 @@ function map_outstate() {
     COLORS = palette.yellow5;
     BREAKS = [0.1, 0.2, 0.3, 0.4];
     isMobile = false;
-    MAINMAP = 0;
     map("#map_outstate");
 
     function maplegend() {
@@ -74,7 +71,6 @@ function enrollchart() {
     function pairedmap() {
         $GRAPHDIV = $("#map_enroll");
         VAL = "enroll0114";
-        MAINMAP = 0;
         map("#map_enroll");
     }
     pairedmap();
