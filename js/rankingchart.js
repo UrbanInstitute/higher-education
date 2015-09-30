@@ -121,7 +121,9 @@ function rankingchart(div, id) {
             })
             .attr("height", y.rangeBand())
             .on("mouseover", function (d) {
-                dispatch.hoverState(this.id);
+                if (isIE == false) {
+                    dispatch.hoverState(this.id);
+                }
             })
             .on("mouseout", function (d) {
                 dispatch.dehoverState(this.id);
