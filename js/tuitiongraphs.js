@@ -117,21 +117,45 @@ function tooltip(state) {
         if (d >= 1) {
             return d = d + " of 50";
         } else {
-            return "";
+            return "NA";
+        }
+    }
+
+    function formatRank2(d) {
+        if (d >= 1) {
+            return d = d + " of 49";
+        } else {
+            return "NA";
+        }
+    }
+
+    function formatNAmoney(d) {
+        if (d == "") {
+            return "NA";
+        } else {
+            return formatmoney(d);
+        }
+    }
+
+    function formatNApct(d) {
+        if (d == "") {
+            return "NA";
+        } else {
+            return formatpct(d);
         }
     }
 
     row.forEach(function (d) {
         d3.selectAll(".tt-name").text(d.state);
         //tuition
-        d3.select("#tt_t2_05").text(formatmoney(+d.t2_05));
-        d3.selectAll(".tt_t2_15").text(formatmoney(+d.t2_15));
-        d3.select("#tt_t2_0515").text(formatpct(d.t2_0515));
-        d3.select("#tt_t4_05").text(formatmoney(+d.t4_05));
+        d3.select("#tt_t2_05").text(formatNAmoney(+d.t2_05));
+        d3.selectAll(".tt_t2_15").text(formatNAmoney(+d.t2_15));
+        d3.select("#tt_t2_0515").text(formatNApct(d.t2_0515));
+        d3.select("#tt_t4_05").text(formatNAmoney(+d.t4_05));
         d3.selectAll(".tt_t4_15").text(formatmoney(+d.t4_15));
         d3.select("#tt_t4_0515").text(formatpct(+d.t4_0515));
         d3.selectAll(".tt_t4outstate_15").text(formatmoney(+d.t4outstate_15));
-        d3.selectAll(".tt_t2_15_rank").text(formatRank(+d.t2_15_rank));
+        d3.selectAll(".tt_t2_15_rank").text(formatRank2(+d.t2_15_rank));
         d3.selectAll(".tt_t4_15_rank").text(formatRank(+d.t4_15_rank));
         d3.selectAll(".tt_t4outstate_15_rank").text(formatRank(+d.t4outstate_15_rank));
     });

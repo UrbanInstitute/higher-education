@@ -3,7 +3,11 @@ var scatterplot_aspect_height = 2;
 function scatterplot(div, id) {
 
     data = data_main.filter(function (d) {
-        return d.abbrev != "US";
+        if (VAL[1] == "t2_15") {
+            return d.abbrev != "US" & d.abbrev !="AK";
+        } else {
+            return d.abbrev != "US";
+        }
     });
 
     data.forEach(function (d) {

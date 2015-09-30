@@ -176,7 +176,11 @@ function slopechart(div, id) {
 function slopechart3(div, id) {
 
     data_years = data_long.filter(function (d) {
-        return (d[YEARVAL] == 2005 | d[YEARVAL] == 2010 | d[YEARVAL] == 2015);
+        if (LINEVAL == "tuition_2year") {
+            return d.abbrev != "AK" & (d[YEARVAL] == 2005 | d[YEARVAL] == 2010 | d[YEARVAL] == 2015);
+        } else {
+            return (d[YEARVAL] == 2005 | d[YEARVAL] == 2010 | d[YEARVAL] == 2015)
+        }
     });
 
     var margin = {
