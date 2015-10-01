@@ -1,6 +1,3 @@
-//configure in each graph call
-
-//globals
 var linechart_aspect_width = 1;
 var linechart_aspect_height = 0.7;
 
@@ -136,7 +133,6 @@ function linechart(div, id) {
     }).entries(data);
 
     var line = d3.svg.line()
-        //.interpolate("basis")
         .x(function (d) {
             return x(d.year);
         })

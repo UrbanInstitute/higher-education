@@ -1,3 +1,5 @@
+//selectable list of ranked tuition values - basically built as 3 bar charts
+
 var ranking_aspect_width = 1;
 var ranking_aspect_height = 1.1;
 var dt;
@@ -33,6 +35,7 @@ function rankingchart(div, id) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    //common y axis labelling 1-50
     var y0 = d3.scale.ordinal()
         .domain(d3.range(1, 51))
         .rangeRoundBands([0, height], .1);
@@ -70,6 +73,7 @@ function rankingchart(div, id) {
 
     var barwidth = width / 4
 
+    //3 lists, each with rankings of 1-50 except 1-49 for 2 year tuition
     for (i in [0, 1, 2]) {
 
         if (i == 0) {
@@ -137,6 +141,7 @@ function rankingchart(div, id) {
                 dispatch.dehoverState(this.id);
             });
 
+        //label bars with state name (abbreviation on mobile)
         rankbar.append("text")
             .attr('id', function (d) {
                 return d.abbrev;
