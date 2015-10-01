@@ -193,3 +193,8 @@ li {
 .source {
     font-size: 12px;
 }
+
+p.note {
+    font-size: 0.9em;
+    font-style: italic;
+}
