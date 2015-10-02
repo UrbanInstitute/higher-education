@@ -74,6 +74,7 @@ function scatterplot(div, id) {
         .attr("class", "y axis")
         .call(yAxis);
 
+    //axis labels
     svg.append("text")
         .attr("class", "slope-label")
         .attr("text-anchor", "middle")
@@ -88,8 +89,7 @@ function scatterplot(div, id) {
         .attr("y", -10)
         .text(LABELS[1]);
 
-    //us lines
-
+    //us average lines
     usdata = data_main.filter(function (d) {
         return d.abbrev == "US";
     });
@@ -120,6 +120,7 @@ function scatterplot(div, id) {
             return y(d[VAL[1]]);
         });
 
+    //label the vertical line
     lines.append("text")
         .attr("y", -10)
         .attr("x", function (d) {
@@ -129,6 +130,7 @@ function scatterplot(div, id) {
         .attr("text-anchor", "middle")
         .text("US average");
 
+    //draw points
     svg.selectAll(".dot")
         .data(data)
         .enter().append("circle")

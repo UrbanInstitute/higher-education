@@ -1,3 +1,6 @@
+//general configuration for graph functions, dispatch (hover, click, dropdown changes), IE detection, graph drawing
+//section graphs are configured in [section]graphs.js
+
 //page globals
 var MOBILE_THRESHOLD = 600;
 var main_data_url = "data/statedata.csv";
