@@ -177,6 +177,16 @@ dt <- dt %>% select(-t2_15_rank, -t4_15_rank, -t4outstate_15_rank)
 dt <- left_join(dt,dt_nous,by="STATEFP")
 write.csv(dt,"data/statedata.csv",row.names=F, na="")
 
+#10-19-15: Error in original workbook for 2015 US appropriations per capita. Use long data instead. Should be fixed in later spreadsheets.
+dt_long<-read.csv("data/annualdata.csv",stringsAsFactors = F)
+dt<-read.csv("data/statedata.csv",stringsAsFactors = F)
+apc<-dt_long %>% filter(fiscalyear==2015) %>%
+  select(state, approp_percap) %>%
+  rename(approp_percap15 = approp_percap)
+dt <- dt %>% select(-approp_percap15)
+dt <- left_join(dt,apc,by="state")
+write.csv(dt,"data/statedata.csv",row.names=F, na="")
+
 ########################################################################################################
 # Annual enrollment and appropriations data: format, make long, join
 ########################################################################################################
