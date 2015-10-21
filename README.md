@@ -1,4 +1,4 @@
-#Funding Public Higher Education feature
+#Financing Public Higher Education feature
 
 ##Data
 * Researcher-provided XLSX files contain data from several sources

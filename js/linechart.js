@@ -103,7 +103,7 @@ function linechart(div, id) {
             .attr("y", 15)
             .attr("text-anchor", "start")
             .attr("class", "recession-label")
-            .text("Recession");
+            .text("Downturn");
     }
 
     var gx = svg.append("g")
