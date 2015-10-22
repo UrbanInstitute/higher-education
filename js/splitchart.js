@@ -123,6 +123,9 @@ function splitchart(div, id) {
             return y(d.state);
         })
         .attr("height", y.rangeBand())
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
+        })
         .on("mouseover", function (d) {
             if (isIE != false) {
                 d3.selectAll(".hovered")
