@@ -8,6 +8,24 @@
     <link rel="shortcut icon" href="favicon.ico">
     <title>Funding</title>
 
+    <!--social metas-->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@urbaninstitute">
+    <meta name="twitter:creator" content="@urbaninstitute">
+    <meta name="twitter:title" content="Financing Public Higher Education">
+    <meta name="twitter:description" content="Reducing barriers to college requires better understanding of how opportunities differ by state. Urban’s new dashboard illustrates these differences.">
+    <meta name="twitter:image" content="http://webapp.urban.org/higher-education/img/social-img.png">
+
+    <meta property="og:title" content="Financing Public Higher Education" />
+    <meta property="og:description" content="Reducing barriers to college requires better understanding of how opportunities differ by state. Urban’s new dashboard illustrates these differences." />
+    <meta property="og:image" content="http://webapp.urban.org/higher-education/img/social-img.png">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+    <meta property="og:url" content=" http://urbn.is/highered">
+
+    <!--style-->
+
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/urban-text.css">
     <link rel="stylesheet" type="text/css" href="css/urban-header.css">
@@ -75,8 +93,8 @@
                 <h1>Funding</h1>
 
                 <p>Variation in tuition and fees and in enrollment across states is tightly intertwined with variation in state funding for higher education. Nationally, funding has declined on a per student basis since the Great Recession as a result of both state funding cuts and rising enrollment. Enrollment trends have played a stronger role in some states, but changes in overall funding are behind the most extreme changes in funding per student. Greater funding declines are associated with steeper price increases in some states’ public institutions, but this correlation across states is far from perfect.</p>
-                
-                <p class="note"><b>Note</b>: In this section, we refer to state funding, which is allocated by state fiscal year, as applying to the fall of the academic year contained within the fiscal year. For example, state funding for state fiscal year 2014–15 applies to the academic year beginning fall 2014.</p>      
+
+                <p class="note"><b>Note</b>: In this section, we refer to state funding, which is allocated by state fiscal year, as applying to the fall of the academic year contained within the fiscal year. For example, state funding for state fiscal year 2014–15 applies to the academic year beginning fall 2014.</p>
 
                 <h3>Funding per Student versus Funding per $1,000 in Personal Income, Fall 2014</h3>
                 <p>Funding per full-time equivalent (FTE) student varies widely across states (left axis). Some of this difference is attributable to differences in state wealth and in costs of living. Focusing on funding per $1,000 in average personal income in the state (right axis) accounts for some of the differences in available resources that affect the effort required to fund higher education.</p>
@@ -100,11 +118,13 @@
                             <select class="stateselect">
                             </select>
                         </div>
-                        <div id="map_funding" class="pairedmap"><img src="img/map_funding.png" alt="State-level map of funding per FTE student, US average at $7,568" /></div>
+                        <div id="map_funding" class="pairedmap"><img src="img/map_funding.png" alt="State-level map of funding per FTE student, US average at $7,568" />
+                        </div>
                     </div>
 
                     <div class="col-md-8 col-md-pull-4">
-                        <div id="funding_slope" class="bingraph"><img src="img/funding_slope.png" alt="Slope chart of funding per FTE student - ranging from $3,657 to $18,544 - vs funding per $1,000 in personal income - ranging from $1.75 to $11.68" /></div>
+                        <div id="funding_slope" class="bingraph"><img src="img/funding_slope.png" alt="Slope chart of funding per FTE student - ranging from $3,657 to $18,544 - vs funding per $1,000 in personal income - ranging from $1.75 to $11.68" />
+                        </div>
                     </div>
                 </div>
                 <div class="source"><b>Sources</b>: Illinois State University, <i>Grapevine</i>, 2015, <a href="http://education.illinoisstate.edu/grapevine/tables/Table4_GPV15.pdf" target="_blank">Table 4</a>; NCES, <i>Digest of Education Statistics</i>, 2014, <a href="http://nces.ed.gov/programs/digest/d14/tables/dt14_307.10.asp" target="_blank">Table 307.10</a> and <a href="http://nces.ed.gov/programs/digest/d14/tables/dt14_307.20.asp" target="_blank">Table 307.20</a>.
@@ -133,17 +153,20 @@
                             </select>
                         </div>
 
-                        <div id="map_grantaid" class="pairedmap"><img src="img/map_grantaid.png" alt="State-level map of percent of state grant aid that is need-based, ranging from 0 to 100%" /></div>
+                        <div id="map_grantaid" class="pairedmap"><img src="img/map_grantaid.png" alt="State-level map of percent of state grant aid that is need-based, ranging from 0 to 100%" />
+                        </div>
                     </div>
 
 
                     <div class="col-md-4 col-md-pull-4">
                         <h4 class="charttitle">More Need Based</h4>
-                        <div id="grantaid1" class="bingraph"><img src="img/grantaid1.png" alt="Bar chart of grant aid, need based vs non-need based, in the 34 states with more need based aid" /></div>
+                        <div id="grantaid1" class="bingraph"><img src="img/grantaid1.png" alt="Bar chart of grant aid, need based vs non-need based, in the 34 states with more need based aid" />
+                        </div>
                     </div>
                     <div class="col-md-4 col-md-pull-4">
                         <h4 class="charttitle">More Non-Need Based</h4>
-                        <div id="grantaid2" class="bingraph"><img src="img/grantaid1.png" alt="Bar chart of grant aid, need based vs non-need based, in the 15 states with more non-need based aid" /></div>
+                        <div id="grantaid2" class="bingraph"><img src="img/grantaid1.png" alt="Bar chart of grant aid, need based vs non-need based, in the 15 states with more non-need based aid" />
+                        </div>
                     </div>
                 </div>
                 <div class="source"><b>Source</b>: National Association of State Student Grant and Aid Programs, 2015, <a href="https://www.nassgap.org/viewrepository.aspx?categoryID=3#" target="_blank">45th Annual Survey, Table 12</a>.
@@ -170,15 +193,17 @@
                             <select class="stateselect">
                             </select>
                         </div>
-                        <div id="map_approp" class="pairedmap"><img src="img/map_approp.png" alt="State-level map of percent change in total funding since fall 2000, ranging from -41% to 83%" /></div>
+                        <div id="map_approp" class="pairedmap"><img src="img/map_approp.png" alt="State-level map of percent change in total funding since fall 2000, ranging from -41% to 83%" />
+                        </div>
                     </div>
 
                     <div class="col-md-8 col-md-pull-4">
-                        <div id="appropriations" class="bingraph"><img src="img/appropriations.png" alt="Line chart of percent change in total funding since fall 2000" /></div>
+                        <div id="appropriations" class="bingraph"><img src="img/appropriations.png" alt="Line chart of percent change in total funding since fall 2000" />
+                        </div>
                     </div>
 
                 </div>
-            <div class="source"><b>Source</b>: Illinois State University, <i><a href="http://education.illinoisstate.edu/grapevine/" target="_blank">Grapevine</a></i>, various publication years for fall 2000 through fall 2014 data.
+                <div class="source"><b>Source</b>: Illinois State University, <i><a href="http://education.illinoisstate.edu/grapevine/" target="_blank">Grapevine</a></i>, various publication years for fall 2000 through fall 2014 data.
                     <br><b>Note</b>: The chart reports state fiscal year (SFY) funding by the fall of the corresponding academic year (e.g., funding for SFY 2014–15 applies to Fall ‘14).</div>
                 <hr>
 
@@ -203,15 +228,17 @@
                             <select class="stateselect">
                             </select>
                         </div>
-                        <div id="map_approppc" class="pairedmap"><img src="img/map_approppc.png" alt="State-level map of percent change in funding per student since fall 2000, US average at -24%" /></div>
+                        <div id="map_approppc" class="pairedmap"><img src="img/map_approppc.png" alt="State-level map of percent change in funding per student since fall 2000, US average at -24%" />
+                        </div>
                     </div>
 
                     <div class="col-md-8 col-md-pull-4">
-                        <div id="approp_percap" class="bingraph"><img src="img/approp_percap.png" alt="Line chart of funding per student since fall 2000, in 2015 dollars" /></div>
+                        <div id="approp_percap" class="bingraph"><img src="img/approp_percap.png" alt="Line chart of funding per student since fall 2000, in 2015 dollars" />
+                        </div>
                     </div>
 
                 </div>
-            <div class="source"><b>Sources</b>: Illinois State University, <i><a href="http://education.illinoisstate.edu/grapevine/" target="_blank">Grapevine</a></i>, various publication years for fall 2000 through fall 2014 data; NCES, <i><a href="http://nces.ed.gov/programs/digest/" target="_blank">Digest of Education Statistics</a></i>, various publication years for fall 2000 through fall 2013 data; NCES, <i>Digest of Education Statistics</i>, 2014, <a href="http://nces.ed.gov/programs/digest/d14/tables/dt14_307.10.asp" target="_blank">307.10</a>.
+                <div class="source"><b>Sources</b>: Illinois State University, <i><a href="http://education.illinoisstate.edu/grapevine/" target="_blank">Grapevine</a></i>, various publication years for fall 2000 through fall 2014 data; NCES, <i><a href="http://nces.ed.gov/programs/digest/" target="_blank">Digest of Education Statistics</a></i>, various publication years for fall 2000 through fall 2013 data; NCES, <i>Digest of Education Statistics</i>, 2014, <a href="http://nces.ed.gov/programs/digest/d14/tables/dt14_307.10.asp" target="_blank">307.10</a>.
                     <br><b>Notes</b>: The chart reports SFY funding by the fall of the corresponding academic year (e.g., funding for SFY 2014-15 applies to Fall ‘14); Fall 2014 FTE student enrollment estimates are based on fall 2013 enrollment by state, updated with the NCES predicted increase of 0.03 percent for the nation as a whole.</div>
                 <hr>
 
