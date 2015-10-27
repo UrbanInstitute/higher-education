@@ -43,46 +43,50 @@ function map(div, id) {
     var path = d3.geo.path()
         .projection(projection);
 
-        svg.selectAll("path")
-            .data(topojson.feature(us, us.objects.cb_2014_us_state_20m).features)
-            .enter().append("path")
-            .attr("d", path)
-            .attr("id", function (d) {
-                return d.properties.abbrev;
-            })
-            .attr("class", "boundary_paired")
-            .attr("fill", function (d) {
-                //NH doesn't give grant aid
-                if (VAL == "grants_pctneedbased" & d.properties.abbrev == "NH") {
-                    return "#fff";
-                } else {
-                    return color(d.properties[VAL]);
-                }
-            })
-            .on("click", function (d) {
-                dispatch.clickState(this.id);
-            })
-            .on("mouseover", function (d) {
-                if (isIE != false) {
-                    d3.selectAll(".hovered")
-                        .classed("hovered", false);
-                    d3.selectAll("#" + this.id)
-                        .classed("hovered", true)
-                        .moveToFront();
-                    tooltip(this.id);
-                    this.parentNode.appendChild(this);
-                } else {
-                    dispatch.hoverState(this.id);
-                }
-            })
-            .on("mouseout", function (d) {
-                if (isIE != false) {
-                    d3.selectAll(".hovered")
-                        .classed("hovered", false);
-                } else {
-                    dispatch.dehoverState(this.id);
-                }
-            });
+    svg.selectAll("path")
+        .data(topojson.feature(us, us.objects.cb_2014_us_state_20m).features)
+        .enter().append("path")
+        .attr("d", path)
+        .attr("id", function (d) {
+            return d.properties.abbrev;
+        })
+        .attr("class", "boundary_paired")
+        .attr("fill", function (d) {
+            //NH doesn't give grant aid
+            if (VAL == "grants_pctneedbased" & d.properties.abbrev == "NH") {
+                return "#fff";
+            } else {
+                return color(d.properties[VAL]);
+            }
+        })
+        .on("click", function (d) {
+            dispatch.clickState(this.id);
+        })
+        .on("mouseover", function (d) {
+            if (isIE != false) {
+                d3.selectAll(".hovered")
+                    .classed("hovered", false);
+                d3.selectAll("#" + this.id)
+                    .classed("hovered", true)
+                    .moveToFront();
+                tooltip(this.id);
+                this.parentNode.appendChild(this);
+            } else {
+                dispatch.hoverState(this.id);
+            }
+        })
+        .on("mouseout", function (d) {
+            if (isIE != false) {
+                svg.selectAll("path")
+                    .attr("class", "boundary_paired")
+                menuId = selecter.property("value");
+                tooltip(menuId);
+                d3.selectAll("[id='" + menuId + "']")
+                    .moveToFront();
+            } else {
+                dispatch.dehoverState(this.id);
+            }
+        });
 
 }
 
