@@ -83,6 +83,7 @@ function map(div, id) {
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")
                     .moveToFront();
+                console.log("IE MOUSEOUT OKAY")
             } else {
                 dispatch.dehoverState(this.id);
             }
