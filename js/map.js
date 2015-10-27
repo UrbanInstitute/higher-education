@@ -71,11 +71,15 @@ function map(div, id) {
                     .moveToFront();
                 tooltip(this.id);
                 this.parentNode.appendChild(this);
+                console.log("IE MOUSEOVER OKAY");
             } else {
                 dispatch.hoverState(this.id);
             }
         })
         .on("mouseout", function (d) {
+            dispatch.dehoverState(this.id);
+        })
+        .on("mouseleave", function (d) {
             if (isIE != false) {
                 svg.selectAll("path")
                     .attr("class", "boundary_paired")
@@ -83,12 +87,9 @@ function map(div, id) {
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")
                     .moveToFront();
-                console.log("IE MOUSEOUT OKAY")
-            } else {
-                dispatch.dehoverState(this.id);
+                console.log("IE MOUSEOUT OKAY");
             }
         });
-
 }
 
 function legend(div) {
