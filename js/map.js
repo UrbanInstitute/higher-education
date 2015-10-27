@@ -76,7 +76,12 @@ function map(div, id) {
                 }
             })
             .on("mouseout", function (d) {
-                dispatch.dehoverState(this.id);
+                if (isIE != false) {
+                    d3.selectAll(".hovered")
+                        .classed("hovered", false);
+                } else {
+                    dispatch.dehoverState(this.id);
+                }
             });
 
 }
