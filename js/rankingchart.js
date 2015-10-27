@@ -172,16 +172,16 @@ function rankingchart(div, id) {
                     tooltip(this.id);
                     this.parentNode.appendChild(this);
                 } else {
-                    if (isIE != false) {
-                        d3.selectAll(".hovered")
-                            .classed("hovered", false);
-                    } else {
-                        dispatch.hoverState(this.id);
-                    }
+                    dispatch.hoverState(this.id);
                 }
             })
             .on("mouseout", function (d) {
-                dispatch.dehoverState(this.id);
+                if (isIE != false) {
+                    d3.selectAll(".hovered")
+                        .classed("hovered", false);
+                } else {
+                    dispatch.dehoverState(this.id);
+                }
             });
     }
 }
