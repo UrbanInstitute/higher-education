@@ -124,7 +124,7 @@ function rankingchart(div, id) {
         rankbar.append("rect")
             .attr('id', function (d) {
                 return d.abbrev;
-            }) 
+            })
             .attr("class", "rankbar")
             .attr("x", i * width / 3)
             .attr("width", barwidth)
@@ -172,7 +172,12 @@ function rankingchart(div, id) {
                     tooltip(this.id);
                     this.parentNode.appendChild(this);
                 } else {
-                    dispatch.hoverState(this.id);
+                    if (isIE != false) {
+                        d3.selectAll(".hovered")
+                            .classed("hovered", false);
+                    } else {
+                        dispatch.hoverState(this.id);
+                    }
                 }
             })
             .on("mouseout", function (d) {
