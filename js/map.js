@@ -69,7 +69,6 @@ function map(div, id) {
                 d3.selectAll("#" + this.id)
                     .classed("hovered", true);
                 //.moveToFront();
-                console.log("workpls");
                 tooltip(this.id);
                 //this.parentNode.appendChild(this);
 
@@ -82,13 +81,12 @@ function map(div, id) {
         })
         .on("mouseleave", function (d) {
             if (isIE != false) {
-                svg.selectAll("path")
-                    .attr("class", "boundary_paired")
+                d3.selectAll(".hovered")
+                    .classed("hovered", false);
                 menuId = selecter.property("value");
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")
                     .moveToFront();
-                console.log("IE MOUSEOUT OKAY");
             }
         });
 }
