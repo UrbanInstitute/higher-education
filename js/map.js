@@ -70,7 +70,7 @@ function map(div, id) {
                     .classed("hovered", true)
                     .moveToFront();
                 tooltip(this.id);
-                this.parentNode.appendChild(this);
+                //this.parentNode.appendChild(this);
 
             } else {
                 dispatch.hoverState(this.id);
