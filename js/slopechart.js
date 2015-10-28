@@ -170,8 +170,8 @@ function slopechart(div, id) {
         })
         .on("mouseleave", function (d) {
             if (isIE != false) {
-                svg.selectAll(".state")
-                    .attr("class", "chartline")
+                d3.selectAll(".hovered")
+                    .classed("hovered", false);
                 menuId = selecter.property("value");
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")
@@ -329,8 +329,8 @@ function slopechart3(div, id) {
         })
         .on("mouseleave", function (d) {
             if (isIE != false) {
-                svg.selectAll(".state")
-                    .attr("class", "chartline")
+                d3.selectAll(".hovered")
+                    .classed("hovered", false);
                 menuId = selecter.property("value");
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")

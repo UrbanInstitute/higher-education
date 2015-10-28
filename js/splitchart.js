@@ -142,8 +142,8 @@ function splitchart(div, id) {
         })
         .on("mouseleave", function (d) {
             if (isIE != false) {
-                svg.selectAll(".splitbar.needbased")
-                    .attr("class", "splitbar needbased")
+                d3.selectAll(".hovered")
+                    .classed("hovered", false);
                 menuId = selecter.property("value");
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")
@@ -186,8 +186,8 @@ function splitchart(div, id) {
         })
         .on("mouseleave", function (d) {
             if (isIE != false) {
-                svg.selectAll(".splitbar.nonneedbased")
-                    .attr("class", "splitbar nonneedbased")
+                d3.selectAll(".hovered")
+                    .classed("hovered", false);
                 menuId = selecter.property("value");
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")

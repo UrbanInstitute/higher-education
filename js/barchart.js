@@ -139,8 +139,8 @@ function barchart(div, id) {
             })
             .on("mouseleave", function (d) {
                 if (isIE != false) {
-                    svg.selectAll(".bar")
-                        .attr("class", "bar")
+                    d3.selectAll(".hovered")
+                        .classed("hovered", false);
                     menuId = selecter.property("value");
                     tooltip(menuId);
                     d3.selectAll("[id='" + menuId + "']")
@@ -286,8 +286,8 @@ function barchart(div, id) {
             })
             .on("mouseleave", function (d) {
                 if (isIE != false) {
-                    svg.selectAll(".bar")
-                        .attr("class", "bar")
+                    d3.selectAll(".hovered")
+                        .classed("hovered", false);
                     menuId = selecter.property("value");
                     tooltip(menuId);
                     d3.selectAll("[id='" + menuId + "']")
