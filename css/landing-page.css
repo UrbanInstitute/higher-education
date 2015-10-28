@@ -154,7 +154,7 @@ html{height: 100%;}*/
 footer {
     background-color: #000;
     bottom: 0px;
-    height: 50px;
+    min-height: 50px;
     /*position: absolute;*/
     
     width: 100%;
