@@ -68,15 +68,11 @@ th {
     stroke: #efefef;
 }
 
-.axis-show path {
-    fill: none;
-    stroke-width: 1px;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
+.axis-show path,
 .axis-show line {
     fill: none;
-    display: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
 }
 
 .zeroline {
@@ -160,8 +156,8 @@ th {
     fill: #666;
     font-style: italic;
 }
-
 /*split bar chart*/
+
 .needbased {
     fill: #1696d2
 }
