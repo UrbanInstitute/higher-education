@@ -171,7 +171,6 @@ function linechart(div, id) {
                     .classed("hovered", false);
                 d3.selectAll("#" + this.id)
                     .classed("hovered", true);
-                console.log("workpls");
                 tooltip(this.id);
             } else {
                 dispatch.hoverState(this.id);
@@ -188,7 +187,6 @@ function linechart(div, id) {
                 tooltip(menuId);
                 d3.selectAll("[id='" + menuId + "']")
                     .moveToFront();
-                console.log("IE MOUSEOUT OKAY");
             }
         });
 

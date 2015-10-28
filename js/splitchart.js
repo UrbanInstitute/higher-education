@@ -131,16 +131,24 @@ function splitchart(div, id) {
                 d3.selectAll(".hovered")
                     .classed("hovered", false);
                 d3.selectAll("#" + this.id)
-                    .classed("hovered", true)
-                    .moveToFront();
+                    .classed("hovered", true);
                 tooltip(this.id);
-                this.parentNode.appendChild(this);
             } else {
                 dispatch.hoverState(this.id);
             }
         })
         .on("mouseout", function (d) {
             dispatch.dehoverState(this.id);
+        })
+        .on("mouseleave", function (d) {
+            if (isIE != false) {
+                svg.selectAll(".splitbar.needbased")
+                    .attr("class", "splitbar needbased")
+                menuId = selecter.property("value");
+                tooltip(menuId);
+                d3.selectAll("[id='" + menuId + "']")
+                    .moveToFront();
+            }
         });
 
     //non-need-based on right
@@ -167,15 +175,23 @@ function splitchart(div, id) {
                 d3.selectAll(".hovered")
                     .classed("hovered", false);
                 d3.selectAll("#" + this.id)
-                    .classed("hovered", true)
-                    .moveToFront();
+                    .classed("hovered", true);
                 tooltip(this.id);
-                this.parentNode.appendChild(this);
             } else {
                 dispatch.hoverState(this.id);
             }
         })
         .on("mouseout", function (d) {
             dispatch.dehoverState(this.id);
+        })
+        .on("mouseleave", function (d) {
+            if (isIE != false) {
+                svg.selectAll(".splitbar.nonneedbased")
+                    .attr("class", "splitbar nonneedbased")
+                menuId = selecter.property("value");
+                tooltip(menuId);
+                d3.selectAll("[id='" + menuId + "']")
+                    .moveToFront();
+            }
         });
 }

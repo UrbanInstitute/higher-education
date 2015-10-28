@@ -4,7 +4,7 @@ function scatterplot(div, id) {
 
     data = data_main.filter(function (d) {
         if (VAL[1] == "t2_15") {
-            return d.abbrev != "US" & d.abbrev !="AK";
+            return d.abbrev != "US" & d.abbrev != "AK";
         } else {
             return d.abbrev != "US";
         }
@@ -154,15 +154,23 @@ function scatterplot(div, id) {
                 d3.selectAll(".hovered")
                     .classed("hovered", false);
                 d3.selectAll("#" + this.id)
-                    .classed("hovered", true)
-                    .moveToFront();
+                    .classed("hovered", true);
                 tooltip(this.id);
-                this.parentNode.appendChild(this);
             } else {
                 dispatch.hoverState(this.id);
             }
         })
         .on("mouseout", function (d) {
             dispatch.dehoverState(this.id);
+        })
+        .on("mouseleave", function (d) {
+            if (isIE != false) {
+                svg.selectAll(".dot")
+                    .attr("class", "scatterdot")
+                menuId = selecter.property("value");
+                tooltip(menuId);
+                d3.selectAll("[id='" + menuId + "']")
+                    .moveToFront();
+            }
         });
 }
