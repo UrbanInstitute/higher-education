@@ -73,7 +73,7 @@ th {
     fill: none;
     stroke-width: 1px;
     stroke: #000;
-    shape-rendering: crispEdges;
+    /*shape-rendering: crispEdges;*/
 }
 
 .zeroline {
