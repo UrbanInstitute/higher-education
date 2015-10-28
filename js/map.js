@@ -67,8 +67,7 @@ function map(div, id) {
                 d3.selectAll(".hovered")
                     .classed("hovered", false);
                 d3.selectAll("#" + this.id)
-                    .classed("hovered", true)
-                    .moveToFront();
+                    .classed("hovered", true);
                 tooltip(this.id);
                 //this.parentNode.appendChild(this);
 
