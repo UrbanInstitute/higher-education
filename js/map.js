@@ -64,14 +64,15 @@ function map(div, id) {
         })
         .on("mouseover", function (d) {
             if (isIE != false) {
+                console.log("IE MOUSEOVER OKAY");
                 d3.selectAll(".hovered")
                     .classed("hovered", false);
                 d3.selectAll("#" + this.id)
                     .classed("hovered", true);
-                    //.moveToFront();
+                //.moveToFront();
                 tooltip(this.id);
-                this.parentNode.appendChild(this);
-                console.log("IE MOUSEOVER OKAY");
+                //this.parentNode.appendChild(this);
+
             } else {
                 dispatch.hoverState(this.id);
             }
