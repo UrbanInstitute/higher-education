@@ -71,7 +71,7 @@ function map(div, id) {
                 //.moveToFront();
                 console.log("workpls");
                 tooltip(this.id);
-                this.parentNode.appendChild(this);
+                //this.parentNode.appendChild(this);
 
             } else {
                 dispatch.hoverState(this.id);
