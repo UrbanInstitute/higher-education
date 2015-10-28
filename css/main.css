@@ -68,12 +68,15 @@ th {
     stroke: #efefef;
 }
 
-.axis-show path,
-.axis-show line {
+.axis-show path {
     fill: none;
     stroke-width: 1px;
     stroke: #000;
-    /*shape-rendering: crispEdges;*/
+    shape-rendering: crispEdges;
+}
+.axis-show line {
+    fill: none;
+    display: none;
 }
 
 .zeroline {
